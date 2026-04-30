@@ -42,6 +42,14 @@ Deno.serve(async (req: Request) => {
     const answerMap: Record<string, string> = {};
     responses.forEach((r) => { answerMap[r.question_key] = r.answer_text; });
 
+    const { data: sessionData } = await supabase
+      .from("sessions")
+      .select("profile_id")
+      .eq("id", session_id)
+      .maybeSingle();
+
+    const profile_id = sessionData?.profile_id ?? null;
+
     const frameworkText = `THE CUBE STRATEGY FRAMEWORK — COMPLETE INTERPRETER'S MANUAL
 ============================================================
 
@@ -691,7 +699,7 @@ arrived before the mind tried to correct it. The correction itself is data.
 
     const { error: insertError } = await supabase
       .from("derived_insights")
-      .insert({ session_id, traits, summary, insight_version: "1.0" });
+      .insert({ session_id, profile_id, traits, summary, insight_version: "1.0" });
 
     if (insertError) {
       throw new Error(`Failed to save insights: ${insertError.message}`);
