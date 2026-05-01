@@ -4,11 +4,12 @@ import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
-import type { InsightTraits } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 
 const ELEMENT_KEYS = ['cube', 'ladder', 'flowers', 'animal', 'storm'] as const;
-const ELEMENT_LABELS: Record<string, string> = {
+type ElementKey = typeof ELEMENT_KEYS[number];
+
+const ELEMENT_LABELS: Record<ElementKey, string> = {
   cube: 'The Cube',
   ladder: 'The Ladder',
   flowers: 'The Flowers',
@@ -16,18 +17,44 @@ const ELEMENT_LABELS: Record<string, string> = {
   storm: 'The Storm',
 };
 
+type ReadingTraits = {
+  self_image?: string;
+  ambition?: string;
+  relationships?: string;
+  freedom?: string;
+  challenges?: string;
+};
+
+const TRAIT_MAP: Record<ElementKey, keyof ReadingTraits> = {
+  cube: 'self_image',
+  ladder: 'ambition',
+  flowers: 'relationships',
+  animal: 'freedom',
+  storm: 'challenges',
+};
+
+function formatName(email: string): string {
+  return email
+    .split('@')[0]
+    .split(/[._\-]+/)
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
+
 function ResultsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const sessionId = searchParams.get('session');
-  const [insights, setInsights] = useState<InsightTraits | null>(null);
+  const paymentStatus = searchParams.get('payment');
+
+  const [traits, setTraits] = useState<ReadingTraits | null>(null);
+  const [summary, setSummary] = useState('');
   const [isPaid, setIsPaid] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userName, setUserName] = useState('');
   const [sessionDate, setSessionDate] = useState('');
   const [copied, setCopied] = useState(false);
   const [visible, setVisible] = useState(false);
-  const paymentStatus = searchParams.get('payment');
 
   const loadResults = async () => {
     const { data: { user } } = await supabase.auth.getUser();
@@ -41,36 +68,24 @@ function ResultsContent() {
 
     if (profile) {
       setIsPaid(profile.subscription_plan === 'one_time');
-      const emailName = profile.email?.split('@')[0] || '';
-      const displayName = emailName.charAt(0).toUpperCase() + emailName.slice(1);
-      setUserName(displayName);
+      setUserName(profile.email ? formatName(profile.email) : '');
     }
 
-    console.log('results page sessionId:', sessionId);
-
-    const { data: session, error: sessionError } = await supabase
-      .from('sessions')
-      .select('*')
-      .eq('id', sessionId)
-      .maybeSingle();
-
-    console.log('sessions query result:', session, sessionError);
-
-    if (session) {
-      const d = new Date(session.created_at);
-      setSessionDate(d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }));
-    }
-
-    const { data: insight, error: insightError } = await supabase
+    const { data: insight } = await supabase
       .from('derived_insights')
-      .select('traits, summary')
+      .select('traits, summary, created_at')
       .eq('session_id', sessionId)
       .maybeSingle();
 
-    console.log('insight query result:', insight, insightError);
-
-    if (insight?.traits) {
-      setInsights(insight.traits as InsightTraits);
+    if (insight) {
+      if (insight.traits) setTraits(insight.traits as ReadingTraits);
+      if (insight.summary) setSummary(insight.summary);
+      if (insight.created_at) {
+        const d = new Date(insight.created_at);
+        if (!isNaN(d.getTime())) {
+          setSessionDate(d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }));
+        }
+      }
     }
 
     setLoading(false);
@@ -87,9 +102,15 @@ function ResultsContent() {
   }, [sessionId]);
 
   const handleCopy = () => {
-    if (!insights) return;
-    const text = buildFullText(insights, userName);
-    navigator.clipboard.writeText(text).then(() => {
+    if (!traits) return;
+    const lines: string[] = [`THE CUBE — A Reading for ${userName || 'You'}`, ''];
+    ELEMENT_KEYS.forEach(k => {
+      lines.push(ELEMENT_LABELS[k].toUpperCase());
+      lines.push(traits[TRAIT_MAP[k]] || '');
+      lines.push('');
+    });
+    if (summary) { lines.push('---', '', summary); }
+    navigator.clipboard.writeText(lines.join('\n')).then(() => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2500);
     });
@@ -107,7 +128,7 @@ function ResultsContent() {
     );
   }
 
-  if (!insights) {
+  if (!traits) {
     return (
       <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: '#0a0a0f' }}>
         <div style={{ textAlign: 'center', maxWidth: '400px', padding: '2rem' }}>
@@ -120,14 +141,9 @@ function ResultsContent() {
           <button
             onClick={loadResults}
             style={{
-              padding: '0.7rem 1.75rem',
-              borderRadius: '8px',
-              border: 'none',
-              background: '#7c3aed',
-              color: '#f5f0eb',
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: '0.88rem',
-              cursor: 'pointer',
+              padding: '0.7rem 1.75rem', borderRadius: '8px', border: 'none',
+              background: '#7c3aed', color: '#f5f0eb',
+              fontFamily: "'DM Sans', sans-serif", fontSize: '0.88rem', cursor: 'pointer',
             }}
           >
             Refresh
@@ -167,27 +183,20 @@ function ResultsContent() {
         )}
       </nav>
 
-      <div
-        style={{
-          maxWidth: '720px', margin: '0 auto', padding: '4rem 2rem 6rem',
-          opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease',
-          position: 'relative', zIndex: 10,
-        }}
-      >
+      <div style={{
+        maxWidth: '720px', margin: '0 auto', padding: '4rem 2rem 6rem',
+        opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease',
+        position: 'relative', zIndex: 10,
+      }}>
         <div style={{ marginBottom: '3.5rem' }}>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#7c3aed', marginBottom: '0.75rem' }}>
             Your reading
           </p>
-          <h1
-            style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
-              fontSize: 'clamp(2rem, 4vw, 2.8rem)',
-              color: '#f5f0eb',
-              fontWeight: 500,
-              lineHeight: '1.2',
-              marginBottom: '0.6rem',
-            }}
-          >
+          <h1 style={{
+            fontFamily: "'Playfair Display', Georgia, serif",
+            fontSize: 'clamp(2rem, 4vw, 2.8rem)',
+            color: '#f5f0eb', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem',
+          }}>
             The Space of {userName || 'You'}
           </h1>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: '#5a5464' }}>
@@ -203,7 +212,7 @@ function ResultsContent() {
                   {ELEMENT_LABELS[key]}
                 </p>
                 <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(1.1rem, 2.2vw, 1.3rem)', color: '#f5f0eb', lineHeight: '1.5', fontWeight: 400 }}>
-                  {insights[key]?.lens}
+                  {traits[TRAIT_MAP[key]]}
                 </p>
               </div>
               {i < ELEMENT_KEYS.length - 1 && (
@@ -213,202 +222,83 @@ function ResultsContent() {
           ))}
         </div>
 
-        {!isPaid && (
-          <div style={{ marginBottom: '3rem' }}>
-            <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.15), transparent)', marginBottom: '2rem' }} />
-            <p
-              style={{
-                fontFamily: "'Playfair Display', Georgia, serif",
-                fontStyle: 'italic',
-                fontSize: '1rem',
-                color: '#8b8494',
-                lineHeight: '1.9',
-                marginBottom: '0.75rem',
-              }}
-            >
-              {insights.cube?.observation}
-            </p>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.95rem', color: '#f5f0eb', lineHeight: '1.8' }}>
-              {insights.cube?.interpretation}
-            </p>
-          </div>
-        )}
-
         {isPaid ? (
-          <PaidContent insights={insights} />
+          <PaidContent summary={summary} />
         ) : (
-          <PaywallSection sessionId={sessionId || ''} />
+          <PaywallSection sessionId={sessionId || ''} summary={summary} />
         )}
       </div>
     </main>
   );
 }
 
-function PaidContent({ insights }: { insights: InsightTraits }) {
+function PaidContent({ summary }: { summary: string }) {
+  const paragraphs = summary.split(/\n{2,}/).map(p => p.trim()).filter(Boolean);
+
   return (
-    <>
-      {ELEMENT_KEYS.map((key) => (
-        <div key={key} style={{ marginBottom: '3.5rem' }}>
-          <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.15), transparent)', marginBottom: '2.5rem' }} />
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#7c3aed', marginBottom: '1.25rem' }}>
-            {ELEMENT_LABELS[key]}
-          </p>
-          <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', fontSize: '0.95rem', color: '#8b8494', lineHeight: '1.9', marginBottom: '1rem' }}>
-            {insights[key]?.observation}
-          </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.95rem', color: '#f5f0eb', lineHeight: '1.85', marginBottom: '1.25rem' }}>
-            {insights[key]?.interpretation}
-          </p>
-          <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: '1.05rem', fontWeight: 600, color: '#f5f0eb', lineHeight: '1.5' }}>
-            {insights[key]?.lens}
-          </p>
-        </div>
+    <div style={{ marginBottom: '3.5rem' }}>
+      <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.2), transparent)', marginBottom: '2.5rem' }} />
+      {paragraphs.map((para, i) => (
+        <p key={i} style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontSize: '1rem', color: '#f5f0eb', lineHeight: '1.85',
+          marginBottom: i < paragraphs.length - 1 ? '1.5rem' : 0,
+        }}>
+          {para}
+        </p>
       ))}
-
-      <div style={{ marginBottom: '3.5rem' }}>
-        <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.2), transparent)', marginBottom: '2.5rem' }} />
-        <h2 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(1.6rem, 3vw, 2rem)', color: '#f5f0eb', fontWeight: 500, marginBottom: '1.5rem' }}>
-          The Pattern
-        </h2>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '1rem', color: '#f5f0eb', lineHeight: '1.85', whiteSpace: 'pre-line' }}>
-          {insights.pattern}
-        </p>
-      </div>
-
-      <div style={{ marginBottom: '3.5rem' }}>
-        <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.15), transparent)', marginBottom: '2.5rem' }} />
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#7c3aed', marginBottom: '1.5rem' }}>
-          Takeaways
-        </p>
-        <ol style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {insights.takeaways?.map((t, i) => (
-            <li key={i} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
-              <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: '1rem', color: 'rgba(124,58,237,0.5)', minWidth: '1.5rem', fontWeight: 500 }}>
-                {i + 1}
-              </span>
-              <span style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: '1.05rem', color: '#f5f0eb', lineHeight: '1.5' }}>
-                {t}
-              </span>
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      <div style={{ textAlign: 'center', padding: '3rem 1rem', position: 'relative' }}>
-        <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.2), transparent)', marginBottom: '3rem' }} />
-        <p
-          style={{
-            fontFamily: "'Playfair Display', Georgia, serif",
-            fontStyle: 'italic',
-            fontSize: 'clamp(1.2rem, 2.5vw, 1.5rem)',
-            color: '#f5f0eb',
-            lineHeight: '1.5',
-            maxWidth: '560px',
-            margin: '0 auto',
-          }}
-        >
-          &ldquo;{insights.summary_line}&rdquo;
-        </p>
-      </div>
-    </>
+    </div>
   );
 }
 
-function PaywallSection({ sessionId }: { sessionId: string }) {
+function PaywallSection({ sessionId, summary }: { sessionId: string; summary: string }) {
+  const preview = summary.split(/\n{2,}/)[0] || '';
+
   return (
     <div style={{ position: 'relative' }}>
-      <div
-        style={{
-          position: 'relative',
-          overflow: 'hidden',
-          maxHeight: '220px',
-          borderRadius: '12px',
-        }}
-      >
-        <div
-          style={{
-            filter: 'blur(8px)',
-            opacity: 0.4,
-            pointerEvents: 'none',
-            userSelect: 'none',
-            padding: '1.5rem',
-            background: '#13131a',
-          }}
-        >
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#7c3aed', marginBottom: '0.75rem' }}>
-            The Ladder
-          </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", color: '#f5f0eb', lineHeight: '1.8', marginBottom: '1rem' }}>
-            There is a structure in your life you have built in order to reach something -- and whether it holds depends entirely on what it is resting against.
-          </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#7c3aed', marginBottom: '0.75rem' }}>
-            The Flowers
-          </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", color: '#f5f0eb', lineHeight: '1.8' }}>
-            What you tend, what you leave to itself, and what you allow to die reveals the shape of your attention.
+      <div style={{ position: 'relative', overflow: 'hidden', maxHeight: '160px', borderRadius: '12px' }}>
+        <div style={{
+          filter: 'blur(6px)', opacity: 0.45, pointerEvents: 'none',
+          userSelect: 'none' as const, padding: '1.5rem', background: '#13131a',
+        }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", color: '#f5f0eb', lineHeight: '1.8', fontSize: '0.95rem' }}>
+            {preview}
           </p>
         </div>
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(to bottom, transparent 0%, #0a0a0f 90%)',
-          }}
-        />
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to bottom, transparent 0%, #0a0a0f 85%)',
+        }} />
       </div>
 
-      <div
-        style={{
-          background: '#13131a',
-          border: '1px solid rgba(124,58,237,0.25)',
-          borderRadius: '16px',
-          padding: '2.5rem',
-          textAlign: 'center',
-          marginTop: '1.5rem',
-          boxShadow: '0 0 60px rgba(124,58,237,0.08)',
-        }}
-      >
-        <h3
-          style={{
-            fontFamily: "'Playfair Display', Georgia, serif",
-            fontSize: '1.5rem',
-            color: '#f5f0eb',
-            fontWeight: 500,
-            marginBottom: '1rem',
-          }}
-        >
+      <div style={{
+        background: '#13131a', border: '1px solid rgba(124,58,237,0.25)',
+        borderRadius: '16px', padding: '2.5rem', textAlign: 'center',
+        marginTop: '1.5rem', boxShadow: '0 0 60px rgba(124,58,237,0.08)',
+      }}>
+        <h3 style={{
+          fontFamily: "'Playfair Display', Georgia, serif",
+          fontSize: '1.5rem', color: '#f5f0eb', fontWeight: 500, marginBottom: '1rem',
+        }}>
           Your reading continues.
         </h3>
-        <p
-          style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: '0.92rem',
-            color: '#8b8494',
-            lineHeight: '1.7',
-            marginBottom: '2rem',
-            maxWidth: '420px',
-            margin: '0 auto 2rem',
-          }}
-        >
-          You&apos;ve seen enough to know this isn&apos;t generic. The full interpretation of your space -- all five elements, the pattern that runs through them, and what it means -- is waiting.
+        <p style={{
+          fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', color: '#8b8494',
+          lineHeight: '1.7', maxWidth: '420px', margin: '0 auto 2rem',
+        }}>
+          You&apos;ve seen enough to know this isn&apos;t generic. The full interpretation of your space — all five elements, the pattern that runs through them, and what it means — is waiting.
         </p>
         <Link
           href={`/unlock?session=${sessionId}`}
           style={{
-            display: 'inline-block',
-            padding: '0.9rem 2.5rem',
-            borderRadius: '8px',
-            background: '#7c3aed',
-            color: '#f5f0eb',
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: '0.95rem',
-            fontWeight: 500,
-            textDecoration: 'none',
-            boxShadow: '0 0 32px rgba(124,58,237,0.35)',
+            display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px',
+            background: '#7c3aed', color: '#f5f0eb',
+            fontFamily: "'DM Sans', sans-serif", fontSize: '0.95rem', fontWeight: 500,
+            textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.35)',
             transition: 'all 0.2s',
           }}
         >
-          Unlock full reading -- 7 EUR
+          Unlock full reading — 7 EUR
         </Link>
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.76rem', color: '#5a5464', marginTop: '1rem' }}>
           One-time payment. Instant access.
@@ -416,37 +306,6 @@ function PaywallSection({ sessionId }: { sessionId: string }) {
       </div>
     </div>
   );
-}
-
-function buildFullText(insights: InsightTraits, name: string): string {
-  const lines: string[] = [];
-  lines.push(`THE CUBE -- A Reading for ${name || 'You'}`);
-  lines.push('');
-
-  const keys = ['cube', 'ladder', 'flowers', 'animal', 'storm'] as const;
-  const labels: Record<string, string> = { cube: 'THE CUBE', ladder: 'THE LADDER', flowers: 'THE FLOWERS', animal: 'THE ANIMAL', storm: 'THE STORM' };
-
-  keys.forEach(k => {
-    lines.push(labels[k]);
-    lines.push(insights[k]?.observation || '');
-    lines.push('');
-    lines.push(insights[k]?.interpretation || '');
-    lines.push('');
-    lines.push(insights[k]?.lens || '');
-    lines.push('');
-    lines.push('---');
-    lines.push('');
-  });
-
-  lines.push('THE PATTERN');
-  lines.push(insights.pattern || '');
-  lines.push('');
-  lines.push('TAKEAWAYS');
-  insights.takeaways?.forEach((t, i) => lines.push(`${i + 1}. ${t}`));
-  lines.push('');
-  lines.push(`"${insights.summary_line}"`);
-
-  return lines.join('\n');
 }
 
 export default function ResultsPage() {
