@@ -1,8 +1,7 @@
 {
-  "/not-found": "app/not-found.js",
-  "/page": "app/page.js",
+  "/unlock/page": "app/unlock/page.js",
   "/experience/page": "app/experience/page.js",
-  "/generating/page": "app/generating/page.js",
   "/auth/page": "app/auth/page.js",
+  "/generating/page": "app/generating/page.js",
   "/results/page": "app/results/page.js"
 }

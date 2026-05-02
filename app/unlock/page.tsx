@@ -34,15 +34,15 @@ function UnlockContent() {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
-          'Apikey': SUPABASE_ANON_KEY,
+          'apikey': SUPABASE_ANON_KEY,
         },
-        body: JSON.stringify({ session_id: sessionId, return_url: `${window.location.origin}/results?session=${sessionId}` }),
+        body: JSON.stringify({ session_id: sessionId }),
       });
 
       if (res.ok) {
         const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
+        if (data.checkout_url) {
+          window.location.href = data.checkout_url;
         }
       }
     } catch {

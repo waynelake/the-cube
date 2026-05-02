@@ -94,11 +94,36 @@ function ResultsContent() {
 
   useEffect(() => {
     if (!sessionId) { router.push('/'); return; }
-    if (paymentStatus === 'success') {
-      setTimeout(() => loadResults(), 2000);
-    } else {
+    if (paymentStatus !== 'success') {
       loadResults();
+      return;
     }
+
+    let attempts = 0;
+    const maxAttempts = 5; // 5 × 2s = 10s
+
+    const poll = async () => {
+      attempts++;
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { router.push('/auth?mode=signin'); return; }
+
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('subscription_plan')
+        .eq('auth_user_id', user.id)
+        .maybeSingle();
+
+      if (profile?.subscription_plan === 'one_time') {
+        loadResults();
+      } else if (attempts >= maxAttempts) {
+        await loadResults();
+        setIsPaid(true);
+      } else {
+        setTimeout(poll, 2000);
+      }
+    };
+
+    setTimeout(poll, 2000);
   }, [sessionId]);
 
   const handleCopy = () => {
