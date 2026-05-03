@@ -150,6 +150,8 @@ export default function DashboardPage() {
 
     if (!profile) { setLoading(false); return; }
 
+    console.log('profile subscription_plan:', profile.subscription_plan);
+
     setEmail(profile.email || user.email || '');
     setIsPaid(profile.subscription_plan === 'one_time' || forceIsPaid);
 
