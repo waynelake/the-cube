@@ -335,8 +335,17 @@ function parseSummary(raw: string) {
 
   for (const block of synthBlocks) {
     const blockLines = block.split('\n').map(l => l.trim()).filter(Boolean);
+
+    if (blockLines.length === 1 && /^Final Synthesis[:\s]*$/i.test(blockLines[0])) {
+      continue;
+    }
+
     if (blockLines.every(l => /^\d+[.)]\s/.test(l))) {
       takeaways.push(...blockLines.map(l => l.replace(/^\d+[.)]\s*/, '')));
+    } else if (/five distilled takeaways/i.test(block)) {
+      const stripped = block.replace(/.*?five distilled takeaways[:\s]*/i, '');
+      const items = stripped.split(/\d+[.)]\s+/).map(s => s.trim()).filter(Boolean);
+      takeaways.push(...items);
     } else if (takeaways.length > 0 && blockLines.length === 1) {
       summation = blockLines[0];
     } else {
@@ -389,7 +398,7 @@ function PaidContent({ summary }: { summary: string }) {
             </p>
             <p style={{
               fontFamily: "'Playfair Display', Georgia, serif",
-              fontStyle: 'italic', fontSize: '1rem', color: '#a78bfa', lineHeight: '1.6',
+              fontStyle: 'italic', fontSize: '1rem', color: 'var(--accent-text)', lineHeight: '1.6',
               marginTop: '1.5rem', paddingTop: '1.5rem',
               borderTop: '1px solid rgba(124,58,237,0.15)',
             }}>

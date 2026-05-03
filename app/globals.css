@@ -12,7 +12,8 @@
   --text-muted: #5a5464;
   --accent: #7c3aed;
   --accent-glow: rgba(124,58,237,0.1);
-  --border: rgba(124,58,237,0.2);
+  --accent-text: #a78bfa;
+  --border: rgba(124,58,237,0.35);
 }
 
 [data-theme="light"] {
@@ -24,6 +25,7 @@
   --text-muted: #9a8f85;
   --accent: #7c3aed;
   --accent-glow: rgba(124,58,237,0.08);
+  --accent-text: #5b21b6;
   --border: rgba(124,58,237,0.25);
 }
 
