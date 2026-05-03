@@ -196,6 +196,17 @@ function ResultsContent() {
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <ThemeToggle />
+          <Link
+            href="/dashboard"
+            style={{
+              padding: '0.5rem 1.25rem', borderRadius: '6px',
+              border: '1px solid rgba(124,58,237,0.25)', background: 'transparent',
+              color: 'var(--text-secondary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem',
+              textDecoration: 'none', transition: 'all 0.2s',
+            }}
+          >
+            Dashboard
+          </Link>
           {isPaid && (
             <button
               onClick={handleCopy}

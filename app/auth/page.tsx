@@ -31,11 +31,11 @@ function AuthContent() {
       if (mode === 'signup') {
         const { error } = await supabase.auth.signUp({ email, password });
         if (error) throw error;
-        router.push('/experience');
+        router.push('/dashboard');
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
-        router.push('/experience');
+        router.push('/dashboard');
       }
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Something went wrong.');
@@ -47,7 +47,7 @@ function AuthContent() {
   const handleGoogle = async () => {
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo: `${window.location.origin}/experience` },
+      options: { redirectTo: `${window.location.origin}/dashboard` },
     });
     if (error) setError(error.message);
   };
