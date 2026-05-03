@@ -7,7 +7,7 @@ import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
 import {
-  PaidContent, PaywallSection, ReadingTraits,
+  PaidContent, PaywallSection, parseSummary, ReadingTraits,
   ELEMENT_KEYS, ELEMENT_LABELS, TRAIT_MAP,
 } from '@/components/reading-display';
 import { Menu, X, LogOut, Plus } from 'lucide-react';
@@ -15,7 +15,7 @@ import { Menu, X, LogOut, Plus } from 'lucide-react';
 type SessionItem = {
   id: string;
   session_number: number;
-  created_at: string;
+  started_at: string;
   insight: { traits: ReadingTraits; summary: string } | null;
 };
 
@@ -58,7 +58,7 @@ function Sidebar({
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
             padding: '0.55rem 1rem', borderRadius: '8px', background: 'var(--accent)',
-            color: 'var(--text-primary)', fontFamily: "'DM Sans', sans-serif",
+            color: '#ffffff', fontFamily: "'DM Sans', sans-serif",
             fontSize: '0.82rem', fontWeight: 500, textDecoration: 'none',
           }}
         >
@@ -83,11 +83,11 @@ function Sidebar({
               cursor: 'pointer', transition: 'all 0.15s',
             }}
           >
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.82rem', color: selectedId === s.id ? 'var(--text-primary)' : 'var(--text-secondary)', marginBottom: '0.2rem', fontWeight: 500 }}>
-              Reading {s.session_number}
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', color: 'var(--text-muted)', marginBottom: '0.3rem' }}>
+              {formatDate(s.started_at)}
             </p>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', color: 'var(--text-muted)' }}>
-              {formatDate(s.created_at)}
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+              {s.insight ? (parseSummary(s.insight.summary).summation || 'Reading ' + s.session_number) : 'Reading ' + s.session_number}
             </p>
           </button>
         ))}
@@ -95,7 +95,7 @@ function Sidebar({
 
       <div style={{ borderTop: '1px solid rgba(124,58,237,0.08)', padding: '1rem 1.5rem', flexShrink: 0 }}>
         {!isPaid && sessions.length > 0 && selectedId && (
-          <div style={{ marginBottom: '1rem', padding: '0.875rem', background: 'rgba(124,58,237,0.06)', borderRadius: '10px', border: '1px solid rgba(124,58,237,0.12)' }}>
+          <div style={{ marginBottom: '1rem', padding: '0.875rem 0.875rem 0.875rem 1rem', background: 'rgba(124,58,237,0.06)', borderRadius: '10px', border: '1px solid rgba(124,58,237,0.12)' }}>
             <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.74rem', color: 'var(--text-secondary)', marginBottom: '0.4rem', lineHeight: '1.5' }}>
               Unlock the full reading — all five elements and the pattern.
             </p>
@@ -138,7 +138,7 @@ export default function DashboardPage() {
 
   useEffect(() => { currentWidthRef.current = sidebarWidth; }, [sidebarWidth]);
 
-  const loadDashboard = useCallback(async () => {
+  const loadDashboard = useCallback(async (urlSession: string | null = null, forceIsPaid = false) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { router.push('/auth?mode=signin'); return; }
 
@@ -151,14 +151,14 @@ export default function DashboardPage() {
     if (!profile) { setLoading(false); return; }
 
     setEmail(profile.email || user.email || '');
-    setIsPaid(profile.subscription_plan === 'one_time');
+    setIsPaid(profile.subscription_plan === 'one_time' || forceIsPaid);
 
     const { data: rawSessions } = await supabase
       .from('sessions')
-      .select('id, session_number, created_at')
+      .select('id, session_number, started_at')
       .eq('profile_id', profile.id)
-      .eq('status', 'completed')
-      .order('created_at', { ascending: false });
+      .eq('synthesis_status', 'complete')
+      .order('started_at', { ascending: false });
 
     if (!rawSessions?.length) { setLoading(false); return; }
 
@@ -172,14 +172,15 @@ export default function DashboardPage() {
     const items: SessionItem[] = rawSessions.map(s => ({
       id: s.id,
       session_number: s.session_number,
-      created_at: s.created_at,
+      started_at: s.started_at,
       insight: insightMap[s.id]
         ? { traits: insightMap[s.id].traits as ReadingTraits, summary: insightMap[s.id].summary }
         : null,
     }));
 
     setSessions(items);
-    setSelectedId(items[0]?.id ?? null);
+    const preselect = urlSession && items.find(s => s.id === urlSession) ? urlSession : (items[0]?.id ?? null);
+    setSelectedId(preselect);
     setLoading(false);
   }, [router]);
 
@@ -190,7 +191,10 @@ export default function DashboardPage() {
       setSidebarWidth(w);
       currentWidthRef.current = w;
     }
-    loadDashboard();
+    const params = new URLSearchParams(window.location.search);
+    const urlSession = params.get('session');
+    const forceIsPaid = params.get('payment') === 'success';
+    loadDashboard(urlSession, forceIsPaid);
   }, [loadDashboard]);
 
   useEffect(() => {
@@ -246,7 +250,7 @@ export default function DashboardPage() {
           <div>
             {selected && (
               <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-                Reading {selected.session_number} &mdash; {formatDate(selected.created_at)}
+                {formatDate(selected.started_at)}
               </p>
             )}
           </div>
@@ -265,7 +269,7 @@ export default function DashboardPage() {
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2rem' }}>
                   Start a reading to get your first symbolic interpretation.
                 </p>
-                <Link href="/experience" style={{ display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px', background: 'var(--accent)', color: 'var(--text-primary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', fontWeight: 500, textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.3)' }}>
+                <Link href="/experience" style={{ display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px', background: 'var(--accent)', color: '#ffffff', fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', fontWeight: 500, textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.3)' }}>
                   Start your reading
                 </Link>
               </div>
@@ -286,7 +290,7 @@ export default function DashboardPage() {
                   The Space of {userName || 'You'}
                 </h1>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                  {formatDate(selected.created_at)}
+                  {formatDate(selected.started_at)}
                 </p>
               </div>
 

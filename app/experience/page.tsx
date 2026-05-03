@@ -202,7 +202,13 @@ export default function ExperiencePage() {
     }));
 
     await supabase.from('responses_raw').insert(insertions);
-    await supabase.from('sessions').update({ status: 'completed', synthesis_status: 'generating' }).eq('id', sessionId);
+
+    const { error: updateError } = await supabase
+      .from('sessions')
+      .update({ status: 'completed', synthesis_status: 'generating' })
+      .eq('id', sessionId);
+
+    if (updateError) console.error('Session update failed:', updateError);
 
     router.push(`/generating?session=${sessionId}`);
   };

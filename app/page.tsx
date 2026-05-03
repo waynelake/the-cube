@@ -1,10 +1,20 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
 
 export default function LandingPage() {
+  const router = useRouter();
+
+  useEffect(() => {
+    supabase.auth.getUser().then(({ data: { user } }) => {
+      if (user) router.push('/dashboard');
+    });
+  }, []);
   return (
     <main className="relative min-h-screen overflow-hidden diagonal-grid" style={{ backgroundColor: 'var(--bg)' }}>
       {/* Atmospheric background glow */}

@@ -25,6 +25,8 @@ function GeneratingContent() {
   const [visibleLines, setVisibleLines] = useState(0);
   const [visibleCards, setVisibleCards] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [showLoader, setShowLoader] = useState(false);
+  const [dotCount, setDotCount] = useState(1);
   const synthesisStarted = useRef(false);
 
   useEffect(() => {
@@ -53,6 +55,8 @@ function GeneratingContent() {
       setTimeout(() => setVisibleCards(n => Math.max(n, i + 1)), 3000 + i * 900)
     );
 
+    const loaderTimer = setTimeout(() => setShowLoader(true), 7500);
+
     if (!synthesisStarted.current) {
       synthesisStarted.current = true;
       callSynthesis();
@@ -60,9 +64,16 @@ function GeneratingContent() {
 
     return () => {
       clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
+      clearTimeout(loaderTimer);
       cardTimers.forEach(clearTimeout);
     };
   }, [sessionId, router]);
+
+  useEffect(() => {
+    if (!showLoader) return;
+    const t = setInterval(() => setDotCount(n => (n % 3) + 1), 500);
+    return () => clearInterval(t);
+  }, [showLoader]);
 
   const callSynthesis = async () => {
     try {
@@ -198,6 +209,21 @@ function GeneratingContent() {
               </p>
             </div>
           ))}
+        </div>
+
+        <div style={{ marginTop: '2rem', textAlign: 'center', opacity: showLoader ? 1 : 0, transition: 'opacity 1.2s ease' }}>
+          <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
+            Interpreting your space{'.'.repeat(dotCount)}
+          </p>
+          <div style={{ height: '2px', maxWidth: '200px', margin: '0 auto', borderRadius: '2px', background: 'rgba(124,58,237,0.15)', overflow: 'hidden' }}>
+            <style>{`
+              @keyframes progress-pulse {
+                0% { transform: translateX(-100%); }
+                100% { transform: translateX(200%); }
+              }
+            `}</style>
+            <div style={{ height: '100%', width: '50%', background: 'var(--accent)', borderRadius: '2px', animation: showLoader ? 'progress-pulse 1.8s ease-in-out infinite' : 'none' }} />
+          </div>
         </div>
       </div>
     </main>

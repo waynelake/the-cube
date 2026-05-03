@@ -197,7 +197,7 @@ function ResultsContent() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
           <ThemeToggle />
           <Link
-            href="/dashboard"
+            href={`/dashboard?session=${sessionId}`}
             style={{
               padding: '0.5rem 1.25rem', borderRadius: '6px',
               border: '1px solid rgba(124,58,237,0.25)', background: 'transparent',
