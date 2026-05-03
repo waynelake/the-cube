@@ -126,7 +126,7 @@ function GeneratingContent() {
   return (
     <main
       className="relative min-h-screen diagonal-grid flex items-center justify-center"
-      style={{ backgroundColor: '#0a0a0f' }}
+      style={{ backgroundColor: 'var(--bg)' }}
     >
       <div
         className="pointer-events-none fixed inset-0 glow-pulse-bg"
@@ -144,7 +144,7 @@ function GeneratingContent() {
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontStyle: 'italic',
                 fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
-                color: visibleLines > i ? '#f5f0eb' : 'transparent',
+                color: visibleLines > i ? 'var(--text-primary)' : 'transparent',
                 marginBottom: '0.6rem',
                 transition: 'color 0.6s ease',
                 opacity: visibleLines > i ? (i === visibleLines - 1 ? 1 : 0.4) : 0,
@@ -160,7 +160,7 @@ function GeneratingContent() {
             <div
               key={key}
               style={{
-                background: '#13131a',
+                background: 'var(--surface)',
                 border: '1px solid rgba(124,58,237,0.15)',
                 borderRadius: '10px',
                 padding: '1rem 1.25rem',
@@ -175,7 +175,7 @@ function GeneratingContent() {
                   fontSize: '0.65rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  color: '#7c3aed',
+                  color: 'var(--accent)',
                   marginBottom: '0.35rem',
                 }}
               >
@@ -185,7 +185,7 @@ function GeneratingContent() {
                 style={{
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: '0.88rem',
-                  color: '#5a5464',
+                  color: 'var(--text-muted)',
                   lineHeight: '1.5',
                   whiteSpace: 'nowrap',
                   overflow: 'hidden',

@@ -5,6 +5,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
+import { ThemeToggle } from '@/components/theme-provider';
 
 const ELEMENT_KEYS = ['cube', 'ladder', 'flowers', 'animal', 'storm'] as const;
 type ElementKey = typeof ELEMENT_KEYS[number];
@@ -143,10 +144,10 @@ function ResultsContent() {
 
   if (loading) {
     return (
-      <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: '#0a0a0f' }}>
+      <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: 'var(--bg)' }}>
         <div className="pointer-events-none fixed inset-0 glow-pulse-bg"
           style={{ background: 'radial-gradient(ellipse 700px 500px at 50% 45%, rgba(124,58,237,0.1) 0%, transparent 70%)' }} />
-        <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', color: '#5a5464', fontSize: '1.1rem' }}>
+        <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
           Loading your reading...
         </p>
       </main>
@@ -155,19 +156,19 @@ function ResultsContent() {
 
   if (!traits) {
     return (
-      <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: '#0a0a0f' }}>
+      <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: 'var(--bg)' }}>
         <div style={{ textAlign: 'center', maxWidth: '400px', padding: '2rem' }}>
-          <p style={{ fontFamily: "'Playfair Display', Georgia, serif", color: '#f5f0eb', fontSize: '1.3rem', marginBottom: '1rem' }}>
+          <p style={{ fontFamily: "'Playfair Display', Georgia, serif", color: 'var(--text-primary)', fontSize: '1.3rem', marginBottom: '1rem' }}>
             Your reading is being prepared.
           </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", color: '#8b8494', fontSize: '0.9rem', marginBottom: '2rem' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
             This can take a moment. Please check back shortly.
           </p>
           <button
             onClick={loadResults}
             style={{
               padding: '0.7rem 1.75rem', borderRadius: '8px', border: 'none',
-              background: '#7c3aed', color: '#f5f0eb',
+              background: 'var(--accent)', color: 'var(--text-primary)',
               fontFamily: "'DM Sans', sans-serif", fontSize: '0.88rem', cursor: 'pointer',
             }}
           >
@@ -179,7 +180,7 @@ function ResultsContent() {
   }
 
   return (
-    <main className="relative min-h-screen diagonal-grid" style={{ backgroundColor: '#0a0a0f' }}>
+    <main className="relative min-h-screen diagonal-grid" style={{ backgroundColor: 'var(--bg)' }}>
       <div className="pointer-events-none fixed inset-0"
         style={{ background: 'radial-gradient(ellipse 700px 400px at 50% 20%, rgba(124,58,237,0.07) 0%, transparent 65%)' }} />
 
@@ -189,63 +190,67 @@ function ResultsContent() {
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}>
           <CubeIcon size={22} />
-          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.35)' }}>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
             The Cube
           </span>
         </Link>
-        {isPaid && (
-          <button
-            onClick={handleCopy}
-            style={{
-              padding: '0.5rem 1.25rem', borderRadius: '6px',
-              border: '1px solid rgba(124,58,237,0.25)', background: 'transparent',
-              color: '#8b8494', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem',
-              cursor: 'pointer', transition: 'all 0.2s',
-            }}
-          >
-            {copied ? 'Copied' : 'Copy my reading'}
-          </button>
-        )}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <ThemeToggle />
+          {isPaid && (
+            <button
+              onClick={handleCopy}
+              style={{
+                padding: '0.5rem 1.25rem', borderRadius: '6px',
+                border: '1px solid rgba(124,58,237,0.25)', background: 'transparent',
+                color: 'var(--text-secondary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem',
+                cursor: 'pointer', transition: 'all 0.2s',
+              }}
+            >
+              {copied ? 'Copied' : 'Copy my reading'}
+            </button>
+          )}
+        </div>
       </nav>
 
-      <div style={{
-        maxWidth: '720px', margin: '0 auto', padding: '4rem 2rem 6rem',
+      <div className="reading-container" style={{
         opacity: visible ? 1 : 0, transition: 'opacity 0.6s ease',
         position: 'relative', zIndex: 10,
       }}>
         <div style={{ marginBottom: '3.5rem' }}>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#7c3aed', marginBottom: '0.75rem' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.75rem' }}>
             Your reading
           </p>
           <h1 style={{
             fontFamily: "'Playfair Display', Georgia, serif",
             fontSize: 'clamp(2rem, 4vw, 2.8rem)',
-            color: '#f5f0eb', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem',
+            color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem',
           }}>
             The Space of {userName || 'You'}
           </h1>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: '#5a5464' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
             {sessionDate}
           </p>
         </div>
 
-        <div style={{ marginBottom: '3rem' }}>
-          {ELEMENT_KEYS.map((key, i) => (
-            <div key={key}>
-              <div style={{ padding: '1.5rem 0' }}>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#7c3aed', marginBottom: '0.6rem' }}>
-                  {ELEMENT_LABELS[key]}
-                </p>
-                <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(1.1rem, 2.2vw, 1.3rem)', color: '#f5f0eb', lineHeight: '1.5', fontWeight: 400 }}>
-                  {traits[TRAIT_MAP[key]]}
-                </p>
+        {!isPaid && (
+          <div style={{ marginBottom: '3rem' }}>
+            {ELEMENT_KEYS.map((key, i) => (
+              <div key={key}>
+                <div style={{ padding: '1.5rem 0' }}>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.6rem' }}>
+                    {ELEMENT_LABELS[key]}
+                  </p>
+                  <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(1.1rem, 2.2vw, 1.3rem)', color: 'var(--text-primary)', lineHeight: '1.5', fontWeight: 400 }}>
+                    {traits[TRAIT_MAP[key]]}
+                  </p>
+                </div>
+                {i < ELEMENT_KEYS.length - 1 && (
+                  <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.15), transparent)' }} />
+                )}
               </div>
-              {i < ELEMENT_KEYS.length - 1 && (
-                <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.15), transparent)' }} />
-              )}
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         {isPaid ? (
           <PaidContent summary={summary} />
@@ -257,21 +262,189 @@ function ResultsContent() {
   );
 }
 
+function stripMd(text: string): string {
+  return text.replace(/\*\*([^*]*)\*\*/g, '$1').replace(/\*([^*]*)\*/g, '$1');
+}
+
+function parseSummary(raw: string) {
+  const text = stripMd(raw);
+  const lines = text.split('\n');
+
+  const isSubHeader = (l: string) =>
+    /^(Observation|Interpretation)(\s*\(.*?\))?[:\s]*$/.test(l.trim());
+  const isElementHeader = (l: string) =>
+    /^(The )?(Cube|Ladder|Flowers|Animal|Storm)(\s*[\(\-].*?)?[:\s]*$/.test(l.trim());
+  const lensMatch = (l: string) =>
+    l.trim().match(/^Strategic Lens[:\s]*(.*)/i);
+
+  const elements: { body: string; lens: string }[] = [];
+  let bodyLines: string[] = [];
+  let lensLines: string[] = [];
+  let inLens = false;
+  let done = false;
+  const afterLines: string[] = [];
+
+  for (const line of lines) {
+    if (done) { afterLines.push(line); continue; }
+
+    const m = lensMatch(line);
+    if (m) {
+      inLens = true;
+      lensLines = m[1].trim() ? [m[1].trim()] : [];
+      continue;
+    }
+
+    if (inLens) {
+      const t = line.trim();
+      if (t) {
+        lensLines.push(t);
+      } else if (lensLines.length > 0) {
+        const body = bodyLines
+          .filter(l => !isSubHeader(l) && !isElementHeader(l))
+          .join('\n').trim().replace(/\n{3,}/g, '\n\n');
+        elements.push({ body, lens: lensLines.join(' ') });
+        bodyLines = []; lensLines = []; inLens = false;
+        if (elements.length === 5) done = true;
+      }
+      continue;
+    }
+
+    bodyLines.push(line);
+  }
+
+  if (inLens && lensLines.length > 0 && elements.length < 5) {
+    const body = bodyLines
+      .filter(l => !isSubHeader(l) && !isElementHeader(l))
+      .join('\n').trim().replace(/\n{3,}/g, '\n\n');
+    elements.push({ body, lens: lensLines.join(' ') });
+  }
+
+  if (elements.length === 0) {
+    return {
+      elements: [] as { body: string; lens: string }[],
+      patternParas: text.split(/\n{2,}/).map(p => p.trim()).filter(Boolean),
+      takeaways: [] as string[],
+      summation: '',
+    };
+  }
+
+  const synthBlocks = afterLines.join('\n').split(/\n{2,}/).map(b => b.trim()).filter(Boolean);
+  const patternParas: string[] = [];
+  const takeaways: string[] = [];
+  let summation = '';
+
+  for (const block of synthBlocks) {
+    const blockLines = block.split('\n').map(l => l.trim()).filter(Boolean);
+    if (blockLines.every(l => /^\d+[.)]\s/.test(l))) {
+      takeaways.push(...blockLines.map(l => l.replace(/^\d+[.)]\s*/, '')));
+    } else if (takeaways.length > 0 && blockLines.length === 1) {
+      summation = blockLines[0];
+    } else {
+      patternParas.push(blockLines.join(' '));
+    }
+  }
+
+  return { elements, patternParas, takeaways, summation };
+}
+
 function PaidContent({ summary }: { summary: string }) {
-  const paragraphs = summary.split(/\n{2,}/).map(p => p.trim()).filter(Boolean);
+  const { elements, patternParas, takeaways, summation } = parseSummary(summary);
+  const CARD_LABELS = ['The Cube', 'The Ladder', 'The Flowers', 'The Animal', 'The Storm'];
 
   return (
     <div style={{ marginBottom: '3.5rem' }}>
-      <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.2), transparent)', marginBottom: '2.5rem' }} />
-      {paragraphs.map((para, i) => (
-        <p key={i} style={{
-          fontFamily: "'DM Sans', sans-serif",
-          fontSize: '1rem', color: '#f5f0eb', lineHeight: '1.85',
-          marginBottom: i < paragraphs.length - 1 ? '1.5rem' : 0,
+      <style>{`
+        .reading-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 1.5rem;
+        }
+        @media (max-width: 768px) {
+          .reading-grid { grid-template-columns: 1fr; }
+        }
+      `}</style>
+
+      <div className="reading-grid">
+        {elements.map((el, i) => (
+          <div key={i} style={{
+            background: 'var(--surface)',
+            border: '1px solid var(--border)',
+            borderRadius: '16px',
+            padding: '2.5rem',
+            ...(i === 4 ? { gridColumn: '1 / -1' } : {}),
+          }}>
+            <p style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: '0.65rem', letterSpacing: '0.2em',
+              textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1rem',
+            }}>
+              {CARD_LABELS[i]}
+            </p>
+            <p style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: '0.95rem', color: 'var(--text-primary)', lineHeight: '1.9',
+              whiteSpace: 'pre-wrap',
+            }}>
+              {el.body}
+            </p>
+            <p style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontStyle: 'italic', fontSize: '1rem', color: '#a78bfa', lineHeight: '1.6',
+              marginTop: '1.5rem', paddingTop: '1.5rem',
+              borderTop: '1px solid rgba(124,58,237,0.15)',
+            }}>
+              {el.lens}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {patternParas.length > 0 && (
+        <div style={{ marginTop: '3rem' }}>
+          <h2 style={{
+            fontFamily: "'Playfair Display', Georgia, serif",
+            fontSize: '2rem', color: 'var(--text-primary)', fontWeight: 500, marginBottom: '2rem',
+          }}>
+            The Pattern
+          </h2>
+          {patternParas.map((para, i) => (
+            <p key={i} style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: '1rem', color: 'var(--text-primary)', lineHeight: '1.9',
+              marginBottom: '1.5rem',
+            }}>
+              {para}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {takeaways.length > 0 && (
+        <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
+          {takeaways.map((t, i) => (
+            <p key={i} style={{
+              fontFamily: "'Playfair Display', Georgia, serif",
+              fontStyle: 'italic', fontSize: '1.2rem', color: 'var(--text-primary)', lineHeight: '1.6',
+              paddingLeft: '1rem', marginBottom: '0.75rem',
+            }}>
+              {i + 1}. {t}
+            </p>
+          ))}
+        </div>
+      )}
+
+      {summation && (
+        <p style={{
+          fontFamily: "'Playfair Display', Georgia, serif",
+          fontStyle: 'italic', fontSize: '1.4rem', color: 'var(--text-primary)',
+          textAlign: 'center', lineHeight: '1.6',
+          marginTop: '3rem', marginBottom: '3rem',
+          maxWidth: '500px', marginLeft: 'auto', marginRight: 'auto',
+          display: 'block',
         }}>
-          {para}
+          {summation}
         </p>
-      ))}
+      )}
     </div>
   );
 }
@@ -284,31 +457,31 @@ function PaywallSection({ sessionId, summary }: { sessionId: string; summary: st
       <div style={{ position: 'relative', overflow: 'hidden', maxHeight: '160px', borderRadius: '12px' }}>
         <div style={{
           filter: 'blur(6px)', opacity: 0.45, pointerEvents: 'none',
-          userSelect: 'none' as const, padding: '1.5rem', background: '#13131a',
+          userSelect: 'none' as const, padding: '1.5rem', background: 'var(--surface)',
         }}>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", color: '#f5f0eb', lineHeight: '1.8', fontSize: '0.95rem' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", color: 'var(--text-primary)', lineHeight: '1.8', fontSize: '0.95rem' }}>
             {preview}
           </p>
         </div>
         <div style={{
           position: 'absolute', inset: 0,
-          background: 'linear-gradient(to bottom, transparent 0%, #0a0a0f 85%)',
+          background: 'linear-gradient(to bottom, transparent 0%, var(--bg) 85%)',
         }} />
       </div>
 
       <div style={{
-        background: '#13131a', border: '1px solid rgba(124,58,237,0.25)',
+        background: 'var(--surface)', border: '1px solid rgba(124,58,237,0.25)',
         borderRadius: '16px', padding: '2.5rem', textAlign: 'center',
         marginTop: '1.5rem', boxShadow: '0 0 60px rgba(124,58,237,0.08)',
       }}>
         <h3 style={{
           fontFamily: "'Playfair Display', Georgia, serif",
-          fontSize: '1.5rem', color: '#f5f0eb', fontWeight: 500, marginBottom: '1rem',
+          fontSize: '1.5rem', color: 'var(--text-primary)', fontWeight: 500, marginBottom: '1rem',
         }}>
           Your reading continues.
         </h3>
         <p style={{
-          fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', color: '#8b8494',
+          fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', color: 'var(--text-secondary)',
           lineHeight: '1.7', maxWidth: '420px', margin: '0 auto 2rem',
         }}>
           You&apos;ve seen enough to know this isn&apos;t generic. The full interpretation of your space — all five elements, the pattern that runs through them, and what it means — is waiting.
@@ -317,7 +490,7 @@ function PaywallSection({ sessionId, summary }: { sessionId: string; summary: st
           href={`/unlock?session=${sessionId}`}
           style={{
             display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px',
-            background: '#7c3aed', color: '#f5f0eb',
+            background: 'var(--accent)', color: 'var(--text-primary)',
             fontFamily: "'DM Sans', sans-serif", fontSize: '0.95rem', fontWeight: 500,
             textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.35)',
             transition: 'all 0.2s',
@@ -325,7 +498,7 @@ function PaywallSection({ sessionId, summary }: { sessionId: string; summary: st
         >
           Unlock full reading — 7 EUR
         </Link>
-        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.76rem', color: '#5a5464', marginTop: '1rem' }}>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '1rem' }}>
           One-time payment. Instant access.
         </p>
       </div>

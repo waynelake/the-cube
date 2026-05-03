@@ -68,7 +68,7 @@ function AuthContent() {
   return (
     <main
       className="relative min-h-screen diagonal-grid flex items-center justify-center px-6"
-      style={{ backgroundColor: '#0a0a0f' }}
+      style={{ backgroundColor: 'var(--bg)' }}
     >
       <div
         className="pointer-events-none fixed inset-0"
@@ -83,7 +83,7 @@ function AuthContent() {
         style={{ textDecoration: 'none' }}
       >
         <CubeIcon size={24} />
-        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.7rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'rgba(245,240,235,0.4)' }}>
+        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.7rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
           The Cube
         </span>
       </Link>
@@ -93,8 +93,8 @@ function AuthContent() {
         style={{
           width: '100%',
           maxWidth: '420px',
-          background: '#13131a',
-          border: '1px solid rgba(124,58,237,0.2)',
+          background: 'var(--surface)',
+          border: '1px solid var(--border)',
           borderRadius: '16px',
           padding: '2.5rem',
           boxShadow: '0 0 80px rgba(124,58,237,0.07), 0 20px 60px rgba(0,0,0,0.5)',
@@ -108,13 +108,13 @@ function AuthContent() {
               fontFamily: "'Playfair Display', Georgia, serif",
               fontSize: '1.6rem',
               fontWeight: 500,
-              color: '#f5f0eb',
+              color: 'var(--text-primary)',
               marginBottom: '0.4rem',
             }}
           >
             {mode === 'signup' ? 'Create your account' : 'Welcome back'}
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.85rem', color: '#8b8494' }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
             {mode === 'signup' ? 'Begin your reading.' : 'Continue where you left off.'}
           </p>
         </div>
@@ -124,7 +124,7 @@ function AuthContent() {
             display: 'flex',
             gap: '0',
             marginBottom: '1.75rem',
-            background: '#0a0a0f',
+            background: 'var(--bg)',
             borderRadius: '8px',
             padding: '3px',
             border: '1px solid rgba(124,58,237,0.12)',
@@ -144,8 +144,8 @@ function AuthContent() {
                 fontWeight: 500,
                 cursor: 'pointer',
                 transition: 'all 0.2s',
-                background: mode === m ? '#7c3aed' : 'transparent',
-                color: mode === m ? '#f5f0eb' : '#8b8494',
+                background: mode === m ? 'var(--accent)' : 'transparent',
+                color: mode === m ? 'var(--text-primary)' : 'var(--text-secondary)',
               }}
             >
               {m === 'signup' ? 'Sign up' : 'Sign in'}
@@ -157,7 +157,7 @@ function AuthContent() {
           <div>
             <label
               htmlFor="email"
-              style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: '#8b8494', marginBottom: '0.4rem', letterSpacing: '0.04em' }}
+              style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.4rem', letterSpacing: '0.04em' }}
             >
               Email
             </label>
@@ -173,8 +173,8 @@ function AuthContent() {
                 padding: '0.7rem 1rem',
                 borderRadius: '8px',
                 border: '1px solid rgba(124,58,237,0.15)',
-                background: '#0a0a0f',
-                color: '#f5f0eb',
+                background: 'var(--bg)',
+                color: 'var(--text-primary)',
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: '0.9rem',
                 outline: 'none',
@@ -189,7 +189,7 @@ function AuthContent() {
           <div>
             <label
               htmlFor="password"
-              style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: '#8b8494', marginBottom: '0.4rem', letterSpacing: '0.04em' }}
+              style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.4rem', letterSpacing: '0.04em' }}
             >
               Password
             </label>
@@ -205,8 +205,8 @@ function AuthContent() {
                 padding: '0.7rem 1rem',
                 borderRadius: '8px',
                 border: '1px solid rgba(124,58,237,0.15)',
-                background: '#0a0a0f',
-                color: '#f5f0eb',
+                background: 'var(--bg)',
+                color: 'var(--text-primary)',
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: '0.9rem',
                 outline: 'none',
@@ -226,7 +226,7 @@ function AuthContent() {
                 alignSelf: 'flex-end',
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: '0.78rem',
-                color: '#5a5464',
+                color: 'var(--text-muted)',
                 background: 'none',
                 border: 'none',
                 cursor: 'pointer',
@@ -251,8 +251,8 @@ function AuthContent() {
               padding: '0.8rem',
               borderRadius: '8px',
               border: 'none',
-              background: loading ? 'rgba(124,58,237,0.5)' : '#7c3aed',
-              color: '#f5f0eb',
+              background: loading ? 'rgba(124,58,237,0.5)' : 'var(--accent)',
+              color: 'var(--text-primary)',
               fontFamily: "'DM Sans', sans-serif",
               fontSize: '0.92rem',
               fontWeight: 500,
@@ -268,7 +268,7 @@ function AuthContent() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', margin: '1.5rem 0' }}>
           <div style={{ flex: 1, height: '1px', background: 'rgba(124,58,237,0.12)' }} />
-          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.75rem', color: '#5a5464' }}>or</span>
+          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.75rem', color: 'var(--text-muted)' }}>or</span>
           <div style={{ flex: 1, height: '1px', background: 'rgba(124,58,237,0.12)' }} />
         </div>
 
@@ -278,9 +278,9 @@ function AuthContent() {
             width: '100%',
             padding: '0.75rem',
             borderRadius: '8px',
-            border: '1px solid rgba(124,58,237,0.2)',
+            border: '1px solid var(--border)',
             background: 'transparent',
-            color: '#f5f0eb',
+            color: 'var(--text-primary)',
             fontFamily: "'DM Sans', sans-serif",
             fontSize: '0.88rem',
             fontWeight: 400,
@@ -292,7 +292,7 @@ function AuthContent() {
             gap: '0.6rem',
           }}
           onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(124,58,237,0.4)'; (e.currentTarget as HTMLButtonElement).style.background = 'rgba(124,58,237,0.05)'; }}
-          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(124,58,237,0.2)'; (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; }}
+          onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = 'var(--border)'; (e.currentTarget as HTMLButtonElement).style.background = 'transparent'; }}
         >
           <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
@@ -304,7 +304,7 @@ function AuthContent() {
         </button>
 
         {mode === 'signup' && (
-          <p style={{ textAlign: 'center', fontFamily: "'DM Sans', sans-serif", fontSize: '0.75rem', color: '#5a5464', marginTop: '1.25rem' }}>
+          <p style={{ textAlign: 'center', fontFamily: "'DM Sans', sans-serif", fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '1.25rem' }}>
             By continuing you agree to our Privacy Policy
           </p>
         )}

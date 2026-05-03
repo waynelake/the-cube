@@ -212,7 +212,7 @@ export default function ExperiencePage() {
   return (
     <main
       className="relative min-h-screen diagonal-grid"
-      style={{ backgroundColor: '#0a0a0f', display: 'flex', flexDirection: 'column' }}
+      style={{ backgroundColor: 'var(--bg)', display: 'flex', flexDirection: 'column' }}
     >
       <div
         className="pointer-events-none fixed inset-0"
@@ -235,7 +235,7 @@ export default function ExperiencePage() {
             fontSize: '0.75rem',
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
-            color: '#5a5464',
+            color: 'var(--text-muted)',
           }}
         >
           Step {step + 1} of 5
@@ -249,7 +249,7 @@ export default function ExperiencePage() {
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            color: '#5a5464',
+            color: 'var(--text-muted)',
             padding: '4px',
             display: 'flex',
             alignItems: 'center',
@@ -266,7 +266,7 @@ export default function ExperiencePage() {
           style={{
             height: '100%',
             width: `${((step + 1) / 5) * 100}%`,
-            background: 'linear-gradient(90deg, #7c3aed, #9d5ff0)',
+            background: 'linear-gradient(90deg, var(--accent), #9d5ff0)',
             transition: 'width 0.4s ease',
             boxShadow: '0 0 8px rgba(124,58,237,0.6)',
           }}
@@ -300,7 +300,7 @@ export default function ExperiencePage() {
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontStyle: 'italic',
                 fontSize: '0.9rem',
-                color: '#5a5464',
+                color: 'var(--text-muted)',
                 textAlign: 'center',
                 marginBottom: '2.5rem',
               }}
@@ -315,7 +315,7 @@ export default function ExperiencePage() {
               fontSize: '0.72rem',
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
-              color: '#7c3aed',
+              color: 'var(--accent)',
               marginBottom: '1.25rem',
               textAlign: 'center',
             }}
@@ -331,7 +331,7 @@ export default function ExperiencePage() {
                   fontFamily: "'Playfair Display', Georgia, serif",
                   fontSize: 'clamp(1.4rem, 3vw, 1.9rem)',
                   lineHeight: '1.4',
-                  color: '#f5f0eb',
+                  color: 'var(--text-primary)',
                   fontWeight: 400,
                   marginBottom: i < question.prompt.length - 1 ? '0.75rem' : 0,
                 }}
@@ -352,8 +352,8 @@ export default function ExperiencePage() {
                 padding: '1.25rem 1.25rem',
                 borderRadius: '12px',
                 border: '1px solid rgba(124,58,237,0.18)',
-                background: '#13131a',
-                color: '#f5f0eb',
+                background: 'var(--surface)',
+                color: 'var(--text-primary)',
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: '1rem',
                 lineHeight: '1.7',
@@ -370,7 +370,7 @@ export default function ExperiencePage() {
             style={{
               fontFamily: "'DM Sans', sans-serif",
               fontSize: '0.78rem',
-              color: '#5a5464',
+              color: 'var(--text-muted)',
               textAlign: 'center',
               marginBottom: '1.5rem',
             }}
@@ -386,7 +386,7 @@ export default function ExperiencePage() {
                 border: 'none',
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: '0.8rem',
-                color: '#8b8494',
+                color: 'var(--text-secondary)',
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -419,7 +419,7 @@ export default function ExperiencePage() {
                     style={{
                       fontFamily: "'DM Sans', sans-serif",
                       fontSize: '0.82rem',
-                      color: '#8b8494',
+                      color: 'var(--text-secondary)',
                     }}
                   >
                     {nudge}
@@ -436,9 +436,9 @@ export default function ExperiencePage() {
                 style={{
                   padding: '0.7rem 1.5rem',
                   borderRadius: '8px',
-                  border: '1px solid rgba(124,58,237,0.2)',
+                  border: '1px solid var(--border)',
                   background: 'transparent',
-                  color: '#8b8494',
+                  color: 'var(--text-secondary)',
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: '0.88rem',
                   cursor: 'pointer',
@@ -456,8 +456,8 @@ export default function ExperiencePage() {
                 padding: '0.7rem 2rem',
                 borderRadius: '8px',
                 border: 'none',
-                background: '#7c3aed',
-                color: '#f5f0eb',
+                background: 'var(--accent)',
+                color: 'var(--text-primary)',
                 fontFamily: "'DM Sans', sans-serif",
                 fontSize: '0.92rem',
                 fontWeight: 500,
@@ -488,8 +488,8 @@ export default function ExperiencePage() {
         >
           <div
             style={{
-              background: '#13131a',
-              border: '1px solid rgba(124,58,237,0.2)',
+              background: 'var(--surface)',
+              border: '1px solid var(--border)',
               borderRadius: '16px',
               padding: '2rem',
               maxWidth: '380px',
@@ -501,14 +501,14 @@ export default function ExperiencePage() {
               style={{
                 fontFamily: "'Playfair Display', Georgia, serif",
                 fontSize: '1.3rem',
-                color: '#f5f0eb',
+                color: 'var(--text-primary)',
                 marginBottom: '0.75rem',
                 fontWeight: 500,
               }}
             >
               Leave the reading?
             </h3>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.85rem', color: '#8b8494', marginBottom: '1.75rem', lineHeight: '1.6' }}>
+            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.75rem', lineHeight: '1.6' }}>
               Your answers won&apos;t be saved if you leave now.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
@@ -517,9 +517,9 @@ export default function ExperiencePage() {
                 style={{
                   padding: '0.65rem 1.5rem',
                   borderRadius: '8px',
-                  border: '1px solid rgba(124,58,237,0.2)',
+                  border: '1px solid var(--border)',
                   background: 'transparent',
-                  color: '#8b8494',
+                  color: 'var(--text-secondary)',
                   fontFamily: "'DM Sans', sans-serif",
                   fontSize: '0.85rem',
                   cursor: 'pointer',
