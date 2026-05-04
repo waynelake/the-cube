@@ -56,6 +56,7 @@ Deno.serve(async (req: Request) => {
     }
 
     const cubeSessionId = session.metadata?.session_id;
+    const stripeSessionId = (event.data.object as { id?: string }).id;
     if (!cubeSessionId) {
       return new Response(JSON.stringify({ error: "No session_id in metadata" }), {
         status: 400,
@@ -79,6 +80,12 @@ Deno.serve(async (req: Request) => {
         .from("profiles")
         .update({ subscription_plan: "one_time" })
         .eq("id", sessionData.profile_id);
+
+      await supabase.from("session_payments").insert({
+        session_id: cubeSessionId,
+        profile_id: sessionData.profile_id,
+        stripe_session_id: stripeSessionId,
+      });
     }
   }
 

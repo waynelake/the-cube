@@ -126,7 +126,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const [sessions, setSessions] = useState<SessionItem[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [isPaid, setIsPaid] = useState(false);
+  const [paidSessionIds, setPaidSessionIds] = useState<Set<string>>(new Set());
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -153,8 +153,6 @@ export default function DashboardPage() {
     console.log('profile subscription_plan:', profile.subscription_plan);
 
     setEmail(profile.email || user.email || '');
-    setIsPaid(profile.subscription_plan === 'one_time' || forceIsPaid);
-
     const { data: rawSessions } = await supabase
       .from('sessions')
       .select('id, session_number, started_at')
@@ -179,6 +177,15 @@ export default function DashboardPage() {
         ? { traits: insightMap[s.id].traits as ReadingTraits, summary: insightMap[s.id].summary }
         : null,
     }));
+
+    const { data: payments } = await supabase
+      .from('session_payments')
+      .select('session_id')
+      .eq('profile_id', profile.id);
+
+    const paidSet = new Set((payments || []).map(p => p.session_id as string));
+    if (forceIsPaid && urlSession) paidSet.add(urlSession);
+    setPaidSessionIds(paidSet);
 
     setSessions(items);
     const preselect = urlSession && items.find(s => s.id === urlSession) ? urlSession : (items[0]?.id ?? null);
@@ -228,7 +235,7 @@ export default function DashboardPage() {
   const selected = sessions.find(s => s.id === selectedId) ?? null;
   const userName = email ? formatName(email) : '';
 
-  const sidebarProps = { sessions, selectedId, loading, email, userName, isPaid, onSelect: handleSelect, onSignOut: handleSignOut };
+  const sidebarProps = { sessions, selectedId, loading, email, userName, isPaid: paidSessionIds.has(selectedId ?? ''), onSelect: handleSelect, onSignOut: handleSignOut };
 
   return (
     <div style={{ display: 'flex', height: '100vh', backgroundColor: 'var(--bg)', overflow: 'hidden' }}>
@@ -296,7 +303,7 @@ export default function DashboardPage() {
                 </p>
               </div>
 
-              {!isPaid && (
+              {!paidSessionIds.has(selected.id) && (
                 <div style={{ marginBottom: '3rem' }}>
                   {ELEMENT_KEYS.map((key, i) => (
                     <div key={key}>
@@ -316,7 +323,7 @@ export default function DashboardPage() {
                 </div>
               )}
 
-              {isPaid
+              {paidSessionIds.has(selected.id)
                 ? <PaidContent summary={selected.insight.summary} />
                 : <PaywallSection sessionId={selected.id} summary={selected.insight.summary} />
               }

@@ -68,9 +68,16 @@ function ResultsContent() {
       .maybeSingle();
 
     if (profile) {
-      setIsPaid(profile.subscription_plan === 'one_time');
       setUserName(profile.email ? formatName(profile.email) : '');
     }
+
+    const { data: payment } = await supabase
+      .from('session_payments')
+      .select('session_id')
+      .eq('session_id', sessionId)
+      .maybeSingle();
+
+    setIsPaid(!!payment);
 
     const { data: insight } = await supabase
       .from('derived_insights')
@@ -108,13 +115,13 @@ function ResultsContent() {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) { router.push('/auth?mode=signin'); return; }
 
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('subscription_plan')
-        .eq('auth_user_id', user.id)
+      const { data: payment } = await supabase
+        .from('session_payments')
+        .select('session_id')
+        .eq('session_id', sessionId)
         .maybeSingle();
 
-      if (profile?.subscription_plan === 'one_time') {
+      if (payment) {
         loadResults();
       } else if (attempts >= maxAttempts) {
         await loadResults();
