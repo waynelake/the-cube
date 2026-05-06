@@ -362,7 +362,7 @@ export default function DashboardPage() {
     setPinnedIds(prev => {
       const next = new Set(prev);
       next.has(id) ? next.delete(id) : next.add(id);
-      localStorage.setItem('pinned-readings', JSON.stringify([...next]));
+      localStorage.setItem('pinned-readings', JSON.stringify(Array.from(next)));
       return next;
     });
   };
