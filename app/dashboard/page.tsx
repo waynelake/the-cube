@@ -283,7 +283,7 @@ export default function DashboardPage() {
                 </Link>
               </div>
             </div>
-          ) : !selected?.insight ? (
+          ) : !selected || !selected.insight ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
               <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
                 {selected ? 'This reading is still being prepared.' : 'Select a reading.'}
