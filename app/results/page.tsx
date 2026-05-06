@@ -243,7 +243,7 @@ function ResultsContent() {
             fontSize: 'clamp(2rem, 4vw, 2.8rem)',
             color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem',
           }}>
-            The Space of {userName || 'You'}
+            What Your Space Reveals
           </h1>
           <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
             {sessionDate}

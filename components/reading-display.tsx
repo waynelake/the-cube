@@ -21,7 +21,10 @@ export const TRAIT_MAP: Record<ElementKey, keyof ReadingTraits> = {
 };
 
 export function stripMd(text: string): string {
-  return text.replace(/\*\*([^*]*)\*\*/g, '$1').replace(/\*([^*]*)\*/g, '$1');
+  return text
+    .replace(/^#{1,6}\s+/gm, '')
+    .replace(/\*\*([^*]*)\*\*/g, '$1')
+    .replace(/\*([^*]*)\*/g, '$1');
 }
 
 export function parseSummary(raw: string) {
