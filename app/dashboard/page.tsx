@@ -312,7 +312,7 @@ export default function DashboardPage() {
                           {ELEMENT_LABELS[key]}
                         </p>
                         <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(1.1rem, 2.2vw, 1.3rem)', color: 'var(--text-primary)', lineHeight: '1.5', fontWeight: 400 }}>
-                          {selected.insight.traits[TRAIT_MAP[key]]}
+                          {selected.insight?.traits[TRAIT_MAP[key]]}
                         </p>
                       </div>
                       {i < ELEMENT_KEYS.length - 1 && (
