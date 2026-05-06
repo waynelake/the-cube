@@ -195,7 +195,7 @@ export function PaywallSection({ sessionId, summary }: { sessionId: string; summ
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', color: 'var(--text-secondary)', lineHeight: '1.7', maxWidth: '420px', margin: '0 auto 2rem' }}>
           You&apos;ve seen enough to know this isn&apos;t generic. The full interpretation — all five elements, the pattern, and what it means — is waiting.
         </p>
-        <Link href={`/unlock?session=${sessionId}`} style={{ display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px', background: 'var(--accent)', color: 'var(--text-primary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.95rem', fontWeight: 500, textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.35)' }}>
+        <Link href={`/unlock?session=${sessionId}`} style={{ display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px', background: 'var(--accent)', color: '#ffffff', fontFamily: "'DM Sans', sans-serif", fontSize: '0.95rem', fontWeight: 500, textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.35)' }}>
           Unlock full reading — 7 EUR
         </Link>
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '1rem' }}>

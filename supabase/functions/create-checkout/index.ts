@@ -29,8 +29,8 @@ Deno.serve(async (req: Request) => {
       "line_items[0][price_data][product_data][name]": "The Cube — Full Reading",
       "line_items[0][quantity]": "1",
       "mode": "payment",
-      "success_url": `http://localhost:3000/results?session=${session_id}&payment=success`,
-      "cancel_url": `http://localhost:3000/results?session=${session_id}`,
+      "success_url": `${Deno.env.get("APP_URL")}/results?session=${session_id}&payment=success`,
+      "cancel_url": `${Deno.env.get("APP_URL")}/results?session=${session_id}`,
       "metadata[session_id]": session_id,
     });
 
