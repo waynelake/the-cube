@@ -12,7 +12,7 @@ import { supabase } from '@/lib/supabase';
 const HeroCube = dynamic(() => import('@/components/hero-cube'), {
   ssr: false,
   loading: () => (
-    <div style={{ width: 'min(400px, 78vw)', height: 'min(400px, 78vw)' }} />
+    <div style={{ width: 'min(560px, 90vw)', height: 'min(560px, 90vw)' }} />
   ),
 });
 
@@ -137,55 +137,85 @@ function Hero() {
     <section
       style={{
         position: 'relative',
-        minHeight: '100dvh',
+        height: '100dvh',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '6rem 1.5rem 5rem',
         textAlign: 'center',
         overflow: 'hidden',
+        padding: '0 1.5rem',
       }}
     >
-      {/* Atmospheric radial glow */}
+      {/* Pulse-glow keyframes */}
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes pulse-glow {
+          0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+          50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+        }
+      `}} />
+
+      {/* Atmospheric radial background */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           pointerEvents: 'none',
           background:
-            'radial-gradient(ellipse 820px 620px at 50% 42%, rgba(124,58,237,0.13) 0%, transparent 72%)',
+            'radial-gradient(ellipse 900px 700px at 50% 38%, rgba(124,58,237,0.1) 0%, transparent 70%)',
         }}
       />
 
-      {/* Three.js rotating cube */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.88 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-        style={{
-          filter:
-            'drop-shadow(0 0 38px rgba(124,58,237,0.48)) drop-shadow(0 0 80px rgba(124,58,237,0.2))',
-          marginBottom: '3.25rem',
-        }}
-      >
-        <HeroCube />
-      </motion.div>
+      {/* Cube + pulsing glow wrapper */}
+      <div style={{ position: 'relative', marginBottom: '-3rem', zIndex: 1 }}>
+        {/* Pulsing radial glow behind cube */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            width: '140%',
+            height: '140%',
+            borderRadius: '50%',
+            background:
+              'radial-gradient(circle, rgba(124,58,237,0.22) 0%, transparent 70%)',
+            animation: 'pulse-glow 4s ease-in-out infinite',
+            pointerEvents: 'none',
+            zIndex: 0,
+          }}
+        />
+
+        {/* Three.js rotating cube */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.88 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.3, ease: EASE, delay: 0.15 }}
+          style={{
+            filter:
+              'drop-shadow(0 0 80px rgba(124,58,237,0.7)) drop-shadow(0 0 160px rgba(124,58,237,0.3))',
+            position: 'relative',
+            zIndex: 1,
+          }}
+        >
+          <HeroCube />
+        </motion.div>
+      </div>
 
       {/* Headline */}
       <motion.h1
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
+        transition={{ duration: 1.05, ease: EASE, delay: 0.55 }}
         style={{
           fontFamily: "'Cormorant Garant', 'Georgia', serif",
-          fontSize: 'clamp(2.5rem, 6vw, 5rem)',
-          lineHeight: 1.1,
-          fontWeight: 400,
+          fontSize: 'clamp(3.5rem, 8vw, 7rem)',
+          lineHeight: 1.05,
+          fontWeight: 300,
           color: 'var(--text-primary)',
-          maxWidth: '900px',
-          margin: '0 auto 1.2rem',
-          letterSpacing: '-0.015em',
+          margin: '0 0 0.8rem',
+          letterSpacing: '-0.02em',
+          position: 'relative',
+          zIndex: 1,
         }}
       >
         You&rsquo;re in a space of your own design.
@@ -195,14 +225,16 @@ function Hero() {
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.75 }}
+        transition={{ duration: 0.9, ease: EASE, delay: 0.75 }}
         style={{
           fontFamily: "'DM Sans', sans-serif",
           fontSize: '1.08rem',
           lineHeight: 1.72,
           color: 'var(--text-secondary)',
           maxWidth: '520px',
-          margin: '0 auto 2.75rem',
+          margin: '0 auto 1.5rem',
+          position: 'relative',
+          zIndex: 1,
         }}
       >
         Answer a few questions. Receive a reading that names what you already
@@ -213,7 +245,8 @@ function Hero() {
       <motion.div
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.95 }}
+        transition={{ duration: 0.85, ease: EASE, delay: 0.95 }}
+        style={{ position: 'relative', zIndex: 1 }}
       >
         <Link
           href="/auth?mode=signup"
@@ -241,7 +274,7 @@ function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 1.1 }}
-        style={{ marginTop: '3.5rem' }}
+        style={{ marginTop: '2.5rem', position: 'relative', zIndex: 1 }}
       >
         <motion.svg
           animate={{ y: [0, 7, 0] }}
@@ -377,7 +410,7 @@ function HowItWorks() {
               <p
                 style={{
                   fontFamily: "'Cormorant Garant', 'Georgia', serif",
-                  fontSize: 'clamp(3rem, 6vw, 4.5rem)',
+                  fontSize: 'clamp(4rem, 8vw, 7rem)',
                   lineHeight: 1,
                   fontWeight: 300,
                   color: 'var(--accent-text)',
@@ -469,7 +502,7 @@ function Foundation() {
           variants={fadeUp}
           style={{
             fontFamily: "'Cormorant Garant', 'Georgia', serif",
-            fontSize: 'clamp(1.85rem, 4vw, 3rem)',
+            fontSize: 'clamp(2.2rem, 4.5vw, 3.5rem)',
             lineHeight: 1.25,
             fontWeight: 400,
             color: 'var(--text-primary)',
@@ -559,6 +592,33 @@ function Testimonials() {
           viewport={{ once: true, margin: '-60px' }}
           variants={stagger}
         >
+          {/* Section header */}
+          <motion.div variants={fadeUp} style={{ marginBottom: '3.5rem' }}>
+            <p
+              style={{
+                fontFamily: "'DM Sans', sans-serif",
+                fontSize: '0.66rem',
+                letterSpacing: '0.24em',
+                textTransform: 'uppercase',
+                color: 'var(--accent-text)',
+                marginBottom: '1rem',
+              }}
+            >
+              What People Say
+            </p>
+            <h2
+              style={{
+                fontFamily: "'Cormorant Garant', 'Georgia', serif",
+                fontSize: 'clamp(2rem, 4vw, 3.2rem)',
+                fontWeight: 400,
+                color: 'var(--text-primary)',
+                letterSpacing: '-0.01em',
+              }}
+            >
+              The people who&rsquo;ve been read.
+            </h2>
+          </motion.div>
+
           {/* Featured first quote — full width */}
           <motion.div
             variants={fadeUp}
@@ -794,14 +854,14 @@ function Pricing() {
                   whileHover={{ scale: 1.025, y: -5 }}
                   transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
                   style={{
-                    padding: 'clamp(1.75rem, 3vw, 2.5rem)',
+                    padding: 'clamp(2rem, 3.5vw, 3rem)',
                     borderRadius: '20px',
                     background: 'var(--surface)',
                     border: tier.highlighted
                       ? '1px solid var(--accent)'
                       : '1px solid var(--border)',
                     boxShadow: tier.highlighted
-                      ? '0 0 40px rgba(124,58,237,0.14), inset 0 1px 1px rgba(167,139,250,0.08)'
+                      ? '0 0 60px rgba(124,58,237,0.2), 0 0 0 1px var(--accent)'
                       : 'none',
                     position: 'relative',
                   }}
@@ -853,7 +913,7 @@ function Pricing() {
                     <span
                       style={{
                         fontFamily: "'Cormorant Garant', 'Georgia', serif",
-                        fontSize: 'clamp(2.4rem, 4.5vw, 3.5rem)',
+                        fontSize: 'clamp(2.8rem, 5vw, 4rem)',
                         fontWeight: 300,
                         color: 'var(--text-primary)',
                         lineHeight: 1,

@@ -16,7 +16,7 @@ export default function HeroCube() {
       const THREE = await import('three');
       if (!active) return;
 
-      const size = Math.min(400, window.innerWidth * 0.78);
+      const size = Math.min(560, window.innerWidth * 0.9);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
@@ -47,12 +47,12 @@ export default function HeroCube() {
       });
       innerGroup.add(new THREE.Mesh(geo, faceMat));
 
-      // Primary outer edges — bright lavender
+      // Primary outer edges — bright violet
       const edgesGeo = new THREE.EdgesGeometry(geo);
       const outerEdgeMat = new THREE.LineBasicMaterial({
-        color: 0xb09ef0,
+        color: 0xc4b5fd,
         transparent: true,
-        opacity: 0.92,
+        opacity: 1.0,
       });
       innerGroup.add(new THREE.LineSegments(edgesGeo, outerEdgeMat));
 
@@ -79,10 +79,10 @@ export default function HeroCube() {
         if (!active) return;
         frameId = requestAnimationFrame(animate);
 
-        // Continuous slow rotation on all axes
-        innerGroup.rotation.x += 0.003;
-        innerGroup.rotation.y += 0.005;
-        innerGroup.rotation.z += 0.0015;
+        // Continuous rotation on all axes
+        innerGroup.rotation.x += 0.004;
+        innerGroup.rotation.y += 0.006;
+        innerGroup.rotation.z += 0.002;
 
         // Lerp outer group toward mouse tilt — subtle parallax
         outerGroup.rotation.x += (mouse.y * 0.18 - outerGroup.rotation.x) * 0.035;
@@ -112,8 +112,8 @@ export default function HeroCube() {
     <div
       ref={mountRef}
       style={{
-        width: 'min(400px, 78vw)',
-        height: 'min(400px, 78vw)',
+        width: 'min(560px, 90vw)',
+        height: 'min(560px, 90vw)',
       }}
     />
   );
