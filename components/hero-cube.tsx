@@ -16,7 +16,7 @@ export default function HeroCube() {
       const THREE = await import('three');
       if (!active) return;
 
-      const size = Math.min(560, window.innerWidth * 0.9);
+      const size = Math.min(580, window.innerWidth * 0.92);
 
       const scene = new THREE.Scene();
       const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
@@ -28,6 +28,15 @@ export default function HeroCube() {
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       mount.appendChild(renderer.domElement);
 
+      // Lights required by MeshPhysicalMaterial
+      const purpleLight = new THREE.PointLight(0x7c3aed, 2);
+      purpleLight.position.set(2, 2, 2);
+      scene.add(purpleLight);
+
+      const fillLight = new THREE.PointLight(0xffffff, 0.3);
+      fillLight.position.set(-2, -1, -2);
+      scene.add(fillLight);
+
       // Outer group — receives mouse parallax tilt
       const outerGroup = new THREE.Group();
       scene.add(outerGroup);
@@ -38,11 +47,13 @@ export default function HeroCube() {
 
       const geo = new THREE.BoxGeometry(1.65, 1.65, 1.65);
 
-      // Transparent faces
-      const faceMat = new THREE.MeshBasicMaterial({
-        color: 0x7c3aed,
+      // Glass faces — PBR physical material
+      const faceMat = new THREE.MeshPhysicalMaterial({
+        color: 0x9b6dff,
         transparent: true,
-        opacity: 0.035,
+        opacity: 0.08,
+        roughness: 0,
+        metalness: 0.1,
         side: THREE.DoubleSide,
       });
       innerGroup.add(new THREE.Mesh(geo, faceMat));
@@ -56,15 +67,34 @@ export default function HeroCube() {
       });
       innerGroup.add(new THREE.LineSegments(edgesGeo, outerEdgeMat));
 
-      // Secondary inner ghost cube — deep purple, subtle
+      // Inner ghost cube 1 — deep purple, upgraded opacity
       const innerGeo = new THREE.BoxGeometry(0.88, 0.88, 0.88);
       const innerEdgesGeo = new THREE.EdgesGeometry(innerGeo);
       const innerEdgeMat = new THREE.LineBasicMaterial({
-        color: 0x7c3aed,
+        color: 0x9b6dff,
         transparent: true,
-        opacity: 0.38,
+        opacity: 0.6,
       });
       innerGroup.add(new THREE.LineSegments(innerEdgesGeo, innerEdgeMat));
+
+      // Inner ghost cube 2 — 0.5 scale, glass faces + lavender edges
+      const innerGeo2 = new THREE.BoxGeometry(0.825, 0.825, 0.825);
+      const innerFaceMat2 = new THREE.MeshPhysicalMaterial({
+        color: 0x9b6dff,
+        transparent: true,
+        opacity: 0.15,
+        roughness: 0,
+        metalness: 0.1,
+        side: THREE.DoubleSide,
+      });
+      innerGroup.add(new THREE.Mesh(innerGeo2, innerFaceMat2));
+      const innerEdgesGeo2 = new THREE.EdgesGeometry(innerGeo2);
+      const innerEdgeMat2 = new THREE.LineBasicMaterial({
+        color: 0xa78bfa,
+        transparent: true,
+        opacity: 0.75,
+      });
+      innerGroup.add(new THREE.LineSegments(innerEdgesGeo2, innerEdgeMat2));
 
       // Mouse tracking
       const mouse = { x: 0, y: 0 };
@@ -79,12 +109,10 @@ export default function HeroCube() {
         if (!active) return;
         frameId = requestAnimationFrame(animate);
 
-        // Continuous rotation on all axes
         innerGroup.rotation.x += 0.004;
         innerGroup.rotation.y += 0.006;
         innerGroup.rotation.z += 0.002;
 
-        // Lerp outer group toward mouse tilt — subtle parallax
         outerGroup.rotation.x += (mouse.y * 0.18 - outerGroup.rotation.x) * 0.035;
         outerGroup.rotation.y += (mouse.x * 0.18 - outerGroup.rotation.y) * 0.035;
 
@@ -112,8 +140,8 @@ export default function HeroCube() {
     <div
       ref={mountRef}
       style={{
-        width: 'min(560px, 90vw)',
-        height: 'min(560px, 90vw)',
+        width: 'min(580px, 92vw)',
+        height: 'min(580px, 92vw)',
       }}
     />
   );
