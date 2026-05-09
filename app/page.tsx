@@ -25,6 +25,37 @@ const fadeIn: Variants = {
   visible: { opacity: 1, transition: { duration: 0.7, ease: EASE } },
 };
 
+// ─── Shared constants ─────────────────────────────────────────────────────────
+
+const GLASS: React.CSSProperties = {
+  background: 'rgba(96, 78, 78, 0.12)',
+  backdropFilter: 'blur(24px) brightness(1.1)',
+  WebkitBackdropFilter: 'blur(24px) brightness(1.1)',
+  border: '1px solid rgba(255,255,255,0.1)',
+  boxShadow:
+    'inset 0 1px 0 rgba(255,255,255,0.12), 0 8px 32px rgba(0,0,0,0.4)',
+};
+
+const SECTION_PAD = 'clamp(6rem, 12vw, 10rem) clamp(1.5rem, 5vw, 4rem)';
+
+const H2: React.CSSProperties = {
+  fontFamily: "'Gotens', sans-serif",
+  fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+  fontWeight: 400,
+  fontStyle: 'normal',
+  letterSpacing: '-0.02em',
+  lineHeight: 1.05,
+  color: '#fff',
+  marginBottom: '1.25rem',
+};
+
+const BODY: React.CSSProperties = {
+  fontFamily: "'Inter', sans-serif",
+  fontSize: '1rem',
+  lineHeight: 1.8,
+  color: 'rgba(240,235,255,0.6)',
+};
+
 // ─── Shared UI ────────────────────────────────────────────────────────────────
 
 function SectionPill({ label }: { label: string }) {
@@ -38,7 +69,7 @@ function SectionPill({ label }: { label: string }) {
         borderRadius: '9999px',
         border: '1px solid rgba(124,58,237,0.35)',
         background: 'rgba(124,58,237,0.08)',
-        marginBottom: '1.5rem',
+        marginBottom: '1rem',
       }}
     >
       <span
@@ -102,12 +133,7 @@ function Nav() {
     >
       <Link
         href="/"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.6rem',
-          textDecoration: 'none',
-        }}
+        style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}
       >
         <CubeIcon size={20} />
         <span
@@ -124,22 +150,23 @@ function Nav() {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
         <ThemeToggle />
+        <div id="google_translate_element" style={{ display: 'flex', alignItems: 'center' }} />
         <Link
           href="/auth?mode=signup"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
-            padding: '0.5rem 1.1rem',
+            padding: '0.9rem 2.25rem',
             borderRadius: '9999px',
             border: '1px solid rgba(255,255,255,0.2)',
             background: 'transparent',
-            color: '#fff',
+            color: '#f0ebff',
             fontFamily: "'Inter', sans-serif",
-            fontSize: '0.8rem',
+            fontSize: '0.95rem',
             fontWeight: 500,
+            letterSpacing: '0.01em',
             textDecoration: 'none',
             whiteSpace: 'nowrap',
-            transition: 'border-color 0.25s',
           }}
         >
           Begin your reading
@@ -156,18 +183,63 @@ function Hero() {
     <section
       style={{
         position: 'relative',
-        padding: '13rem 1.5rem 6rem',
+        padding: '13rem 1.5rem 7rem',
         textAlign: 'center',
         overflow: 'hidden',
       }}
     >
-      <div
+      <img
+        src="/images/Hero_Gradient.png"
+        alt=""
         style={{
           position: 'absolute',
           inset: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
           pointerEvents: 'none',
-          background:
-            'radial-gradient(ellipse 80% 55% at 50% 0%, rgba(124,58,237,0.22) 0%, transparent 65%)',
+        }}
+      />
+      <img
+        src="/images/bg_ellipse.png"
+        alt=""
+        style={{
+          position: 'absolute',
+          left: '-10%',
+          top: '10%',
+          width: '60%',
+          height: '80%',
+          objectFit: 'contain',
+          pointerEvents: 'none',
+          opacity: 0.7,
+        }}
+      />
+      <img
+        src="/images/Stars-2.png"
+        alt=""
+        style={{
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          width: '40%',
+          height: '60%',
+          objectFit: 'contain',
+          pointerEvents: 'none',
+          opacity: 0.8,
+        }}
+      />
+      <img
+        src="/images/Stars-a.png"
+        alt=""
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: '20%',
+          width: '50%',
+          height: '60%',
+          objectFit: 'contain',
+          pointerEvents: 'none',
+          opacity: 0.6,
         }}
       />
 
@@ -195,10 +267,9 @@ function Hero() {
         <motion.p
           variants={fadeUp}
           style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '1rem',
-            color: 'rgba(255,255,255,0.5)',
-            marginBottom: '2.25rem',
+            ...BODY,
+            color: 'rgba(240,235,255,0.55)',
+            marginBottom: '2.5rem',
             letterSpacing: '0.01em',
           }}
         >
@@ -210,14 +281,15 @@ function Hero() {
             href="/auth?mode=signup"
             style={{
               display: 'inline-block',
-              padding: '0.8rem 2rem',
+              padding: '0.9rem 2.25rem',
               borderRadius: '9999px',
-              border: '1px solid rgba(255,255,255,0.22)',
+              border: '1px solid rgba(255,255,255,0.2)',
               background: 'transparent',
-              color: '#fff',
+              color: '#f0ebff',
               fontFamily: "'Inter', sans-serif",
-              fontSize: '0.88rem',
+              fontSize: '0.95rem',
               fontWeight: 500,
+              letterSpacing: '0.01em',
               textDecoration: 'none',
             }}
           >
@@ -237,7 +309,7 @@ function StatsBar() {
       style={{
         maxWidth: '900px',
         margin: '0 auto 6rem',
-        padding: '0 clamp(1.5rem, 5vw, 3rem)',
+        padding: '0 clamp(1.5rem, 5vw, 4rem)',
       }}
     >
       <motion.div
@@ -258,94 +330,48 @@ function StatsBar() {
         {[
           { value: '15', label: 'Different Languages', showDivider: true },
           { value: '120+', label: 'Years of Psychology', showDivider: true },
-          { value: null, label: null, showDivider: true },
           { value: '100+', label: 'Users Played', showDivider: false },
-        ].map((item, i) => {
-          if (item.value === null) {
-            return (
+        ].map((item, i) => (
+          <div
+            key={i}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.6rem',
+              padding: '1.25rem 1.75rem',
+              borderRight: item.showDivider
+                ? '1px solid rgba(255,255,255,0.07)'
+                : 'none',
+              flex: '1 1 auto',
+            }}
+          >
+            <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '1rem', lineHeight: 1 }}>
+              •
+            </span>
+            <div>
               <div
-                key={i}
                 style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: '1.25rem 1.75rem',
-                  borderRight: '1px solid rgba(255,255,255,0.07)',
+                  fontFamily: "'Gotens', sans-serif",
+                  fontSize: '1.25rem',
+                  color: '#fff',
+                  lineHeight: 1.1,
                 }}
               >
-                <div
-                  style={{
-                    width: '42px',
-                    height: '24px',
-                    borderRadius: '12px',
-                    background: '#7c3aed',
-                    position: 'relative',
-                  }}
-                >
-                  <div
-                    style={{
-                      position: 'absolute',
-                      right: '3px',
-                      top: '50%',
-                      transform: 'translateY(-50%)',
-                      width: '18px',
-                      height: '18px',
-                      borderRadius: '50%',
-                      background: '#fff',
-                    }}
-                  />
-                </div>
+                {item.value}
               </div>
-            );
-          }
-          return (
-            <div
-              key={i}
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.6rem',
-                padding: '1.25rem 1.75rem',
-                borderRight: item.showDivider
-                  ? '1px solid rgba(255,255,255,0.07)'
-                  : 'none',
-                flex: '1 1 auto',
-              }}
-            >
-              <span
+              <div
                 style={{
-                  color: 'rgba(255,255,255,0.2)',
-                  fontSize: '1rem',
-                  lineHeight: 1,
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '0.7rem',
+                  color: 'rgba(255,255,255,0.38)',
+                  marginTop: '0.15rem',
                 }}
               >
-                •
-              </span>
-              <div>
-                <div
-                  style={{
-                    fontFamily: "'Gotens', sans-serif",
-                    fontSize: '1.25rem',
-                    color: '#fff',
-                    lineHeight: 1.1,
-                  }}
-                >
-                  {item.value}
-                </div>
-                <div
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.7rem',
-                    color: 'rgba(255,255,255,0.38)',
-                    marginTop: '0.15rem',
-                  }}
-                >
-                  {item.label}
-                </div>
+                {item.label}
               </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </motion.div>
     </div>
   );
@@ -373,11 +399,7 @@ function HowItWorks() {
   ];
 
   return (
-    <section
-      style={{
-        padding: 'clamp(3rem, 7vw, 6rem) clamp(1.5rem, 5vw, 3rem)',
-      }}
-    >
+    <section style={{ padding: SECTION_PAD }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <motion.div
           initial="hidden"
@@ -387,7 +409,7 @@ function HowItWorks() {
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '1rem',
+            gap: '1.25rem',
           }}
         >
           {steps.map((step, i) => (
@@ -395,18 +417,17 @@ function HowItWorks() {
               key={i}
               variants={fadeUp}
               style={{
-                padding: '2rem 2rem 2.25rem',
-                borderRadius: '16px',
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.07)',
+                ...GLASS,
+                padding: '2.25rem',
+                borderRadius: '30px',
                 position: 'relative',
               }}
             >
               <span
                 style={{
                   position: 'absolute',
-                  top: '1.1rem',
-                  left: '1.5rem',
+                  top: '1.25rem',
+                  left: '1.75rem',
                   fontFamily: "'Inter', sans-serif",
                   fontSize: '0.65rem',
                   letterSpacing: '0.1em',
@@ -415,29 +436,21 @@ function HowItWorks() {
               >
                 {step.number}
               </span>
-              <div style={{ marginTop: '2.25rem' }}>
+              <div style={{ marginTop: '2.5rem' }}>
                 <h3
                   style={{
                     fontFamily: "'Gotens', sans-serif",
-                    fontSize: '1.5rem',
+                    fontSize: '1.55rem',
                     fontWeight: 400,
+                    fontStyle: 'normal',
                     color: '#fff',
-                    marginBottom: '0.7rem',
+                    marginBottom: '0.85rem',
                     lineHeight: 1.2,
                   }}
                 >
                   {step.title}
                 </h3>
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.875rem',
-                    lineHeight: 1.75,
-                    color: 'rgba(255,255,255,0.42)',
-                  }}
-                >
-                  {step.body}
-                </p>
+                <p style={{ ...BODY, fontSize: '0.9rem' }}>{step.body}</p>
               </div>
             </motion.div>
           ))}
@@ -451,13 +464,7 @@ function HowItWorks() {
 
 function Starburst({ size = 72, opacity = 1 }: { size?: number; opacity?: number }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 80 80"
-      fill="none"
-      style={{ opacity }}
-    >
+    <svg width={size} height={size} viewBox="0 0 80 80" fill="none" style={{ opacity }}>
       <path
         d="M40 2L43.5 36.5L78 40L43.5 43.5L40 78L36.5 43.5L2 40L36.5 36.5Z"
         fill="white"
@@ -507,7 +514,7 @@ function TheExperience() {
   return (
     <section
       style={{
-        padding: 'clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 3rem)',
+        padding: SECTION_PAD,
         background: 'rgba(255,255,255,0.01)',
       }}
     >
@@ -518,31 +525,10 @@ function TheExperience() {
           viewport={{ once: true, margin: '-60px' }}
           variants={stagger}
         >
-          <motion.div variants={fadeUp} style={{ marginBottom: '3.5rem' }}>
+          <motion.div variants={fadeUp} style={{ marginBottom: '3rem' }}>
             <SectionPill label="How it works" />
-            <h2
-              style={{
-                fontFamily: "'Gotens', sans-serif",
-                fontSize: 'clamp(3rem, 7vw, 5.5rem)',
-                fontWeight: 400,
-                color: '#fff',
-                lineHeight: 1.0,
-                letterSpacing: '-0.01em',
-                maxWidth: '640px',
-                marginBottom: '1.1rem',
-              }}
-            >
-              The Experience
-            </h2>
-            <p
-              style={{
-                fontFamily: "'Inter', sans-serif",
-                fontSize: '0.97rem',
-                color: 'rgba(255,255,255,0.45)',
-                maxWidth: '420px',
-                lineHeight: 1.72,
-              }}
-            >
+            <h2 style={{ ...H2, maxWidth: '640px' }}>The Experience</h2>
+            <p style={{ ...BODY, maxWidth: '420px' }}>
               Answer a few questions. Receive a reading that names what you
               already knew.
             </p>
@@ -552,7 +538,7 @@ function TheExperience() {
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
-              gap: '1rem',
+              gap: '1.25rem',
             }}
           >
             {features.map((f, i) => (
@@ -560,14 +546,13 @@ function TheExperience() {
                 key={i}
                 variants={fadeUp}
                 style={{
-                  padding: '2.25rem',
-                  borderRadius: '18px',
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.07)',
+                  ...GLASS,
+                  padding: '2.5rem',
+                  borderRadius: '30px',
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '2rem',
-                  minHeight: '280px',
+                  minHeight: '300px',
                 }}
               >
                 <div>{f.shape}</div>
@@ -575,25 +560,17 @@ function TheExperience() {
                   <h3
                     style={{
                       fontFamily: "'Gotens', sans-serif",
-                      fontSize: '1.4rem',
+                      fontSize: '1.45rem',
                       fontWeight: 400,
+                      fontStyle: 'normal',
                       color: '#fff',
-                      marginBottom: '0.6rem',
+                      marginBottom: '0.75rem',
                       lineHeight: 1.25,
                     }}
                   >
                     {f.title}
                   </h3>
-                  <p
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '0.85rem',
-                      lineHeight: 1.75,
-                      color: 'rgba(255,255,255,0.42)',
-                    }}
-                  >
-                    {f.body}
-                  </p>
+                  <p style={{ ...BODY, fontSize: '0.9rem' }}>{f.body}</p>
                 </div>
               </motion.div>
             ))}
@@ -612,22 +589,36 @@ function Foundation() {
   return (
     <section
       style={{
-        padding: 'clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 3rem)',
+        padding: SECTION_PAD,
         position: 'relative',
         overflow: 'hidden',
+        textAlign: 'center',
       }}
     >
-      <div
+      {/* bg_ellipse centered background layer */}
+      <img
+        src="/images/bg_ellipse.png"
+        alt=""
         style={{
           position: 'absolute',
-          inset: 0,
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: '80%',
           pointerEvents: 'none',
-          background:
-            'radial-gradient(ellipse 700px 500px at 50% 50%, rgba(124,58,237,0.07) 0%, transparent 70%)',
+          opacity: 0.3,
+          zIndex: 0,
         }}
       />
 
-      <div style={{ maxWidth: '800px', margin: '0 auto', position: 'relative' }}>
+      <div
+        style={{
+          maxWidth: '800px',
+          margin: '0 auto',
+          position: 'relative',
+          zIndex: 1,
+        }}
+      >
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -638,34 +629,18 @@ function Foundation() {
             <SectionPill label="What It's Based On" />
           </motion.div>
 
-          <motion.h2
-            variants={fadeUp}
-            style={{
-              fontFamily: "'Gotens', sans-serif",
-              fontSize: 'clamp(2.2rem, 5.5vw, 4rem)',
-              fontWeight: 400,
-              color: '#fff',
-              lineHeight: 1.15,
-              letterSpacing: '-0.01em',
-              marginBottom: '1.5rem',
-            }}
-          >
+          <motion.h2 variants={fadeUp} style={H2}>
             Drawn from the work of{' '}
-            <span style={{ color: 'rgba(167,139,250,0.85)' }}>
-              depth psychologists
-            </span>{' '}
+            <span style={{ color: '#a78bfa' }}>depth psychologists</span>{' '}
             who believed the psyche speaks in images.
           </motion.h2>
 
           <motion.p
             variants={fadeUp}
             style={{
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '0.93rem',
-              lineHeight: 1.82,
-              color: 'rgba(255,255,255,0.42)',
-              marginBottom: '3rem',
-              maxWidth: '620px',
+              ...BODY,
+              maxWidth: '600px',
+              margin: '0 auto 3rem',
             }}
           >
             The Cube exercise has roots in object relations theory, Jungian
@@ -676,7 +651,12 @@ function Foundation() {
 
           <motion.div
             variants={stagger}
-            style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}
+            style={{
+              display: 'flex',
+              flexWrap: 'wrap',
+              gap: '0.5rem',
+              justifyContent: 'center',
+            }}
           >
             {authors.map((author, i) => (
               <motion.span
@@ -703,146 +683,175 @@ function Foundation() {
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────
 
+const TESTIMONIALS = [
+  {
+    quote:
+      "It bypasses the way I think. If you'd asked me directly, I don't know if I'd have answered as honestly, or even known how to answer.",
+    name: 'Sarah K.',
+    role: 'Designer',
+  },
+  {
+    quote: "Scary how accurate it is. I really didn't expect that.",
+    name: 'Tom R.',
+    role: 'Founder',
+  },
+  {
+    quote:
+      "It named something I knew was there but didn't know how to put into words.",
+    name: 'Maya L.',
+    role: 'Content Strategist',
+  },
+];
+
+function TestimonialCard({ t }: { t: typeof TESTIMONIALS[number] }) {
+  return (
+    <div
+      style={{
+        ...GLASS,
+        width: '380px',
+        flexShrink: 0,
+        padding: '2rem',
+        borderRadius: '24px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '1.1rem',
+      }}
+    >
+      <div style={{ display: 'flex', gap: '0.18rem' }}>
+        {[...Array(5)].map((_, j) => (
+          <svg key={j} width="13" height="13" viewBox="0 0 24 24" fill="#7c3aed">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+          </svg>
+        ))}
+      </div>
+      <p
+        style={{
+          ...BODY,
+          fontSize: '0.9rem',
+          color: 'rgba(240,235,255,0.75)',
+          fontStyle: 'italic',
+          flex: 1,
+        }}
+      >
+        &ldquo;{t.quote}&rdquo;
+      </p>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: 'auto' }}>
+        <div
+          style={{
+            width: '32px',
+            height: '32px',
+            borderRadius: '50%',
+            background:
+              'linear-gradient(135deg, rgba(124,58,237,0.6), rgba(167,139,250,0.4))',
+            flexShrink: 0,
+          }}
+        />
+        <div>
+          <div
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '0.8rem',
+              fontWeight: 500,
+              color: '#fff',
+            }}
+          >
+            {t.name}
+          </div>
+          <div
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '0.7rem',
+              color: 'rgba(255,255,255,0.38)',
+            }}
+          >
+            {t.role}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Testimonials() {
-  const testimonials = [
-    {
-      quote:
-        "It bypasses the way I think. If you'd asked me directly, I don't know if I'd have answered as honestly, or even known how to answer.",
-      name: 'Sarah K.',
-      role: 'Designer',
-    },
-    {
-      quote: "Scary how accurate it is. I really didn't expect that.",
-      name: 'Tom R.',
-      role: 'Founder',
-    },
-    {
-      quote:
-        "It named something I knew was there but didn't know how to put into words.",
-      name: 'Maya L.',
-      role: 'Content Strategist',
-    },
-  ];
+  const doubled = [...TESTIMONIALS, ...TESTIMONIALS];
 
   return (
     <section
       style={{
-        padding: 'clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 3rem)',
+        padding: `clamp(6rem, 12vw, 10rem) 0`,
         background: 'rgba(255,255,255,0.015)',
+        overflow: 'hidden',
       }}
     >
-      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
-          variants={stagger}
-        >
-          <motion.div variants={fadeUp} style={{ marginBottom: '3rem' }}>
-            <SectionPill label="Testimonial" />
-            <h2
-              style={{
-                fontFamily: "'Gotens', sans-serif",
-                fontSize: 'clamp(2.2rem, 5.5vw, 4rem)',
-                fontWeight: 400,
-                color: '#fff',
-                lineHeight: 1.1,
-              }}
-            >
-              Reasons why you'll love The Cube
-            </h2>
-          </motion.div>
+      {/* Section header */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-60px' }}
+        variants={stagger}
+        style={{
+          maxWidth: '1100px',
+          margin: '0 auto',
+          padding: '0 clamp(1.5rem, 5vw, 4rem)',
+          marginBottom: '3rem',
+        }}
+      >
+        <motion.div variants={fadeUp}>
+          <SectionPill label="Testimonial" />
+          <h2 style={H2}>Reasons why you'll love The Cube</h2>
+        </motion.div>
+      </motion.div>
 
+      {/* Marquee */}
+      <div style={{ position: 'relative' }}>
+        {/* Left fade mask */}
+        <img
+          src="/images/Hero_Gradient.png"
+          alt=""
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            height: '100%',
+            width: '200px',
+            objectFit: 'cover',
+            pointerEvents: 'none',
+            zIndex: 2,
+          }}
+        />
+        {/* Right fade mask — mirrored */}
+        <img
+          src="/images/Hero_Gradient.png"
+          alt=""
+          style={{
+            position: 'absolute',
+            right: 0,
+            top: 0,
+            height: '100%',
+            width: '200px',
+            objectFit: 'cover',
+            pointerEvents: 'none',
+            zIndex: 2,
+            transform: 'scaleX(-1)',
+          }}
+        />
+
+        <div style={{ overflow: 'hidden' }}>
           <div
+            className="marquee-inner"
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '1rem',
+              display: 'flex',
+              gap: '1.5rem',
+              width: 'max-content',
+              animation: 'marquee 30s linear infinite',
+              paddingLeft: '1.5rem',
             }}
           >
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={i}
-                variants={fadeUp}
-                style={{
-                  padding: '2rem',
-                  borderRadius: '16px',
-                  background: 'rgba(255,255,255,0.03)',
-                  border: '1px solid rgba(255,255,255,0.07)',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '1.1rem',
-                }}
-              >
-                <div style={{ display: 'flex', gap: '0.18rem' }}>
-                  {[...Array(5)].map((_, j) => (
-                    <svg
-                      key={j}
-                      width="13"
-                      height="13"
-                      viewBox="0 0 24 24"
-                      fill="#7c3aed"
-                    >
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                    </svg>
-                  ))}
-                </div>
-                <p
-                  style={{
-                    fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.9rem',
-                    lineHeight: 1.72,
-                    color: 'rgba(255,255,255,0.7)',
-                    fontStyle: 'italic',
-                    flex: 1,
-                  }}
-                >
-                  &ldquo;{t.quote}&rdquo;
-                </p>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.75rem',
-                    marginTop: 'auto',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '50%',
-                      background:
-                        'linear-gradient(135deg, rgba(124,58,237,0.6), rgba(167,139,250,0.4))',
-                      flexShrink: 0,
-                    }}
-                  />
-                  <div>
-                    <div
-                      style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: '0.8rem',
-                        fontWeight: 500,
-                        color: '#fff',
-                      }}
-                    >
-                      {t.name}
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: '0.7rem',
-                        color: 'rgba(255,255,255,0.38)',
-                      }}
-                    >
-                      {t.role}
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
+            {doubled.map((t, i) => (
+              <TestimonialCard key={i} t={t} />
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -910,11 +919,7 @@ function Pricing() {
   ];
 
   return (
-    <section
-      style={{
-        padding: 'clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 3rem)',
-      }}
-    >
+    <section style={{ padding: SECTION_PAD }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <motion.div
           initial="hidden"
@@ -922,20 +927,9 @@ function Pricing() {
           viewport={{ once: true, margin: '-60px' }}
           variants={stagger}
         >
-          <motion.div variants={fadeUp}>
+          <motion.div variants={fadeUp} style={{ marginBottom: '3rem' }}>
             <SectionPill label="Pricing" />
-            <h2
-              style={{
-                fontFamily: "'Gotens', sans-serif",
-                fontSize: 'clamp(2.2rem, 5.5vw, 4rem)',
-                fontWeight: 400,
-                color: '#fff',
-                lineHeight: 1.1,
-                marginBottom: '2.5rem',
-              }}
-            >
-              Begin wherever you are.
-            </h2>
+            <h2 style={H2}>Begin wherever you are.</h2>
           </motion.div>
 
           {/* Billing toggle */}
@@ -964,8 +958,7 @@ function Pricing() {
                   fontSize: '0.78rem',
                   fontWeight: 500,
                   background: billing === period ? '#7c3aed' : 'transparent',
-                  color:
-                    billing === period ? '#fff' : 'rgba(255,255,255,0.38)',
+                  color: billing === period ? '#fff' : 'rgba(255,255,255,0.38)',
                   transition:
                     'background 0.28s cubic-bezier(0.16,1,0.3,1), color 0.28s cubic-bezier(0.16,1,0.3,1)',
                 }}
@@ -980,7 +973,7 @@ function Pricing() {
             style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-              gap: '1rem',
+              gap: '1.25rem',
               textAlign: 'left',
             }}
           >
@@ -999,21 +992,18 @@ function Pricing() {
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.28, ease: EASE }}
                   style={{
+                    ...GLASS,
                     padding: 'clamp(1.75rem, 3vw, 2.5rem)',
-                    borderRadius: '18px',
+                    borderRadius: '30px',
                     background: tier.highlighted
-                      ? 'rgba(124,58,237,0.15)'
-                      : 'rgba(255,255,255,0.04)',
-                    backdropFilter: tier.highlighted ? 'blur(20px)' : 'blur(16px)',
-                    WebkitBackdropFilter: tier.highlighted
-                      ? 'blur(20px)'
-                      : 'blur(16px)',
+                      ? 'rgba(124,58,237,0.18)'
+                      : GLASS.background,
                     border: tier.highlighted
                       ? '1px solid rgba(124,58,237,0.5)'
-                      : '1px solid rgba(255,255,255,0.08)',
+                      : GLASS.border,
                     boxShadow: tier.highlighted
-                      ? '0 0 60px rgba(124,58,237,0.18)'
-                      : 'none',
+                      ? 'inset 0 1px 0 rgba(255,255,255,0.12), 0 0 60px rgba(124,58,237,0.2), 0 8px 32px rgba(0,0,0,0.4)'
+                      : GLASS.boxShadow,
                     position: 'relative',
                   }}
                 >
@@ -1089,7 +1079,7 @@ function Pricing() {
                     style={{
                       height: '1px',
                       background: 'rgba(255,255,255,0.07)',
-                      margin: '1.4rem 0',
+                      margin: '1.5rem 0',
                     }}
                   />
 
@@ -1100,7 +1090,7 @@ function Pricing() {
                       margin: '0 0 2rem',
                       display: 'flex',
                       flexDirection: 'column',
-                      gap: '0.6rem',
+                      gap: '0.65rem',
                     }}
                   >
                     {tier.features.map((feature, j) => (
@@ -1108,8 +1098,8 @@ function Pricing() {
                         key={j}
                         style={{
                           fontFamily: "'Inter', sans-serif",
-                          fontSize: '0.86rem',
-                          color: 'rgba(255,255,255,0.55)',
+                          fontSize: '0.9rem',
+                          color: 'rgba(240,235,255,0.6)',
                           display: 'flex',
                           alignItems: 'center',
                           gap: '0.6rem',
@@ -1134,20 +1124,21 @@ function Pricing() {
                     style={{
                       display: 'block',
                       textAlign: 'center',
-                      padding: '0.78rem',
-                      borderRadius: '10px',
+                      padding: '0.9rem 2.25rem',
+                      borderRadius: '9999px',
                       background: tier.highlighted ? '#7c3aed' : 'transparent',
                       border: tier.highlighted
                         ? 'none'
-                        : '1px solid rgba(255,255,255,0.1)',
-                      color: tier.highlighted
-                        ? '#fff'
-                        : 'rgba(255,255,255,0.5)',
+                        : '1px solid rgba(255,255,255,0.2)',
+                      color: tier.highlighted ? '#fff' : '#f0ebff',
                       fontFamily: "'Inter', sans-serif",
-                      fontSize: '0.875rem',
+                      fontSize: '0.95rem',
                       fontWeight: 500,
+                      letterSpacing: '0.01em',
                       textDecoration: 'none',
-                      transition: 'opacity 0.22s cubic-bezier(0.16,1,0.3,1)',
+                      boxShadow: tier.highlighted
+                        ? '0 0 32px rgba(124,58,237,0.4)'
+                        : 'none',
                     }}
                   >
                     {tier.cta}
@@ -1193,7 +1184,7 @@ function FAQ() {
   return (
     <section
       style={{
-        padding: 'clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 3rem)',
+        padding: SECTION_PAD,
         background: 'rgba(255,255,255,0.01)',
       }}
     >
@@ -1215,15 +1206,7 @@ function FAQ() {
         >
           <motion.div variants={fadeUp}>
             <SectionPill label="FAQ" />
-            <h2
-              style={{
-                fontFamily: "'Gotens', sans-serif",
-                fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-                fontWeight: 400,
-                color: '#fff',
-                lineHeight: 1.05,
-              }}
-            >
+            <h2 style={H2}>
               Questions &<br />Answers
             </h2>
           </motion.div>
@@ -1257,8 +1240,8 @@ function FAQ() {
                 <span
                   style={{
                     fontFamily: "'Inter', sans-serif",
-                    fontSize: '0.9rem',
-                    color: open === i ? '#fff' : 'rgba(255,255,255,0.65)',
+                    fontSize: '0.95rem',
+                    color: open === i ? '#fff' : 'rgba(240,235,255,0.65)',
                     lineHeight: 1.5,
                     transition: 'color 0.22s',
                   }}
@@ -1297,10 +1280,8 @@ function FAQ() {
                   >
                     <p
                       style={{
-                        fontFamily: "'Inter', sans-serif",
-                        fontSize: '0.875rem',
-                        lineHeight: 1.78,
-                        color: 'rgba(255,255,255,0.42)',
+                        ...BODY,
+                        fontSize: '0.9rem',
                         padding: '1rem 0 1.25rem',
                       }}
                     >
@@ -1323,7 +1304,7 @@ function FooterCTA() {
   return (
     <section
       style={{
-        padding: 'clamp(5rem, 10vw, 9rem) 1.5rem',
+        padding: SECTION_PAD,
         textAlign: 'center',
         position: 'relative',
         overflow: 'hidden',
@@ -1351,9 +1332,10 @@ function FooterCTA() {
             fontFamily: "'Gotens', sans-serif",
             fontSize: 'clamp(3rem, 9vw, 6.5rem)',
             fontWeight: 400,
+            fontStyle: 'normal',
             color: '#fff',
             lineHeight: 1.0,
-            marginBottom: '2rem',
+            marginBottom: '1.5rem',
           }}
         >
           Start your<br />Experience Today
@@ -1362,12 +1344,9 @@ function FooterCTA() {
         <motion.p
           variants={fadeUp}
           style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: '0.9rem',
-            color: 'rgba(255,255,255,0.38)',
+            ...BODY,
             maxWidth: '360px',
             margin: '0 auto 2.5rem',
-            lineHeight: 1.68,
           }}
         >
           Join thousands of users discovering themselves through The Cube
@@ -1379,14 +1358,15 @@ function FooterCTA() {
             href="/auth?mode=signup"
             style={{
               display: 'inline-block',
-              padding: '0.85rem 2.25rem',
+              padding: '0.9rem 2.25rem',
               borderRadius: '9999px',
-              border: '1px solid rgba(255,255,255,0.22)',
+              border: '1px solid rgba(255,255,255,0.2)',
               background: 'transparent',
-              color: '#fff',
+              color: '#f0ebff',
               fontFamily: "'Inter', sans-serif",
-              fontSize: '0.88rem',
+              fontSize: '0.95rem',
               fontWeight: 500,
+              letterSpacing: '0.01em',
               textDecoration: 'none',
             }}
           >
@@ -1475,11 +1455,40 @@ export default function LandingPage() {
     });
   }, []);
 
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src =
+      'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    script.async = true;
+    document.body.appendChild(script);
+
+    (window as any).googleTranslateElementInit = () => {
+      new (window as any).google.translate.TranslateElement(
+        {
+          pageLanguage: 'en',
+          autoDisplay: false,
+          layout: (window as any).google.translate.TranslateElement.InlineLayout
+            .SIMPLE,
+        },
+        'google_translate_element'
+      );
+    };
+  }, []);
+
   return (
     <>
       <style
         dangerouslySetInnerHTML={{
-          __html: `@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');`,
+          __html: `
+            @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+            @keyframes marquee {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-50%); }
+            }
+            .marquee-inner:hover {
+              animation-play-state: paused;
+            }
+          `,
         }}
       />
       <main
