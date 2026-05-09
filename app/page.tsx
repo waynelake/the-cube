@@ -186,20 +186,9 @@ function Hero() {
         padding: '13rem 1.5rem 7rem',
         textAlign: 'center',
         overflow: 'hidden',
+        background: 'linear-gradient(135deg, #0F0430 0%, rgba(96,78,78,0.2) 77%, #000000 99%)',
       }}
     >
-      <img
-        src="/images/Hero_Gradient.png"
-        alt=""
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          pointerEvents: 'none',
-        }}
-      />
       <img
         src="/images/bg_ellipse.png"
         alt=""
