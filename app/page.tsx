@@ -8,8 +8,10 @@ import { CubeIcon } from '@/components/cube-icon';
 import HeroCube from '@/components/hero-cube';
 import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/lib/language-context';
-import { t } from '@/lib/translations';
+import { t } from '@/lib/translations/index';
 import { LangToggle } from '@/components/lang-toggle';
+
+export const dynamic = 'force-dynamic';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
