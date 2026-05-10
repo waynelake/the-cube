@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, type Variants, AnimatePresence } from 'framer-motion';
 import { CubeIcon } from '@/components/cube-icon';
-import { ThemeToggle } from '@/components/theme-provider';
 import { supabase } from '@/lib/supabase';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -268,7 +267,6 @@ function Nav() {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
         <LangToggle />
-        <ThemeToggle />
         <Link
           href="/auth?mode=signup"
           className="nav-cta"
