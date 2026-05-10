@@ -105,7 +105,7 @@ function AuthContent() {
         <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
           <h2
             style={{
-              fontFamily: "'Playfair Display', Georgia, serif",
+              fontFamily: "'Inter', Georgia, serif",
               fontSize: '1.6rem',
               fontWeight: 500,
               color: 'var(--text-primary)',
