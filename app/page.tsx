@@ -7,6 +7,8 @@ import { motion, type Variants, AnimatePresence } from 'framer-motion';
 import { CubeIcon } from '@/components/cube-icon';
 import HeroCube from '@/components/hero-cube';
 import { supabase } from '@/lib/supabase';
+import { useLanguage } from '@/lib/language-context';
+import { t } from '@/lib/translations';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -139,8 +141,8 @@ function SectionPill({ label }: { label: string }) {
 
 // ─── Lang toggle ─────────────────────────────────────────────────────────────
 
-function LangToggle() {
-  const [lang, setLang] = useState<'EN' | 'DE'>('EN');
+export function LangToggle() {
+  const { language, setLanguage } = useLanguage();
   const [open, setOpen] = useState(false);
 
   return (
@@ -163,7 +165,7 @@ function LangToggle() {
           letterSpacing: '0.03em',
         }}
       >
-        {lang}
+        {language}
         <svg width="10" height="7" viewBox="0 0 10 7" fill="none">
           <path d="M1 1L5 5.5L9 1" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
@@ -184,11 +186,11 @@ function LangToggle() {
           }}
         >
           {(['EN', 'DE'] as const)
-            .filter(l => l !== lang)
+            .filter(l => l !== language)
             .map(l => (
               <button
                 key={l}
-                onClick={() => { setLang(l); setOpen(false); }}
+                onClick={() => { setLanguage(l); setOpen(false); }}
                 style={{
                   display: 'block',
                   width: '100%',
@@ -217,6 +219,7 @@ function LangToggle() {
 
 function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const { language } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -262,7 +265,7 @@ function Nav() {
             letterSpacing: '0.01em',
           }}
         >
-          The Cube
+          {t(language, 'nav.title')}
         </span>
       </Link>
 
@@ -287,7 +290,7 @@ function Nav() {
             whiteSpace: 'nowrap',
           }}
         >
-          Begin your reading
+          {t(language, 'nav.beginReading')}
         </Link>
       </div>
     </motion.nav>
@@ -297,6 +300,8 @@ function Nav() {
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
 function Hero() {
+  const { language } = useLanguage();
+
   return (
     <section
       style={{
@@ -340,7 +345,7 @@ function Hero() {
             letterSpacing: '-0.01em',
           }}
         >
-          The Cube
+          {t(language, 'hero.title')}
         </motion.h1>
 
         <motion.p
@@ -352,7 +357,7 @@ function Hero() {
             letterSpacing: '0.01em',
           }}
         >
-          You see a cube. How Big is it?
+          {t(language, 'hero.subtitle')}
         </motion.p>
 
         <motion.div variants={fadeUp}>
@@ -372,7 +377,7 @@ function Hero() {
               boxShadow: '0 4px 24px rgba(203,194,229,0.25)',
             }}
           >
-            Begin your reading
+            {t(language, 'hero.cta')}
           </Link>
         </motion.div>
       </motion.div>
@@ -394,6 +399,8 @@ function Hero() {
 // ─── Stats Bar ────────────────────────────────────────────────────────────────
 
 function StatsBar() {
+  const { language } = useLanguage();
+
   return (
     <>
       <style>{`
@@ -447,7 +454,7 @@ function StatsBar() {
         <div className="stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <span style={STAT_VALUE}>15</span>
           <span style={STAT_LABEL}>
-            Different<br />Languages
+            {t(language, 'hero.stats.languages')}
           </span>
         </div>
 
@@ -458,7 +465,7 @@ function StatsBar() {
         <div className="stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
           <span style={STAT_VALUE}>120+</span>
           <span style={STAT_LABEL}>
-            Years of Psychology<br />And imagery
+            {t(language, 'hero.stats.yearsExperience')}
           </span>
         </div>
 
@@ -486,7 +493,7 @@ function StatsBar() {
           </div>
           <div>
             <div style={{ ...STAT_VALUE, fontSize: '1.15rem' }}>100+</div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.57rem', color: 'rgba(255,255,255,0.42)', letterSpacing: '0.02em', marginTop: '0.1rem' }}>Users Played</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.57rem', color: 'rgba(255,255,255,0.42)', letterSpacing: '0.02em', marginTop: '0.1rem' }}>{t(language, 'hero.stats.usersPlayed')}</div>
           </div>
         </div>
         </motion.div>
