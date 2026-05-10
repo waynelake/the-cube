@@ -1,13 +1,17 @@
 'use client';
 
+export const dynamic = 'force-dynamic';
+
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
+import { LangToggle } from '@/components/lang-toggle';
+import { useLanguage } from '@/lib/language-context';
 import {
-  PaidContent, PaywallSection, parseSummary, ReadingTraits,
+  PaidContent, parseSummary, ReadingTraits,
   ELEMENT_KEYS, ELEMENT_LABELS, TRAIT_MAP,
 } from '@/components/reading-display';
 import { Menu, X, LogOut, Plus, MoreHorizontal, Pencil, Pin } from 'lucide-react';
@@ -240,6 +244,7 @@ function Sidebar({
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { language } = useLanguage();
   const [sessions, setSessions] = useState<SessionItem[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [paidSessionIds, setPaidSessionIds] = useState<Set<string>>(new Set());
@@ -428,7 +433,10 @@ export default function DashboardPage() {
               </p>
             )}
           </div>
-          <ThemeToggle />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <LangToggle />
+            <ThemeToggle />
+          </div>
         </nav>
 
         <div style={{ flex: 1 }}>

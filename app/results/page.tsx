@@ -1,11 +1,15 @@
 'use client';
 
+export const dynamic = 'force-dynamic';
+
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
+import { LangToggle } from '@/components/lang-toggle';
+import { useLanguage } from '@/lib/language-context';
 
 const ELEMENT_KEYS = ['cube', 'ladder', 'flowers', 'animal', 'storm'] as const;
 type ElementKey = typeof ELEMENT_KEYS[number];
@@ -45,6 +49,7 @@ function formatName(email: string): string {
 function ResultsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { language } = useLanguage();
   const sessionId = searchParams.get('session');
   const paymentStatus = searchParams.get('payment');
 
@@ -167,6 +172,7 @@ function ResultsContent() {
           </span>
         </Link>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <LangToggle />
           <ThemeToggle />
           <Link
             href={`/dashboard?session=${sessionId}`}
