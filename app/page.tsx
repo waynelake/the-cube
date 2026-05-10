@@ -476,10 +476,10 @@ function TheExperience() {
           viewport={{ once: true, margin: '-60px' }}
           variants={stagger}
         >
-          <motion.div variants={fadeUp} style={{ marginBottom: '3rem' }}>
+          <motion.div variants={fadeUp} style={{ marginBottom: '3rem', textAlign: 'center' }}>
             <SectionPill label="How it works" />
-            <h2 style={{ ...H2, maxWidth: '640px' }}>The Experience</h2>
-            <p style={{ ...BODY, maxWidth: '420px' }}>
+            <h2 style={{ ...H2 }}>The Experience</h2>
+            <p style={{ ...BODY, maxWidth: '420px', margin: '0 auto' }}>
               Answer a few questions. Receive a reading that names what you
               already knew.
             </p>
@@ -739,7 +739,7 @@ function Testimonials() {
           marginBottom: '3rem',
         }}
       >
-        <motion.div variants={fadeUp}>
+        <motion.div variants={fadeUp} style={{ textAlign: 'center' }}>
           <SectionPill label="Testimonial" />
           <h2 style={{ ...H2, textAlign: 'center', margin: '0 auto 1.25rem' }}>
             <span style={{ display: 'block' }}>Reasons why you'll</span>
@@ -873,7 +873,7 @@ function Pricing() {
           viewport={{ once: true, margin: '-60px' }}
           variants={stagger}
         >
-          <motion.div variants={fadeUp} style={{ marginBottom: '3rem' }}>
+          <motion.div variants={fadeUp} style={{ marginBottom: '3rem', textAlign: 'center' }}>
             <SectionPill label="Pricing" />
             <h2 style={{ ...H2, textAlign: 'center', margin: '0 auto 1.25rem' }}>
               <span style={{ display: 'block' }}>Begin wherever</span>
