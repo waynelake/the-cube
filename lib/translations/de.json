@@ -59,6 +59,32 @@
   "testimonials": {
     "title": "Was Benutzer sagen"
   },
+  "faq": {
+    "label": "FAQ",
+    "title": "Fragen & Antworten",
+    "items": [
+      {
+        "q": "Was genau ist Der Würfel?",
+        "a": "Der Würfel ist eine symbolische psychologische Übung, die in der Tiefenpsychologie verwurzelt ist. Sie stellen sich einen Raum vor und beschreiben fünf Objekte darin. Jedes Objekt entspricht einer Dimension Ihrer inneren Welt, und wir erstellen eine persönliche Lesung auf der Grundlage dessen, was Sie beschrieben haben."
+      },
+      {
+        "q": "Wie lange dauert eine Lesung?",
+        "a": "Die meisten Menschen verbringen 5–10 Minuten damit, die Fragen zu beantworten. Die Lesung selbst wird sofort geliefert und dauert noch einige Minuten zum Lesen."
+      },
+      {
+        "q": "Wird die Lesung an das zugeschnitten, was ich beschreibe?",
+        "a": "Ja. Jede Lesung wird auf der Grundlage Ihrer spezifischen Antworten erstellt. Zwei Menschen können das gleiche Objekt völlig unterschiedlich beschreiben, und ihre Lesungen werden diesen Unterschied widerspiegeln."
+      },
+      {
+        "q": "Worauf basiert es?",
+        "a": "Die Übung basiert auf junianischer Symbolik, Objektbeziehungstheorie und 50+ Jahren tiefenpsychologischer Forschung, einschließlich der Arbeiten von Jung, Hillman, von Franz, Estés und Winnicott."
+      },
+      {
+        "q": "Kann ich mehr als eine Lesung machen?",
+        "a": "Ja. Mit einem Abonnement erhalten Sie unbegrenzte Lesungen, ein Gespräch nach der Lesung, um die Interpretation weiter zu erkunden, und einen Lesungsverlauf, um Muster im Laufe der Zeit zu verfolgen."
+      }
+    ]
+  },
   "pricing": {
     "label": "Preisgestaltung",
     "title": "Beginnen Sie überall, wo Sie sind.",

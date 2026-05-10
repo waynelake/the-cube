@@ -59,6 +59,32 @@
   "testimonials": {
     "title": "What users are saying"
   },
+  "faq": {
+    "label": "FAQ",
+    "title": "Questions & Answers",
+    "items": [
+      {
+        "q": "What exactly is The Cube?",
+        "a": "The Cube is a symbolic psychological exercise rooted in depth psychology. You imagine a space and describe five objects in it. Each object maps to a dimension of your inner world, and we generate a personal reading based on what you described."
+      },
+      {
+        "q": "How long does a reading take?",
+        "a": "Most people spend 5–10 minutes answering the questions. The reading itself is delivered immediately and takes another few minutes to read through."
+      },
+      {
+        "q": "Is the reading personalised to what I describe?",
+        "a": "Yes. Every reading is generated from your specific answers. Two people can describe the same object completely differently, and their readings will reflect that difference."
+      },
+      {
+        "q": "What is it based on?",
+        "a": "The exercise draws from Jungian symbolism, object relations theory, and 50+ years of depth psychology research, including the work of Jung, Hillman, von Franz, Estés, and Winnicott."
+      },
+      {
+        "q": "Can I do more than one reading?",
+        "a": "Yes. With a subscription you get unlimited readings, a post-reading conversation to explore the interpretation further, and a reading history to track patterns over time."
+      }
+    ]
+  },
   "pricing": {
     "label": "Pricing",
     "title": "Begin wherever you are.",

@@ -920,7 +920,7 @@ function Pricing({ language }: { language: 'EN' | 'DE' }) {
                     'background 0.28s cubic-bezier(0.16,1,0.3,1), color 0.28s cubic-bezier(0.16,1,0.3,1)',
                 }}
               >
-                {period === 'monthly' ? 'Monthly' : 'Annually (save up to 45%)'}
+                {period === 'monthly' ? t(language, 'pricing.billingToggle.monthly') : t(language, 'pricing.billingToggle.annual')}
               </button>
             ))}
           </motion.div>
@@ -1112,31 +1112,11 @@ function Pricing({ language }: { language: 'EN' | 'DE' }) {
 
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
-const FAQ_ITEMS = [
-  {
-    q: 'What exactly is The Cube?',
-    a: 'The Cube is a symbolic psychological exercise rooted in depth psychology. You imagine a space and describe five objects in it. Each object maps to a dimension of your inner world, and we generate a personal reading based on what you described.',
-  },
-  {
-    q: 'How long does a reading take?',
-    a: 'Most people spend 5–10 minutes answering the questions. The reading itself is delivered immediately and takes another few minutes to read through.',
-  },
-  {
-    q: 'Is the reading personalised to what I describe?',
-    a: 'Yes. Every reading is generated from your specific answers. Two people can describe the same object completely differently, and their readings will reflect that difference.',
-  },
-  {
-    q: 'What is it based on?',
-    a: "The exercise draws from Jungian symbolism, object relations theory, and 50+ years of depth psychology research, including the work of Jung, Hillman, von Franz, Estés, and Winnicott.",
-  },
-  {
-    q: 'Can I do more than one reading?',
-    a: 'Yes. With a subscription you get unlimited readings, a post-reading conversation to explore the interpretation further, and a reading history to track patterns over time.',
-  },
-];
 
 function FAQ({ language }: { language: 'EN' | 'DE' }) {
   const [open, setOpen] = useState<number | null>(null);
+  const faqData = t(language, 'faq');
+  const faqItems = Array.isArray(faqData.items) ? faqData.items : [];
 
   return (
     <section
@@ -1162,9 +1142,9 @@ function FAQ({ language }: { language: 'EN' | 'DE' }) {
           variants={stagger}
         >
           <motion.div variants={fadeUp}>
-            <SectionPill label="FAQ" />
+            <SectionPill label={faqData.label} />
             <h2 style={H2}>
-              Questions &<br />Answers
+              {faqData.title}
             </h2>
           </motion.div>
         </motion.div>
@@ -1176,7 +1156,7 @@ function FAQ({ language }: { language: 'EN' | 'DE' }) {
           variants={stagger}
           style={{ display: 'flex', flexDirection: 'column' }}
         >
-          {FAQ_ITEMS.map((item, i) => (
+          {faqItems.map((item, i) => (
             <motion.div key={i} variants={fadeUp}>
               <button
                 onClick={() => setOpen(open === i ? null : i)}
