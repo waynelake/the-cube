@@ -322,20 +322,6 @@ function Hero() {
           opacity: 0.8,
         }}
       />
-      <img
-        src="/images/Stars-a.png"
-        alt=""
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: '20%',
-          width: '50%',
-          height: '60%',
-          objectFit: 'contain',
-          pointerEvents: 'none',
-          opacity: 0.6,
-        }}
-      />
 
       <motion.div
         initial="hidden"
@@ -584,9 +570,26 @@ function TheExperience() {
       style={{
         padding: SECTION_PAD,
         background: 'rgba(255,255,255,0.01)',
+        position: 'relative',
+        overflow: 'hidden',
       }}
     >
-      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+      <img
+        src="/images/Stars-a.png"
+        alt=""
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: '80%',
+          width: '50%',
+          height: '60%',
+          objectFit: 'contain',
+          pointerEvents: 'none',
+          opacity: 0.6,
+          transform: 'translateX(-50%)',
+        }}
+      />
+      <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -1102,9 +1105,9 @@ function Pricing() {
                   >
                     <span
                       style={{
-                        fontFamily: "'Gotens', sans-serif",
+                        fontFamily: "'Inter', sans-serif",
                         fontSize: 'clamp(2.5rem, 4.5vw, 3.5rem)',
-                        fontWeight: 400,
+                        fontWeight: 600,
                         color: '#fff',
                         lineHeight: 1,
                       }}
