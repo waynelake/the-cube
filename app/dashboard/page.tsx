@@ -1,15 +1,14 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
 import { useState, useEffect, useCallback, useRef } from 'react';
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
-import { LangToggle } from '@/components/lang-toggle';
-import { useLanguage } from '@/lib/language-context';
+
+const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
 import {
   PaidContent, parseSummary, ReadingTraits,
   ELEMENT_KEYS, ELEMENT_LABELS, TRAIT_MAP,
@@ -244,7 +243,6 @@ function Sidebar({
 
 export default function DashboardPage() {
   const router = useRouter();
-  const { language } = useLanguage();
   const [sessions, setSessions] = useState<SessionItem[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [paidSessionIds, setPaidSessionIds] = useState<Set<string>>(new Set());
