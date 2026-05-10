@@ -476,10 +476,10 @@ function TheExperience() {
           viewport={{ once: true, margin: '-60px' }}
           variants={stagger}
         >
-          <motion.div variants={fadeUp} style={{ marginBottom: '3rem', textAlign: 'center' }}>
+          <motion.div variants={fadeUp} style={{ marginBottom: '3rem' }}>
             <SectionPill label="How it works" />
             <h2 style={{ ...H2 }}>The Experience</h2>
-            <p style={{ ...BODY, maxWidth: '420px', margin: '0 auto' }}>
+            <p style={{ ...BODY, maxWidth: '420px' }}>
               Answer a few questions. Receive a reading that names what you
               already knew.
             </p>
