@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
-import { LangToggle } from '@/app/page';
+import { LangToggle } from '@/components/lang-toggle';
 import { useLanguage } from '@/lib/language-context';
 import {
   PaidContent, parseSummary, ReadingTraits,
