@@ -765,8 +765,9 @@ function Testimonials() {
       >
         <motion.div variants={fadeUp}>
           <SectionPill label="Testimonial" />
-          <h2 style={{ ...H2, maxWidth: '9em', margin: '0 auto 1.25rem' }}>
-            Reasons why you'll love The Cube
+          <h2 style={{ ...H2, textAlign: 'center', margin: '0 auto 1.25rem' }}>
+            <span style={{ display: 'block' }}>Reasons why you'll</span>
+            <span style={{ display: 'block' }}>love The Cube</span>
           </h2>
         </motion.div>
       </motion.div>
@@ -898,8 +899,9 @@ function Pricing() {
         >
           <motion.div variants={fadeUp} style={{ marginBottom: '3rem' }}>
             <SectionPill label="Pricing" />
-            <h2 style={{ ...H2, maxWidth: '7em', margin: '0 auto 1.25rem', textAlign: 'center' }}>
-              Begin wherever you are.
+            <h2 style={{ ...H2, textAlign: 'center', margin: '0 auto 1.25rem' }}>
+              <span style={{ display: 'block' }}>Begin wherever</span>
+              <span style={{ display: 'block' }}>you are.</span>
             </h2>
           </motion.div>
 
