@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, type Variants, AnimatePresence } from 'framer-motion';
@@ -8,10 +9,16 @@ import { CubeIcon } from '@/components/cube-icon';
 import HeroCube from '@/components/hero-cube';
 import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/lib/language-context';
+<<<<<<< HEAD
 import { t } from '@/lib/translations/index';
 import { LangToggle } from '@/components/lang-toggle';
 
 export const dynamic = 'force-dynamic';
+=======
+import { t } from '@/lib/translations';
+
+const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
+>>>>>>> claude/determined-banzai-95f34d
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -142,9 +149,13 @@ function SectionPill({ label }: { label: string }) {
   );
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> claude/determined-banzai-95f34d
 // ─── Nav ─────────────────────────────────────────────────────────────────────
 
-function Nav() {
+function Nav({ language }: { language: 'EN' | 'DE' }) {
   const [scrolled, setScrolled] = useState(false);
   const { language } = useLanguage();
 
@@ -226,15 +237,19 @@ function Nav() {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
+<<<<<<< HEAD
 function Hero() {
   const { language } = useLanguage();
 
+=======
+function Hero({ language }: { language: 'EN' | 'DE' }) {
+>>>>>>> claude/determined-banzai-95f34d
   return (
     <section
       style={{
         position: 'relative',
         padding: '13rem 1.5rem 7rem',
-        textAlign: 'center',
+        textAlign: 'left',
         overflow: 'hidden',
         background: 'radial-gradient(ellipse 120% 65% at 50% 0%, rgba(124,58,237,0.28) 0%, transparent 65%)',
       }}
@@ -325,6 +340,7 @@ function Hero() {
 
 // ─── Stats Bar ────────────────────────────────────────────────────────────────
 
+<<<<<<< HEAD
 function StatsBar() {
   const { language } = useLanguage();
 
@@ -366,6 +382,25 @@ function StatsBar() {
             border: '1px solid rgba(255,255,255,0.08)',
             gap: '1.25rem',
           }}
+=======
+function StatsBar({ language }: { language: 'EN' | 'DE' }) {
+  return (
+    <div style={{ maxWidth: '860px', margin: '0 0 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: EASE }}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0.6rem 0.6rem 0.6rem 1.25rem',
+          borderRadius: '9999px',
+          background: 'rgba(14, 12, 24, 0.9)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          gap: '1.25rem',
+        }}
+>>>>>>> claude/determined-banzai-95f34d
       >
         {/* Bullet */}
         <div style={{
@@ -378,9 +413,15 @@ function StatsBar() {
         </div>
 
         {/* Stat 1 */}
+<<<<<<< HEAD
         <div className="stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <span style={STAT_VALUE}>15</span>
           <span style={STAT_LABEL}>
+=======
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>15</span>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.5 }}>
+>>>>>>> claude/determined-banzai-95f34d
             {t(language, 'hero.stats.languages')}
           </span>
         </div>
@@ -389,9 +430,15 @@ function StatsBar() {
         <div className="stats-divider" style={{ width: '1px', height: '28px', background: 'rgba(255,255,255,0.1)', flexShrink: 0 }} />
 
         {/* Stat 2 */}
+<<<<<<< HEAD
         <div className="stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
           <span style={STAT_VALUE}>120+</span>
           <span style={STAT_LABEL}>
+=======
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>120+</span>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.5 }}>
+>>>>>>> claude/determined-banzai-95f34d
             {t(language, 'hero.stats.yearsExperience')}
           </span>
         </div>
@@ -419,7 +466,11 @@ function StatsBar() {
             ))}
           </div>
           <div>
+<<<<<<< HEAD
             <div style={{ ...STAT_VALUE, fontSize: '1.15rem' }}>100+</div>
+=======
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>100+</div>
+>>>>>>> claude/determined-banzai-95f34d
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.57rem', color: 'rgba(255,255,255,0.42)', letterSpacing: '0.02em', marginTop: '0.1rem' }}>{t(language, 'hero.stats.usersPlayed')}</div>
           </div>
         </div>
@@ -1457,6 +1508,7 @@ function Footer() {
 
 export default function LandingPage() {
   const router = useRouter();
+  const { language } = useLanguage();
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -1489,9 +1541,9 @@ export default function LandingPage() {
           width: '100%',
         }}
       >
-        <Nav />
-        <Hero />
-        <StatsBar />
+        <Nav language={language} />
+        <Hero language={language} />
+        <StatsBar language={language} />
         <HowItWorks />
         <TheExperience />
         <Foundation />

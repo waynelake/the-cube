@@ -99,7 +99,11 @@ function UnlockContent() {
           </p>
           <h2
             style={{
+<<<<<<< HEAD
               fontFamily: "'Inter', sans-serif",
+=======
+              fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
               fontSize: '1.7rem',
               color: '#f5f0eb',
               fontWeight: 500,
@@ -109,7 +113,11 @@ function UnlockContent() {
             Unlock your full reading
           </h2>
           <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'center', gap: '0.4rem', marginTop: '1rem' }}>
+<<<<<<< HEAD
             <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '3rem', color: '#f5f0eb', fontWeight: 500, lineHeight: '1' }}>
+=======
+            <span style={{ fontFamily: "'Inter', Georgia, serif", fontSize: '3rem', color: '#f5f0eb', fontWeight: 500, lineHeight: '1' }}>
+>>>>>>> claude/determined-banzai-95f34d
               7 EUR
             </span>
           </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
@@ -8,6 +9,8 @@ import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
 import { LangToggle } from '@/components/lang-toggle';
 import { useLanguage } from '@/lib/language-context';
+
+const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
 
 const ELEMENT_KEYS = ['cube', 'ladder', 'flowers', 'animal', 'storm'] as const;
 type ElementKey = typeof ELEMENT_KEYS[number];
@@ -118,7 +121,11 @@ function ResultsContent() {
       <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: 'var(--bg)' }}>
         <div className="pointer-events-none fixed inset-0 glow-pulse-bg"
           style={{ background: 'radial-gradient(ellipse 700px 500px at 50% 45%, rgba(124,58,237,0.1) 0%, transparent 70%)' }} />
+<<<<<<< HEAD
         <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+=======
+        <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+>>>>>>> claude/determined-banzai-95f34d
           Loading your reading...
         </p>
       </main>
@@ -129,7 +136,11 @@ function ResultsContent() {
     return (
       <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: 'var(--bg)' }}>
         <div style={{ textAlign: 'center', maxWidth: '400px', padding: '2rem' }}>
+<<<<<<< HEAD
           <p style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-primary)', fontSize: '1.3rem', marginBottom: '1rem' }}>
+=======
+          <p style={{ fontFamily: "'Inter', Georgia, serif", color: 'var(--text-primary)', fontSize: '1.3rem', marginBottom: '1rem' }}>
+>>>>>>> claude/determined-banzai-95f34d
             Your reading is being prepared.
           </p>
           <p style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
@@ -202,7 +213,11 @@ function ResultsContent() {
             Your reading
           </p>
           <h1 style={{
+<<<<<<< HEAD
             fontFamily: "'Inter', sans-serif",
+=======
+            fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
             fontSize: 'clamp(2rem, 4vw, 2.8rem)',
             color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem',
           }}>
@@ -213,7 +228,35 @@ function ResultsContent() {
           </p>
         </div>
 
+<<<<<<< HEAD
         <PaidContent summary={summary} />
+=======
+        {!isPaid && (
+          <div style={{ marginBottom: '3rem' }}>
+            {ELEMENT_KEYS.map((key, i) => (
+              <div key={key}>
+                <div style={{ padding: '1.5rem 0' }}>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.6rem' }}>
+                    {ELEMENT_LABELS[key]}
+                  </p>
+                  <p style={{ fontFamily: "'Inter', Georgia, serif", fontSize: 'clamp(1.1rem, 2.2vw, 1.3rem)', color: 'var(--text-primary)', lineHeight: '1.5', fontWeight: 400 }}>
+                    {traits[TRAIT_MAP[key]]}
+                  </p>
+                </div>
+                {i < ELEMENT_KEYS.length - 1 && (
+                  <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.15), transparent)' }} />
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {isPaid ? (
+          <PaidContent summary={summary} />
+        ) : (
+          <PaywallSection sessionId={sessionId || ''} summary={summary} />
+        )}
+>>>>>>> claude/determined-banzai-95f34d
       </div>
     </main>
   );
@@ -354,7 +397,11 @@ function PaidContent({ summary }: { summary: string }) {
               {el.body}
             </p>
             <p style={{
+<<<<<<< HEAD
               fontFamily: "'Inter', sans-serif",
+=======
+              fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
               fontStyle: 'italic', fontSize: '1rem', color: 'var(--accent-text)', lineHeight: '1.6',
               marginTop: '1.5rem', paddingTop: '1.5rem',
               borderTop: '1px solid rgba(124,58,237,0.15)',
@@ -368,7 +415,11 @@ function PaidContent({ summary }: { summary: string }) {
       {patternParas.length > 0 && (
         <div style={{ marginTop: '3rem' }}>
           <h2 style={{
+<<<<<<< HEAD
             fontFamily: "'Inter', sans-serif",
+=======
+            fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
             fontSize: '2rem', color: 'var(--text-primary)', fontWeight: 500, marginBottom: '2rem',
           }}>
             The Pattern
@@ -389,7 +440,11 @@ function PaidContent({ summary }: { summary: string }) {
         <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
           {takeaways.map((t, i) => (
             <p key={i} style={{
+<<<<<<< HEAD
               fontFamily: "'Inter', sans-serif",
+=======
+              fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
               fontStyle: 'italic', fontSize: '1.2rem', color: 'var(--text-primary)', lineHeight: '1.6',
               paddingLeft: '1rem', marginBottom: '0.75rem',
             }}>
@@ -401,7 +456,11 @@ function PaidContent({ summary }: { summary: string }) {
 
       {summation && (
         <p style={{
+<<<<<<< HEAD
           fontFamily: "'Inter', sans-serif",
+=======
+          fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
           fontStyle: 'italic', fontSize: '1.4rem', color: 'var(--text-primary)',
           textAlign: 'center', lineHeight: '1.6',
           marginTop: '3rem', marginBottom: '3rem',
@@ -415,6 +474,66 @@ function PaidContent({ summary }: { summary: string }) {
   );
 }
 
+<<<<<<< HEAD
+=======
+function PaywallSection({ sessionId, summary }: { sessionId: string; summary: string }) {
+  const preview = summary.split(/\n{2,}/)[0] || '';
+
+  return (
+    <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative', overflow: 'hidden', maxHeight: '160px', borderRadius: '12px' }}>
+        <div style={{
+          filter: 'blur(6px)', opacity: 0.45, pointerEvents: 'none',
+          userSelect: 'none' as const, padding: '1.5rem', background: 'var(--surface)',
+        }}>
+          <p style={{ fontFamily: "'DM Sans', sans-serif", color: 'var(--text-primary)', lineHeight: '1.8', fontSize: '0.95rem' }}>
+            {preview}
+          </p>
+        </div>
+        <div style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to bottom, transparent 0%, var(--bg) 85%)',
+        }} />
+      </div>
+
+      <div style={{
+        background: 'var(--surface)', border: '1px solid rgba(124,58,237,0.25)',
+        borderRadius: '16px', padding: '2.5rem', textAlign: 'center',
+        marginTop: '1.5rem', boxShadow: '0 0 60px rgba(124,58,237,0.08)',
+      }}>
+        <h3 style={{
+          fontFamily: "'Inter', Georgia, serif",
+          fontSize: '1.5rem', color: 'var(--text-primary)', fontWeight: 500, marginBottom: '1rem',
+        }}>
+          Your reading continues.
+        </h3>
+        <p style={{
+          fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', color: 'var(--text-secondary)',
+          lineHeight: '1.7', maxWidth: '420px', margin: '0 auto 2rem',
+        }}>
+          You&apos;ve seen enough to know this isn&apos;t generic. The full interpretation of your space — all five elements, the pattern that runs through them, and what it means — is waiting.
+        </p>
+        <Link
+          href={`/unlock?session=${sessionId}`}
+          style={{
+            display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px',
+            background: 'var(--accent)', color: 'var(--text-primary)',
+            fontFamily: "'DM Sans', sans-serif", fontSize: '0.95rem', fontWeight: 500,
+            textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.35)',
+            transition: 'all 0.2s',
+          }}
+        >
+          Unlock full reading — 7 EUR
+        </Link>
+        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '1rem' }}>
+          One-time payment. Instant access.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+>>>>>>> claude/determined-banzai-95f34d
 export default function ResultsPage() {
   return (
     <Suspense fallback={null}>

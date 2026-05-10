@@ -306,7 +306,11 @@ export default function ExperiencePage() {
           {step === 0 && (
             <p
               style={{
+<<<<<<< HEAD
                 fontFamily: "'Inter', sans-serif",
+=======
+                fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
                 fontStyle: 'italic',
                 fontSize: '0.9rem',
                 color: 'var(--text-muted)',
@@ -337,7 +341,11 @@ export default function ExperiencePage() {
               <p
                 key={i}
                 style={{
+<<<<<<< HEAD
                   fontFamily: "'Inter', sans-serif",
+=======
+                  fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
                   fontSize: 'clamp(1.4rem, 3vw, 1.9rem)',
                   lineHeight: '1.4',
                   color: 'var(--text-primary)',
@@ -508,7 +516,11 @@ export default function ExperiencePage() {
           >
             <h3
               style={{
+<<<<<<< HEAD
                 fontFamily: "'Inter', sans-serif",
+=======
+                fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
                 fontSize: '1.3rem',
                 color: 'var(--text-primary)',
                 marginBottom: '0.75rem',

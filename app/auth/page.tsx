@@ -105,7 +105,11 @@ function AuthContent() {
         <div style={{ marginBottom: '2rem', textAlign: 'center' }}>
           <h2
             style={{
+<<<<<<< HEAD
               fontFamily: "'Inter', sans-serif",
+=======
+              fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
               fontSize: '1.6rem',
               fontWeight: 500,
               color: 'var(--text-primary)',

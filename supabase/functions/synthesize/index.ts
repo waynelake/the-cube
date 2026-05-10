@@ -13,7 +13,7 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    const { session_id } = await req.json();
+    const { session_id, language = 'EN' } = await req.json();
     if (!session_id) {
       return new Response(JSON.stringify({ error: "session_id required" }), {
         status: 400,
@@ -50,8 +50,17 @@ Deno.serve(async (req: Request) => {
 
     const profile_id = sessionData?.profile_id ?? null;
 
+    const languageInstruction = language === 'DE'
+      ? `Erstelle die gesamte Antwort auf Deutsch (Deutsch). Dies beinhaltet alle Beobachtungen, Interpretationen, strategischen Ansätze, die abschließende Synthese und die fünf destillierten Erkenntnisse. Der Ton, die Tiefe und die Qualität der Einsicht müssen identisch bleiben — nur die Sprache ändert sich.`
+      : `Generate the entire response in English. This includes all observations, interpretations, strategic lenses, final synthesis, and five distilled takeaways. Tone, depth, and quality of insight must remain identical — only the language changes.`;
+
     const frameworkText = `THE CUBE STRATEGY FRAMEWORK — COMPLETE INTERPRETER'S MANUAL
 ============================================================
+
+## LANGUAGE INSTRUCTION
+
+${languageInstruction}
+
 
 ## PRIORITY INSTRUCTION — SOURCE HIERARCHY
 
