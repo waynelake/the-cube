@@ -379,7 +379,7 @@ function Hero() {
 
       <div style={{
         position: 'absolute',
-        top: '50%',
+        top: 'calc(50% + 120px)',
         left: '50%',
         transform: 'translate(-50%, -50%)',
         zIndex: 1,
