@@ -186,7 +186,7 @@ function Hero() {
         padding: '13rem 1.5rem 7rem',
         textAlign: 'center',
         overflow: 'hidden',
-        background: 'linear-gradient(135deg, #0F0430 0%, rgba(96,78,78,0.2) 77%, #000000 99%)',
+        background: 'linear-gradient(to right, #0F0430 0%, rgba(96,78,78,0.15) 70%, #000000 100%)',
       }}
     >
       <img
@@ -272,14 +272,14 @@ function Hero() {
               display: 'inline-block',
               padding: '0.9rem 2.25rem',
               borderRadius: '9999px',
-              border: '1px solid rgba(255,255,255,0.2)',
-              background: 'transparent',
-              color: '#f0ebff',
+              background: '#CBC2E5',
+              color: '#150A35',
               fontFamily: "'Inter', sans-serif",
               fontSize: '0.95rem',
-              fontWeight: 500,
+              fontWeight: 600,
               letterSpacing: '0.01em',
               textDecoration: 'none',
+              boxShadow: '0 4px 24px rgba(203,194,229,0.25)',
             }}
           >
             Begin your reading
@@ -340,8 +340,9 @@ function StatsBar() {
             <div>
               <div
                 style={{
-                  fontFamily: "'Gotens', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '1.25rem',
+                  fontWeight: 600,
                   color: '#fff',
                   lineHeight: 1.1,
                 }}
@@ -428,10 +429,9 @@ function HowItWorks() {
               <div style={{ marginTop: '2.5rem' }}>
                 <h3
                   style={{
-                    fontFamily: "'Gotens', sans-serif",
-                    fontSize: '1.55rem',
-                    fontWeight: 400,
-                    fontStyle: 'normal',
+                    fontFamily: "'Inter', sans-serif",
+                    fontSize: '1.35rem',
+                    fontWeight: 600,
                     color: '#fff',
                     marginBottom: '0.85rem',
                     lineHeight: 1.2,
@@ -548,13 +548,12 @@ function TheExperience() {
                 <div>
                   <h3
                     style={{
-                      fontFamily: "'Gotens', sans-serif",
-                      fontSize: '1.45rem',
-                      fontWeight: 400,
-                      fontStyle: 'normal',
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: '1.25rem',
+                      fontWeight: 600,
                       color: '#fff',
                       marginBottom: '0.75rem',
-                      lineHeight: 1.25,
+                      lineHeight: 1.3,
                     }}
                   >
                     {f.title}
@@ -618,10 +617,16 @@ function Foundation() {
             <SectionPill label="What It's Based On" />
           </motion.div>
 
-          <motion.h2 variants={fadeUp} style={H2}>
+          <motion.h2 variants={fadeUp} style={{
+            ...H2,
+            fontFamily: "'Inter', sans-serif",
+            fontWeight: 500,
+            color: 'rgba(240,235,255,0.55)',
+          }}>
             Drawn from the work of{' '}
-            <span style={{ color: '#a78bfa' }}>depth psychologists</span>{' '}
-            who believed the psyche speaks in images.
+            <span style={{ color: '#fff' }}>depth psychologists</span>{' '}
+            who{' '}
+            <span style={{ color: '#fff' }}>believed the psyche speaks in images.</span>
           </motion.h2>
 
           <motion.p
@@ -1482,7 +1487,7 @@ export default function LandingPage() {
       />
       <main
         style={{
-          background: '#09090f',
+          background: '#000000',
           color: '#fff',
           overflowX: 'hidden',
           width: '100%',
