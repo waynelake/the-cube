@@ -7,7 +7,7 @@ import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
 import {
-  PaidContent, PaywallSection, parseSummary, ReadingTraits,
+  PaidContent, parseSummary, ReadingTraits,
   ELEMENT_KEYS, ELEMENT_LABELS, TRAIT_MAP,
 } from '@/components/reading-display';
 import { Menu, X, LogOut, Plus, MoreHorizontal, Pencil, Pin } from 'lucide-react';
@@ -30,11 +30,11 @@ function formatName(email: string): string {
 const MIN_W = 200, MAX_W = 400, DEFAULT_W = 280;
 
 function Sidebar({
-  sessions, selectedId, loading, email, displayName, isPaid,
+  sessions, selectedId, loading, email, displayName,
   pinnedIds, onSelect, onClose, onSignOut, onSaveName, onPin, onHide, onRename,
 }: {
   sessions: SessionItem[]; selectedId: string | null; loading: boolean;
-  email: string; displayName: string; isPaid: boolean; pinnedIds: Set<string>;
+  email: string; displayName: string; pinnedIds: Set<string>;
   onSelect: (id: string) => void; onClose?: () => void; onSignOut: () => void;
   onSaveName: (name: string) => Promise<void>;
   onPin: (id: string) => void;
@@ -179,16 +179,6 @@ function Sidebar({
       </div>
 
       <div style={{ borderTop: '1px solid rgba(124,58,237,0.08)', padding: '1rem 1.5rem', flexShrink: 0 }}>
-        {!isPaid && sessions.length > 0 && selectedId && (
-          <div style={{ marginBottom: '1rem', padding: '0.875rem 0.875rem 0.875rem 1rem', background: 'rgba(124,58,237,0.06)', borderRadius: '10px', border: '1px solid rgba(124,58,237,0.12)' }}>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.74rem', color: 'var(--text-secondary)', marginBottom: '0.4rem', lineHeight: '1.5' }}>
-              Unlock the full reading — all five elements and the pattern.
-            </p>
-            <Link href={`/unlock?session=${selectedId}`} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.74rem', color: 'var(--accent-text)', textDecoration: 'none', fontWeight: 500 }}>
-              Unlock for 7 EUR →
-            </Link>
-          </div>
-        )}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
           <div style={{ overflow: 'hidden', flex: 1 }}>
             {editingName ? (
@@ -242,7 +232,6 @@ export default function DashboardPage() {
   const router = useRouter();
   const [sessions, setSessions] = useState<SessionItem[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [paidSessionIds, setPaidSessionIds] = useState<Set<string>>(new Set());
   const [pinnedIds, setPinnedIds] = useState<Set<string>>(new Set());
   const [email, setEmail] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -256,7 +245,7 @@ export default function DashboardPage() {
 
   useEffect(() => { currentWidthRef.current = sidebarWidth; }, [sidebarWidth]);
 
-  const loadDashboard = useCallback(async (urlSession: string | null = null, forceIsPaid = false) => {
+  const loadDashboard = useCallback(async (urlSession: string | null = null) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { router.push('/auth?mode=signin'); return; }
 
@@ -301,15 +290,6 @@ export default function DashboardPage() {
         },
       }));
 
-    const { data: payments } = await supabase
-      .from('session_payments')
-      .select('session_id')
-      .eq('profile_id', profile.id);
-
-    const paidSet = new Set((payments || []).map(p => p.session_id as string));
-    if (forceIsPaid && urlSession) paidSet.add(urlSession);
-    setPaidSessionIds(paidSet);
-
     setSessions(items);
     const preselect = urlSession && items.find(s => s.id === urlSession) ? urlSession : (items[0]?.id ?? null);
     setSelectedId(preselect);
@@ -328,8 +308,7 @@ export default function DashboardPage() {
 
     const params = new URLSearchParams(window.location.search);
     const urlSession = params.get('session');
-    const forceIsPaid = params.get('payment') === 'success';
-    loadDashboard(urlSession, forceIsPaid);
+    loadDashboard(urlSession);
   }, [loadDashboard]);
 
   useEffect(() => {
@@ -397,7 +376,7 @@ export default function DashboardPage() {
 
   const sidebarProps = {
     sessions: sortedSessions, selectedId, loading, email, displayName,
-    isPaid: paidSessionIds.has(selectedId ?? ''), pinnedIds,
+    pinnedIds,
     onSelect: handleSelect, onSignOut: handleSignOut,
     onSaveName: handleSaveName, onPin: handlePin, onHide: handleHide, onRename: handleRename,
   };
@@ -434,12 +413,12 @@ export default function DashboardPage() {
         <div style={{ flex: 1 }}>
           {loading ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
-              <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>Loading your readings...</p>
+              <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>Loading your readings...</p>
             </div>
           ) : sessions.length === 0 ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', padding: '2rem' }}>
               <div style={{ textAlign: 'center', maxWidth: '400px' }}>
-                <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 500 }}>No readings yet.</p>
+                <p style={{ fontFamily: "'Inter', Georgia, serif", fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 500 }}>No readings yet.</p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2rem' }}>
                   Start a reading to get your first symbolic interpretation.
                 </p>
@@ -450,14 +429,14 @@ export default function DashboardPage() {
             </div>
           ) : !selected || !selected.insight ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
-              <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+              <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
                 {selected ? 'This reading is still being prepared.' : 'Select a reading.'}
               </p>
             </div>
           ) : (
             <div className="reading-container">
               <div style={{ marginBottom: '3.5rem' }}>
-                <h1 style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem' }}>
+                <h1 style={{ fontFamily: "'Inter', Georgia, serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem' }}>
                   What Your Space Reveals
                 </h1>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
@@ -465,30 +444,7 @@ export default function DashboardPage() {
                 </p>
               </div>
 
-              {!paidSessionIds.has(selected.id) && (
-                <div style={{ marginBottom: '3rem' }}>
-                  {ELEMENT_KEYS.map((key, i) => (
-                    <div key={key}>
-                      <div style={{ padding: '1.5rem 0' }}>
-                        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.6rem' }}>
-                          {ELEMENT_LABELS[key]}
-                        </p>
-                        <p style={{ fontFamily: "'Playfair Display', Georgia, serif", fontSize: 'clamp(1.1rem, 2.2vw, 1.3rem)', color: 'var(--text-primary)', lineHeight: '1.5', fontWeight: 400 }}>
-                          {selected.insight?.traits?.[TRAIT_MAP[key]]}
-                        </p>
-                      </div>
-                      {i < ELEMENT_KEYS.length - 1 && (
-                        <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.15), transparent)' }} />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {paidSessionIds.has(selected.id)
-                ? <PaidContent summary={selected.insight?.summary ?? ''} />
-                : <PaywallSection sessionId={selected.id} summary={selected.insight?.summary ?? ''} />
-              }
+              <PaidContent summary={selected.insight?.summary ?? ''} />
             </div>
           )}
         </div>

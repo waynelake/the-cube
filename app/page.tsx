@@ -1203,7 +1203,7 @@ const FAQ_ITEMS = [
   },
   {
     q: 'Can I do more than one reading?',
-    a: 'Yes. With a subscription you get unlimited readings, a post-reading conversation to explore the interpretation further, and a reading history to track patterns over time.',
+    a: 'Yes. You can do unlimited readings, see your full reading history, and track patterns over time across all your readings.',
   },
 ];
 
