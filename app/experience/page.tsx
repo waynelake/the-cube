@@ -1,12 +1,10 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { X, ChevronDown, ChevronUp } from 'lucide-react';
-import { useLanguage } from '@/lib/language-context';
 
 type QuestionKey = 'cube' | 'ladder' | 'flowers' | 'animal' | 'storm';
 
@@ -109,7 +107,6 @@ const QUESTIONS: Question[] = [
 
 export default function ExperiencePage() {
   const router = useRouter();
-  const { language } = useLanguage();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<QuestionKey, string>>({
     cube: '', ladder: '', flowers: '', animal: '', storm: '',
