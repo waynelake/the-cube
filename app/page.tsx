@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { motion, type Variants, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { motion, type Variants, AnimatePresence } from 'framer-motion';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
 import { supabase } from '@/lib/supabase';
@@ -462,19 +462,8 @@ function TheExperience() {
     },
   ];
 
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ['start end', 'center center'],
-  });
-
-  const card1Y = useTransform(scrollYProgress, [0, 1], [0, 440]);
-  const card2Y = useTransform(scrollYProgress, [0, 1], [220, 440]);
-  const cardYs = [card1Y, card2Y, 440] as const;
-
   return (
     <section
-      ref={sectionRef}
       style={{
         padding: SECTION_PAD,
         background: 'rgba(255,255,255,0.01)',
@@ -501,19 +490,17 @@ function TheExperience() {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
               gap: '1.25rem',
-              paddingBottom: '440px',
             }}
           >
             {features.map((f, i) => (
               <motion.div
                 key={i}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                initial={{ opacity: 0, y: 60 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-40px' }}
-                transition={{ duration: 0.7, ease: EASE, delay: i * 0.08 }}
+                transition={{ duration: 0.85, ease: EASE, delay: i * 0.18 }}
                 style={{
                   ...GLASS,
-                  y: cardYs[i],
                   padding: '2.5rem',
                   borderRadius: '30px',
                   display: 'flex',
