@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from '@/lib/supabase';
+import { useLanguage } from '@/lib/language-context';
+import type { Language } from '@/lib/language-context';
 
 const ELEMENT_LABELS = [
   { key: 'cube', label: 'The Cube' },
@@ -21,11 +23,13 @@ const STATUS_LINES = [
 function GeneratingContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { language: contextLanguage } = useLanguage();
   const sessionId = searchParams.get('session');
   const [visibleLines, setVisibleLines] = useState(0);
   const [visibleCards, setVisibleCards] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showLoader, setShowLoader] = useState(false);
+  const [language, setLanguage] = useState<Language>(contextLanguage);
   const synthesisStarted = useRef(false);
 
   useEffect(() => {
@@ -41,6 +45,16 @@ function GeneratingContent() {
         const map: Record<string, string> = {};
         data.forEach(r => { map[r.question_key] = r.answer_text; });
         setAnswers(map);
+      }
+
+      const { data: sessionData } = await supabase
+        .from('sessions')
+        .select('language')
+        .eq('id', sessionId)
+        .single();
+
+      if (sessionData?.language) {
+        setLanguage(sessionData.language as Language);
       }
     };
 
@@ -88,7 +102,7 @@ function GeneratingContent() {
           'Authorization': `Bearer ${token}`,
           'apikey': SUPABASE_ANON_KEY,
         },
-        body: JSON.stringify({ session_id: sessionId }),
+        body: JSON.stringify({ session_id: sessionId, language: language }),
       });
 
       if (res.ok) {

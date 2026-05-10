@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { X, ChevronDown, ChevronUp } from 'lucide-react';
+import { useLanguage } from '@/lib/language-context';
 
 type QuestionKey = 'cube' | 'ladder' | 'flowers' | 'animal' | 'storm';
 
@@ -107,6 +108,7 @@ const QUESTIONS: Question[] = [
 
 export default function ExperiencePage() {
   const router = useRouter();
+  const { language } = useLanguage();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<QuestionKey, string>>({
     cube: '', ladder: '', flowers: '', animal: '', storm: '',
@@ -156,6 +158,7 @@ export default function ExperiencePage() {
         status: 'active',
         synthesis_status: 'pending',
         session_number: (count ?? 0) + 1,
+        language: language,
       })
       .select('id')
       .single();
@@ -164,7 +167,7 @@ export default function ExperiencePage() {
       setSessionId(session.id);
       setProfileId(profile.id);
     }
-  }, [router]);
+  }, [router, language]);
 
   useEffect(() => {
     initSession();
