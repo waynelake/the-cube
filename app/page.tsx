@@ -446,17 +446,17 @@ function HowItWorks() {
 function TheExperience() {
   const features = [
     {
-      shape: <img src="/images/star.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
+      shape: <img src="/images/icon-star.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
       title: 'Five objects. No right answers.',
       body: 'A simple space is described to you. Five objects appear in it. You describe what you see, and how you see it.',
     },
     {
-      shape: <img src="/images/small-star.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
+      shape: <img src="/images/icon-small-star.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
       title: 'A reading that sees through the surface.',
       body: 'Each object maps to something real. The reading draws from depth psychology and decades of symbolic research.',
     },
     {
-      shape: <img src="/images/Expert Team.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
+      shape: <img src="/images/icon-circle.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
       title: 'It names what you already knew.',
       body: 'A precise, personal reading. Not generic. Written only for what you described in your own words.',
     },
