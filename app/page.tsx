@@ -1,15 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, type Variants, AnimatePresence } from 'framer-motion';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
 import { supabase } from '@/lib/supabase';
-import { LangToggle } from '@/components/lang-toggle';
 
-export const dynamic = 'force-dynamic';
+const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
