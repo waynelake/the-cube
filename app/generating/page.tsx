@@ -145,7 +145,7 @@ function GeneratingContent() {
             <p
               key={i}
               style={{
-                fontFamily: "'Inter', Georgia, serif",
+                fontFamily: "'Inter', sans-serif",
                 fontStyle: 'italic',
                 fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
                 color: visibleLines > i ? 'var(--text-primary)' : 'transparent',
@@ -205,7 +205,7 @@ function GeneratingContent() {
         </div>
 
         <div style={{ marginTop: '2rem', textAlign: 'center', opacity: showLoader ? 1 : 0, transition: 'opacity 1.2s ease' }}>
-          <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
             Interpreting your space...
           </p>
           <div style={{ height: '2px', maxWidth: '200px', margin: '0 auto', borderRadius: '2px', background: 'rgba(124,58,237,0.15)', overflow: 'hidden' }}>

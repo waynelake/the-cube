@@ -303,7 +303,7 @@ export default function ExperiencePage() {
           {step === 0 && (
             <p
               style={{
-                fontFamily: "'Inter', Georgia, serif",
+                fontFamily: "'Inter', sans-serif",
                 fontStyle: 'italic',
                 fontSize: '0.9rem',
                 color: 'var(--text-muted)',
@@ -334,7 +334,7 @@ export default function ExperiencePage() {
               <p
                 key={i}
                 style={{
-                  fontFamily: "'Inter', Georgia, serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: 'clamp(1.4rem, 3vw, 1.9rem)',
                   lineHeight: '1.4',
                   color: 'var(--text-primary)',
@@ -505,7 +505,7 @@ export default function ExperiencePage() {
           >
             <h3
               style={{
-                fontFamily: "'Inter', Georgia, serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '1.3rem',
                 color: 'var(--text-primary)',
                 marginBottom: '0.75rem',

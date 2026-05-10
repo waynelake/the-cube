@@ -115,7 +115,7 @@ function ResultsContent() {
       <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: 'var(--bg)' }}>
         <div className="pointer-events-none fixed inset-0 glow-pulse-bg"
           style={{ background: 'radial-gradient(ellipse 700px 500px at 50% 45%, rgba(124,58,237,0.1) 0%, transparent 70%)' }} />
-        <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+        <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
           Loading your reading...
         </p>
       </main>
@@ -126,7 +126,7 @@ function ResultsContent() {
     return (
       <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: 'var(--bg)' }}>
         <div style={{ textAlign: 'center', maxWidth: '400px', padding: '2rem' }}>
-          <p style={{ fontFamily: "'Inter', Georgia, serif", color: 'var(--text-primary)', fontSize: '1.3rem', marginBottom: '1rem' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-primary)', fontSize: '1.3rem', marginBottom: '1rem' }}>
             Your reading is being prepared.
           </p>
           <p style={{ fontFamily: "'DM Sans', sans-serif", color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
@@ -198,7 +198,7 @@ function ResultsContent() {
             Your reading
           </p>
           <h1 style={{
-            fontFamily: "'Inter', Georgia, serif",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 'clamp(2rem, 4vw, 2.8rem)',
             color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem',
           }}>
@@ -350,7 +350,7 @@ function PaidContent({ summary }: { summary: string }) {
               {el.body}
             </p>
             <p style={{
-              fontFamily: "'Inter', Georgia, serif",
+              fontFamily: "'Inter', sans-serif",
               fontStyle: 'italic', fontSize: '1rem', color: 'var(--accent-text)', lineHeight: '1.6',
               marginTop: '1.5rem', paddingTop: '1.5rem',
               borderTop: '1px solid rgba(124,58,237,0.15)',
@@ -364,7 +364,7 @@ function PaidContent({ summary }: { summary: string }) {
       {patternParas.length > 0 && (
         <div style={{ marginTop: '3rem' }}>
           <h2 style={{
-            fontFamily: "'Inter', Georgia, serif",
+            fontFamily: "'Inter', sans-serif",
             fontSize: '2rem', color: 'var(--text-primary)', fontWeight: 500, marginBottom: '2rem',
           }}>
             The Pattern
@@ -385,7 +385,7 @@ function PaidContent({ summary }: { summary: string }) {
         <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
           {takeaways.map((t, i) => (
             <p key={i} style={{
-              fontFamily: "'Inter', Georgia, serif",
+              fontFamily: "'Inter', sans-serif",
               fontStyle: 'italic', fontSize: '1.2rem', color: 'var(--text-primary)', lineHeight: '1.6',
               paddingLeft: '1rem', marginBottom: '0.75rem',
             }}>
@@ -397,7 +397,7 @@ function PaidContent({ summary }: { summary: string }) {
 
       {summation && (
         <p style={{
-          fontFamily: "'Inter', Georgia, serif",
+          fontFamily: "'Inter', sans-serif",
           fontStyle: 'italic', fontSize: '1.4rem', color: 'var(--text-primary)',
           textAlign: 'center', lineHeight: '1.6',
           marginTop: '3rem', marginBottom: '3rem',
