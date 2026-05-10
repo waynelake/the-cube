@@ -83,7 +83,7 @@ function AuthContent() {
         style={{ textDecoration: 'none' }}
       >
         <CubeIcon size={24} />
-        <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.7rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+        <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.7rem', letterSpacing: '0.22em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
           The Cube
         </span>
       </Link>
@@ -114,7 +114,7 @@ function AuthContent() {
           >
             {mode === 'signup' ? 'Create your account' : 'Welcome back'}
           </h2>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
             {mode === 'signup' ? 'Begin your reading.' : 'Continue where you left off.'}
           </p>
         </div>
@@ -139,7 +139,7 @@ function AuthContent() {
                 padding: '0.5rem',
                 borderRadius: '6px',
                 border: 'none',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '0.83rem',
                 fontWeight: 500,
                 cursor: 'pointer',
@@ -157,7 +157,7 @@ function AuthContent() {
           <div>
             <label
               htmlFor="email"
-              style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.4rem', letterSpacing: '0.04em' }}
+              style={{ display: 'block', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.4rem', letterSpacing: '0.04em' }}
             >
               Email
             </label>
@@ -175,7 +175,7 @@ function AuthContent() {
                 border: '1px solid rgba(124,58,237,0.15)',
                 background: 'var(--bg)',
                 color: 'var(--text-primary)',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '0.9rem',
                 outline: 'none',
                 transition: 'border-color 0.2s',
@@ -189,7 +189,7 @@ function AuthContent() {
           <div>
             <label
               htmlFor="password"
-              style={{ display: 'block', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.4rem', letterSpacing: '0.04em' }}
+              style={{ display: 'block', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '0.4rem', letterSpacing: '0.04em' }}
             >
               Password
             </label>
@@ -207,7 +207,7 @@ function AuthContent() {
                 border: '1px solid rgba(124,58,237,0.15)',
                 background: 'var(--bg)',
                 color: 'var(--text-primary)',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '0.9rem',
                 outline: 'none',
                 transition: 'border-color 0.2s',
@@ -224,7 +224,7 @@ function AuthContent() {
               onClick={handleForgotPassword}
               style={{
                 alignSelf: 'flex-end',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '0.78rem',
                 color: 'var(--text-muted)',
                 background: 'none',
@@ -239,7 +239,7 @@ function AuthContent() {
           )}
 
           {error && (
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.82rem', color: '#e05a5a', textAlign: 'center' }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.82rem', color: '#e05a5a', textAlign: 'center' }}>
               {error}
             </p>
           )}
@@ -253,7 +253,7 @@ function AuthContent() {
               border: 'none',
               background: loading ? 'rgba(124,58,237,0.5)' : 'var(--accent)',
               color: 'var(--text-primary)',
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.92rem',
               fontWeight: 500,
               cursor: loading ? 'not-allowed' : 'pointer',
@@ -268,7 +268,7 @@ function AuthContent() {
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', margin: '1.5rem 0' }}>
           <div style={{ flex: 1, height: '1px', background: 'rgba(124,58,237,0.12)' }} />
-          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.75rem', color: 'var(--text-muted)' }}>or</span>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.75rem', color: 'var(--text-muted)' }}>or</span>
           <div style={{ flex: 1, height: '1px', background: 'rgba(124,58,237,0.12)' }} />
         </div>
 
@@ -281,7 +281,7 @@ function AuthContent() {
             border: '1px solid var(--border)',
             background: 'transparent',
             color: 'var(--text-primary)',
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             fontSize: '0.88rem',
             fontWeight: 400,
             cursor: 'pointer',
@@ -304,7 +304,7 @@ function AuthContent() {
         </button>
 
         {mode === 'signup' && (
-          <p style={{ textAlign: 'center', fontFamily: "'DM Sans', sans-serif", fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '1.25rem' }}>
+          <p style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '1.25rem' }}>
             By continuing you agree to our Privacy Policy
           </p>
         )}

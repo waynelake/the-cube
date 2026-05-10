@@ -237,7 +237,7 @@ export default function ExperiencePage() {
       >
         <div
           style={{
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             fontSize: '0.75rem',
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
@@ -317,7 +317,7 @@ export default function ExperiencePage() {
 
           <p
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.72rem',
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
@@ -360,7 +360,7 @@ export default function ExperiencePage() {
                 border: '1px solid rgba(124,58,237,0.18)',
                 background: 'var(--surface)',
                 color: 'var(--text-primary)',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '1rem',
                 lineHeight: '1.7',
                 outline: 'none',
@@ -374,7 +374,7 @@ export default function ExperiencePage() {
 
           <p
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.78rem',
               color: 'var(--text-muted)',
               textAlign: 'center',
@@ -390,7 +390,7 @@ export default function ExperiencePage() {
               style={{
                 background: 'none',
                 border: 'none',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '0.8rem',
                 color: 'var(--text-secondary)',
                 cursor: 'pointer',
@@ -423,7 +423,7 @@ export default function ExperiencePage() {
                   <li
                     key={i}
                     style={{
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "'Inter', sans-serif",
                       fontSize: '0.82rem',
                       color: 'var(--text-secondary)',
                     }}
@@ -445,7 +445,7 @@ export default function ExperiencePage() {
                   border: '1px solid var(--border)',
                   background: 'transparent',
                   color: 'var(--text-secondary)',
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '0.88rem',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
@@ -464,7 +464,7 @@ export default function ExperiencePage() {
                 border: 'none',
                 background: 'var(--accent)',
                 color: 'var(--text-primary)',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '0.92rem',
                 fontWeight: 500,
                 cursor: submitting ? 'not-allowed' : 'pointer',
@@ -514,7 +514,7 @@ export default function ExperiencePage() {
             >
               Leave the reading?
             </h3>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.75rem', lineHeight: '1.6' }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.75rem', lineHeight: '1.6' }}>
               Your answers won&apos;t be saved if you leave now.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
@@ -526,7 +526,7 @@ export default function ExperiencePage() {
                   border: '1px solid var(--border)',
                   background: 'transparent',
                   color: 'var(--text-secondary)',
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '0.85rem',
                   cursor: 'pointer',
                 }}
@@ -541,7 +541,7 @@ export default function ExperiencePage() {
                   border: 'none',
                   background: 'rgba(224,90,90,0.15)',
                   color: '#e05a5a',
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '0.85rem',
                   cursor: 'pointer',
                 }}

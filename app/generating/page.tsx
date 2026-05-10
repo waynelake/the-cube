@@ -175,7 +175,7 @@ function GeneratingContent() {
             >
               <p
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '0.65rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
@@ -187,7 +187,7 @@ function GeneratingContent() {
               </p>
               <p
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '0.88rem',
                   color: 'var(--text-muted)',
                   lineHeight: '1.5',

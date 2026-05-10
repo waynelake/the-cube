@@ -129,7 +129,7 @@ function ResultsContent() {
           <p style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-primary)', fontSize: '1.3rem', marginBottom: '1rem' }}>
             Your reading is being prepared.
           </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
             This can take a moment. Please check back shortly.
           </p>
           <button
@@ -137,7 +137,7 @@ function ResultsContent() {
             style={{
               padding: '0.7rem 1.75rem', borderRadius: '8px', border: 'none',
               background: 'var(--accent)', color: 'var(--text-primary)',
-              fontFamily: "'DM Sans', sans-serif", fontSize: '0.88rem', cursor: 'pointer',
+              fontFamily: "'Inter', sans-serif", fontSize: '0.88rem', cursor: 'pointer',
             }}
           >
             Refresh
@@ -158,7 +158,7 @@ function ResultsContent() {
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}>
           <CubeIcon size={22} />
-          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
             The Cube
           </span>
         </Link>
@@ -169,7 +169,7 @@ function ResultsContent() {
             style={{
               padding: '0.5rem 1.25rem', borderRadius: '6px',
               border: '1px solid rgba(124,58,237,0.25)', background: 'transparent',
-              color: 'var(--text-secondary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem',
+              color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem',
               textDecoration: 'none', transition: 'all 0.2s',
             }}
           >
@@ -180,7 +180,7 @@ function ResultsContent() {
             style={{
               padding: '0.5rem 1.25rem', borderRadius: '6px',
               border: '1px solid rgba(124,58,237,0.25)', background: 'transparent',
-              color: 'var(--text-secondary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem',
+              color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem',
               cursor: 'pointer', transition: 'all 0.2s',
             }}
           >
@@ -194,7 +194,7 @@ function ResultsContent() {
         position: 'relative', zIndex: 10,
       }}>
         <div style={{ marginBottom: '3.5rem' }}>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.75rem' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.75rem' }}>
             Your reading
           </p>
           <h1 style={{
@@ -204,7 +204,7 @@ function ResultsContent() {
           }}>
             What Your Space Reveals
           </h1>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
             {sessionDate}
           </p>
         </div>
@@ -336,14 +336,14 @@ function PaidContent({ summary }: { summary: string }) {
             ...(i === 4 ? { gridColumn: '1 / -1' } : {}),
           }}>
             <p style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.65rem', letterSpacing: '0.2em',
               textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1rem',
             }}>
               {CARD_LABELS[i]}
             </p>
             <p style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.95rem', color: 'var(--text-primary)', lineHeight: '1.9',
               whiteSpace: 'pre-wrap',
             }}>
@@ -371,7 +371,7 @@ function PaidContent({ summary }: { summary: string }) {
           </h2>
           {patternParas.map((para, i) => (
             <p key={i} style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '1rem', color: 'var(--text-primary)', lineHeight: '1.9',
               marginBottom: '1.5rem',
             }}>

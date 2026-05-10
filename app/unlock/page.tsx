@@ -71,7 +71,7 @@ function UnlockContent() {
         style={{
           position: 'absolute', top: '2rem', left: '2rem', zIndex: 10,
           display: 'flex', alignItems: 'center', gap: '0.5rem',
-          fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: '#5a5464',
+          fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: '#5a5464',
           textDecoration: 'none', transition: 'color 0.2s',
         }}
       >
@@ -94,7 +94,7 @@ function UnlockContent() {
         }}
       >
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#7c3aed', marginBottom: '0.75rem' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#7c3aed', marginBottom: '0.75rem' }}>
             One-time access
           </p>
           <h2
@@ -119,7 +119,7 @@ function UnlockContent() {
           {FEATURES.map((f, i) => (
             <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.75rem' }}>
               <Check size={15} style={{ color: '#7c3aed', marginTop: '2px', flexShrink: 0 }} />
-              <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.88rem', color: '#8b8494', lineHeight: '1.5' }}>
+              <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.88rem', color: '#8b8494', lineHeight: '1.5' }}>
                 {f}
               </span>
             </li>
@@ -129,7 +129,7 @@ function UnlockContent() {
         <div style={{ height: '1px', background: 'rgba(124,58,237,0.12)', marginBottom: '2rem' }} />
 
         {error && (
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.82rem', color: '#e05a5a', textAlign: 'center', marginBottom: '1rem' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.82rem', color: '#e05a5a', textAlign: 'center', marginBottom: '1rem' }}>
             {error}
           </p>
         )}
@@ -144,7 +144,7 @@ function UnlockContent() {
             border: 'none',
             background: (loading || fetchingUrl) ? 'rgba(124,58,237,0.5)' : '#7c3aed',
             color: '#f5f0eb',
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             fontSize: '0.95rem',
             fontWeight: 500,
             cursor: (loading || fetchingUrl) ? 'not-allowed' : 'pointer',
@@ -155,7 +155,7 @@ function UnlockContent() {
           {fetchingUrl ? 'Preparing checkout...' : loading ? 'Processing...' : 'Pay 7 EUR and unlock'}
         </button>
 
-        <p style={{ textAlign: 'center', fontFamily: "'DM Sans', sans-serif", fontSize: '0.75rem', color: '#5a5464', marginTop: '1rem', lineHeight: '1.5' }}>
+        <p style={{ textAlign: 'center', fontFamily: "'Inter', sans-serif", fontSize: '0.75rem', color: '#5a5464', marginTop: '1rem', lineHeight: '1.5' }}>
           Secure payment via Stripe. Your reading is saved to your account.
         </p>
       </div>

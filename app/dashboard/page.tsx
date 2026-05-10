@@ -54,7 +54,7 @@ function Sidebar({
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
             <CubeIcon size={20} />
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.68rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.68rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
               The Cube
             </span>
           </Link>
@@ -69,7 +69,7 @@ function Sidebar({
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
             padding: '0.55rem 1rem', borderRadius: '8px', background: 'var(--accent)',
-            color: '#ffffff', fontFamily: "'DM Sans', sans-serif",
+            color: '#ffffff', fontFamily: "'Inter', sans-serif",
             fontSize: '0.82rem', fontWeight: 500, textDecoration: 'none',
           }}
         >
@@ -80,9 +80,9 @@ function Sidebar({
 
       <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem 0' }}>
         {loading ? (
-          <p style={{ padding: '1rem 1.5rem', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>Loading...</p>
+          <p style={{ padding: '1rem 1.5rem', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>Loading...</p>
         ) : sessions.length === 0 ? (
-          <p style={{ padding: '1rem 1.5rem', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>No readings yet.</p>
+          <p style={{ padding: '1rem 1.5rem', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>No readings yet.</p>
         ) : sessions.map(s => {
           const title = s.insight?.custom_title
             || parseSummary(s.insight?.summary || '').summation
@@ -100,15 +100,15 @@ function Sidebar({
                     autoFocus
                     value={titleInput}
                     onChange={e => setTitleInput(e.target.value)}
-                    style={{ width: '100%', padding: '0.3rem 0.5rem', borderRadius: '6px', border: '1px solid rgba(124,58,237,0.3)', background: 'var(--bg)', color: 'var(--text-primary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', outline: 'none', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '0.3rem 0.5rem', borderRadius: '6px', border: '1px solid rgba(124,58,237,0.3)', background: 'var(--bg)', color: 'var(--text-primary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', outline: 'none', boxSizing: 'border-box' }}
                     onKeyDown={e => {
                       if (e.key === 'Enter') { onRename(s.id, titleInput); setEditingTitleId(null); }
                       if (e.key === 'Escape') setEditingTitleId(null);
                     }}
                   />
                   <div style={{ display: 'flex', gap: '0.4rem' }}>
-                    <button onClick={() => { onRename(s.id, titleInput); setEditingTitleId(null); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif" }}>Save</button>
-                    <button onClick={() => setEditingTitleId(null)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif" }}>Cancel</button>
+                    <button onClick={() => { onRename(s.id, titleInput); setEditingTitleId(null); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Save</button>
+                    <button onClick={() => setEditingTitleId(null)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Cancel</button>
                   </div>
                 </div>
               ) : (
@@ -124,11 +124,11 @@ function Sidebar({
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.3rem' }}>
                     {pinnedIds.has(s.id) && <Pin size={10} style={{ color: 'var(--accent)', flexShrink: 0 }} />}
-                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.72rem', color: 'var(--text-muted)' }}>
                       {formatDate(s.started_at)}
                     </p>
                   </div>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {title}
                   </p>
                 </button>
@@ -166,7 +166,7 @@ function Sidebar({
                     <button
                       key={label}
                       onClick={action}
-                      style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem 0.875rem', background: 'none', border: 'none', color: label === 'Hide' ? '#e05a5a' : 'var(--text-secondary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', cursor: 'pointer' }}
+                      style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem 0.875rem', background: 'none', border: 'none', color: label === 'Hide' ? '#e05a5a' : 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', cursor: 'pointer' }}
                     >
                       {label}
                     </button>
@@ -187,20 +187,20 @@ function Sidebar({
                   autoFocus
                   value={nameInput}
                   onChange={e => setNameInput(e.target.value)}
-                  style={{ padding: '0.3rem 0.5rem', borderRadius: '6px', border: '1px solid rgba(124,58,237,0.3)', background: 'var(--bg)', color: 'var(--text-primary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
+                  style={{ padding: '0.3rem 0.5rem', borderRadius: '6px', border: '1px solid rgba(124,58,237,0.3)', background: 'var(--bg)', color: 'var(--text-primary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
                   onKeyDown={e => {
                     if (e.key === 'Enter') { onSaveName(nameInput); setEditingName(false); }
                     if (e.key === 'Escape') setEditingName(false);
                   }}
                 />
                 <div style={{ display: 'flex', gap: '0.4rem' }}>
-                  <button onClick={() => { onSaveName(nameInput); setEditingName(false); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif" }}>Save</button>
-                  <button onClick={() => setEditingName(false)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif" }}>Cancel</button>
+                  <button onClick={() => { onSaveName(nameInput); setEditingName(false); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Save</button>
+                  <button onClick={() => setEditingName(false)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Cancel</button>
                 </div>
               </div>
             ) : (
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.15rem' }}>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.82rem', color: 'var(--text-primary)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.82rem', color: 'var(--text-primary)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
                   {displayName}
                 </p>
                 <button
@@ -212,7 +212,7 @@ function Sidebar({
               </div>
             )}
             {!editingName && (
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.72rem', color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {email}
               </p>
             )}
@@ -402,7 +402,7 @@ export default function DashboardPage() {
           </button>
           <div>
             {selected && (
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                 {formatDate(selected.started_at)}
               </p>
             )}
@@ -419,10 +419,10 @@ export default function DashboardPage() {
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', padding: '2rem' }}>
               <div style={{ textAlign: 'center', maxWidth: '400px' }}>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 500 }}>No readings yet.</p>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2rem' }}>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2rem' }}>
                   Start a reading to get your first symbolic interpretation.
                 </p>
-                <Link href="/experience" style={{ display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px', background: 'var(--accent)', color: '#ffffff', fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', fontWeight: 500, textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.3)' }}>
+                <Link href="/experience" style={{ display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px', background: 'var(--accent)', color: '#ffffff', fontFamily: "'Inter', sans-serif", fontSize: '0.92rem', fontWeight: 500, textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.3)' }}>
                   Start your reading
                 </Link>
               </div>
@@ -439,7 +439,7 @@ export default function DashboardPage() {
                 <h1 style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem' }}>
                   What Your Space Reveals
                 </h1>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                   {formatDate(selected.started_at)}
                 </p>
               </div>
