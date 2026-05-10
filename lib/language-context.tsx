@@ -9,26 +9,31 @@ interface LanguageContextType {
   setLanguage: (lang: Language) => void;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const defaultContextValue: LanguageContextType = {
+  language: 'EN',
+  setLanguage: () => {},
+};
+
+const LanguageContext = createContext<LanguageContextType>(defaultContextValue);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>('EN');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const stored = localStorage.getItem('cube-language') as Language | null;
     if (stored && (stored === 'EN' || stored === 'DE')) {
       setLanguageState(stored);
     }
-    setMounted(true);
   }, []);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem('cube-language', lang);
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('cube-language', lang);
+    }
   };
-
-  if (!mounted) return <>{children}</>;
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>

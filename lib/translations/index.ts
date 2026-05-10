@@ -4,7 +4,7 @@ import type { Language } from '@/lib/language-context';
 
 const translations = { en, de };
 
-export function getTranslation(language: Language, key: string): string {
+export function getTranslation(language: Language, key: string): any {
   const lang = language === 'EN' ? 'en' : 'de';
   const keys = key.split('.');
 
@@ -20,17 +20,17 @@ export function getTranslation(language: Language, key: string): string {
         if (value && typeof value === 'object' && fallbackK in value) {
           value = value[fallbackK];
         } else {
-          return key; // Return key if not found in either language
+          return undefined;
         }
       }
       break;
     }
   }
 
-  return typeof value === 'string' ? value : key;
+  return value;
 }
 
-export function t(language: Language, key: string): string {
+export function t(language: Language, key: string): any {
   return getTranslation(language, key);
 }
 

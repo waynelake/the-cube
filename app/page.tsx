@@ -44,7 +44,7 @@ const GLASS: React.CSSProperties = {
 const SECTION_PAD = 'clamp(6rem, 12vw, 10rem) clamp(1.5rem, 5vw, 4rem)';
 
 const H2: React.CSSProperties = {
-  fontFamily: "'Gotens', sans-serif",
+  fontFamily: "'Inter', sans-serif",
   fontSize: 'clamp(2rem, 4vw, 4rem)',
   fontWeight: 400,
   fontStyle: 'normal',
@@ -144,7 +144,7 @@ function Nav({ language }: { language: 'EN' | 'DE' }) {
         <CubeIcon size={20} />
         <span
           style={{
-            fontFamily: "'Gotens', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             fontSize: '1rem',
             color: '#fff',
             letterSpacing: '0.01em',
@@ -234,7 +234,7 @@ function Hero({ language }: { language: 'EN' | 'DE' }) {
         <motion.h1
           variants={fadeUp}
           style={{
-            fontFamily: "'Gotens', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 'clamp(5.5rem, 16vw, 11rem)',
             lineHeight: 0.92,
             fontWeight: 400,
@@ -366,8 +366,9 @@ function StatsBar({ language }: { language: 'EN' | 'DE' }) {
 
 // ─── How It Works ─────────────────────────────────────────────────────────────
 
-function HowItWorks() {
-  const steps = [
+function HowItWorks({ language }: { language: 'EN' | 'DE' }) {
+  const stepsData = t(language, 'howItWorks.steps');
+  const steps = Array.isArray(stepsData) ? stepsData : [
     {
       number: '01',
       title: 'Describe your space',
@@ -450,24 +451,27 @@ function HowItWorks() {
 
 
 
-function TheExperience() {
-  const features = [
+function TheExperience({ language }: { language: 'EN' | 'DE' }) {
+  const experienceFeaturesData = t(language, 'experience.features');
+  const experienceFeatures = Array.isArray(experienceFeaturesData) ? experienceFeaturesData : [
     {
-      shape: <img src="/images/icon-star.png" alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
       title: 'Five objects. No right answers.',
       body: 'A simple space is described to you. Five objects appear in it. You describe what you see, and how you see it.',
     },
     {
-      shape: <img src="/images/icon-small-star.png" alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
       title: 'A reading that sees through the surface.',
       body: 'Each object maps to something real. The reading draws from depth psychology and decades of symbolic research.',
     },
     {
-      shape: <img src="/images/icon-circle.png" alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
       title: 'It names what you already knew.',
       body: 'A precise, personal reading. Not generic. Written only for what you described in your own words.',
     },
   ];
+  const features = experienceFeatures.map((f, i) => ({
+    shape: <img src={["/images/icon-star.png", "/images/icon-small-star.png", "/images/icon-circle.png"][i]} alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
+    title: f.title,
+    body: f.body,
+  }));
 
   return (
     <section
@@ -484,11 +488,10 @@ function TheExperience() {
           variants={stagger}
         >
           <motion.div variants={fadeUp} style={{ marginBottom: '3rem' }}>
-            <SectionPill label="How it works" />
-            <h2 style={{ ...H2 }}>The Experience</h2>
+            <SectionPill label={t(language, 'experience.label')} />
+            <h2 style={{ ...H2 }}>{t(language, 'experience.title')}</h2>
             <p style={{ ...BODY, maxWidth: '420px' }}>
-              Answer a few questions. Receive a reading that names what you
-              already knew.
+              {t(language, 'experience.subtitle')}
             </p>
           </motion.div>
 
@@ -543,7 +546,7 @@ function TheExperience() {
 
 // ─── Foundation ───────────────────────────────────────────────────────────────
 
-function Foundation() {
+function Foundation({ language }: { language: 'EN' | 'DE' }) {
   const authors = ['Jung', 'Hillman', 'von Franz', 'Estés', 'Winnicott'];
 
   return (
@@ -572,7 +575,7 @@ function Foundation() {
           variants={stagger}
         >
           <motion.div variants={fadeUp}>
-            <SectionPill label="What It's Based On" />
+            <SectionPill label={t(language, 'theoryAndResearch.label')} />
           </motion.div>
 
           <motion.h2 variants={fadeUp} style={{
@@ -582,10 +585,7 @@ function Foundation() {
             fontWeight: 500,
             color: 'rgba(240,235,255,0.55)',
           }}>
-            Drawn from the work of{' '}
-            <span style={{ color: '#fff' }}>depth psychologists</span>{' '}
-            who{' '}
-            <span style={{ color: '#fff' }}>believed the psyche speaks in images.</span>
+            {t(language, 'theoryAndResearch.title')}
           </motion.h2>
 
           <motion.p
@@ -596,10 +596,7 @@ function Foundation() {
               margin: '0 auto 3rem',
             }}
           >
-            The Cube exercise has roots in object relations theory, Jungian
-            symbolism, and decades of research into how the unconscious uses
-            spatial metaphor. The objects you choose, and how you describe them,
-            reveal patterns you live inside but rarely see from the outside.
+            {t(language, 'theoryAndResearch.body')}
           </motion.p>
 
           <motion.div
@@ -725,7 +722,7 @@ function TestimonialCard({ t }: { t: typeof TESTIMONIALS[number] }) {
   );
 }
 
-function Testimonials() {
+function Testimonials({ language }: { language: 'EN' | 'DE' }) {
   const doubled = [...TESTIMONIALS, ...TESTIMONIALS];
 
   return (
@@ -752,8 +749,7 @@ function Testimonials() {
         <motion.div variants={fadeUp} style={{ textAlign: 'center' }}>
           <SectionPill label="Testimonial" />
           <h2 style={{ ...H2, textAlign: 'center', margin: '0 auto 1.25rem' }}>
-            <span style={{ display: 'block' }}>Reasons why you'll</span>
-            <span style={{ display: 'block' }}>love The Cube</span>
+            {t(language, 'testimonials.title')}
           </h2>
         </motion.div>
       </motion.div>
@@ -829,26 +825,23 @@ interface PricingTier {
   badge?: string;
 }
 
-function Pricing() {
+function Pricing({ language }: { language: 'EN' | 'DE' }) {
   const [billing, setBilling] = useState<Billing>('annual');
 
-  const tiers: PricingTier[] = [
+  const pricingTiersData = t(language, 'pricing.tiers');
+  const pricingTiers = Array.isArray(pricingTiersData) ? pricingTiersData : [
     {
       name: 'Free',
-      priceMonthly: '0€',
-      priceAnnual: '0€',
-      subtitleMonthly: null,
-      subtitleAnnual: null,
+      price: '0€',
+      subtitle: null,
       features: ['First reading preview', 'Five trait summaries', 'Strategic lens lines'],
       cta: 'Begin for free',
       highlighted: false,
     },
     {
       name: 'Single Reading',
-      priceMonthly: '7€',
-      priceAnnual: '7€',
-      subtitleMonthly: 'one time',
-      subtitleAnnual: 'one time',
+      price: '7€',
+      subtitle: 'one time',
       features: [
         'Full interpretation of one reading',
         'All five elements',
@@ -859,10 +852,8 @@ function Pricing() {
     },
     {
       name: 'Subscriber',
-      priceMonthly: '9€',
-      priceAnnual: '59€',
-      subtitleMonthly: '/ month',
-      subtitleAnnual: '/ year',
+      price: '9€',
+      subtitle: '/ month',
       features: [
         'Unlimited readings',
         'Post-reading conversation',
@@ -874,6 +865,14 @@ function Pricing() {
     },
   ];
 
+  const tiers: PricingTier[] = pricingTiers.map(tier => ({
+    ...tier,
+    priceMonthly: tier.price,
+    priceAnnual: tier.price,
+    subtitleMonthly: tier.subtitle,
+    subtitleAnnual: tier.subtitle,
+  }));
+
   return (
     <section style={{ padding: SECTION_PAD }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -884,10 +883,9 @@ function Pricing() {
           variants={stagger}
         >
           <motion.div variants={fadeUp} style={{ marginBottom: '3rem', textAlign: 'center' }}>
-            <SectionPill label="Pricing" />
+            <SectionPill label={t(language, 'pricing.label')} />
             <h2 style={{ ...H2, textAlign: 'center', margin: '0 auto 1.25rem' }}>
-              <span style={{ display: 'block' }}>Begin wherever</span>
-              <span style={{ display: 'block' }}>you are.</span>
+              {t(language, 'pricing.title')}
             </h2>
           </motion.div>
 
@@ -1012,7 +1010,7 @@ function Pricing() {
                   >
                     <span
                       style={{
-                        fontFamily: "'Gotens', sans-serif",
+                        fontFamily: "'Inter', sans-serif",
                         fontSize: 'clamp(2.5rem, 4.5vw, 3.5rem)',
                         fontWeight: 400,
                         color: '#fff',
@@ -1137,7 +1135,7 @@ const FAQ_ITEMS = [
   },
 ];
 
-function FAQ() {
+function FAQ({ language }: { language: 'EN' | 'DE' }) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
@@ -1259,7 +1257,7 @@ function FAQ() {
 
 // ─── Footer CTA ───────────────────────────────────────────────────────────────
 
-function FooterCTA() {
+function FooterCTA({ language }: { language: 'EN' | 'DE' }) {
   return (
     <section
       style={{
@@ -1288,7 +1286,7 @@ function FooterCTA() {
         <motion.h2
           variants={fadeUp}
           style={{
-            fontFamily: "'Gotens', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 'clamp(3rem, 9vw, 6.5rem)',
             fontWeight: 400,
             fontStyle: 'normal',
@@ -1339,7 +1337,7 @@ function FooterCTA() {
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 
-function Footer() {
+function Footer({ language }: { language: 'EN' | 'DE' }) {
   return (
     <footer
       style={{
@@ -1360,7 +1358,7 @@ function Footer() {
           <CubeIcon size={17} />
           <span
             style={{
-              fontFamily: "'Gotens', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.9rem',
               color: 'rgba(255,255,255,0.35)',
             }}
@@ -1443,14 +1441,14 @@ export default function LandingPage() {
         <Nav language={language} />
         <Hero language={language} />
         <StatsBar language={language} />
-        <HowItWorks />
-        <TheExperience />
-        <Foundation />
-        <Testimonials />
-        <Pricing />
-        <FAQ />
-        <FooterCTA />
-        <Footer />
+        <HowItWorks language={language} />
+        <TheExperience language={language} />
+        <Foundation language={language} />
+        <Testimonials language={language} />
+        <Pricing language={language} />
+        <FAQ language={language} />
+        <FooterCTA language={language} />
+        <Footer language={language} />
       </main>
     </>
   );
