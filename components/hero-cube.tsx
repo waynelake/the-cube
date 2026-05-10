@@ -216,7 +216,7 @@ export default function HeroCube() {
         clearcoatRoughness: 0.04,
       });
 
-      type DripMesh = THREE.Mesh & { userData: { baseScaleY: number; targetProgress: number; currentProgress: number } };
+      type DripMesh = any;
 
       function createDrip(offsetX: number, offsetZ: number, baseScale: number): DripMesh {
         const points = [
