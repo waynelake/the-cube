@@ -468,9 +468,9 @@ function TheExperience() {
     offset: ['start end', 'center center'],
   });
 
-  const card1Y = useTransform(scrollYProgress, [0, 1], [0, 160]);
-  const card2Y = useTransform(scrollYProgress, [0, 1], [80, 160]);
-  const cardYs = [card1Y, card2Y, 160] as const;
+  const card1Y = useTransform(scrollYProgress, [0, 1], [0, 440]);
+  const card2Y = useTransform(scrollYProgress, [0, 1], [220, 440]);
+  const cardYs = [card1Y, card2Y, 440] as const;
 
   return (
     <section
@@ -501,7 +501,7 @@ function TheExperience() {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
               gap: '1.25rem',
-              paddingBottom: '160px',
+              paddingBottom: '440px',
             }}
           >
             {features.map((f, i) => (
