@@ -126,29 +126,3 @@
   }
 }
 
-/* ── Google Translate overrides ──────────────────────────────────────────── */
-
-.goog-te-gadget-simple {
-  border: none !important;
-  font-size: 10pt;
-  display: inline-block;
-  padding-top: 1px;
-  padding-bottom: 2px;
-  cursor: pointer;
-  background: transparent !important;
-}
-
-.goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed {
-  color: #ffffff !important;
-}
-
-.goog-te-gadget img {
-  vertical-align: middle;
-  border: none;
-  display: inline-block;
-}
-
-/* Hide the divider span */
-.goog-te-gadget-simple span[style*="border-left"] {
-  display: none !important;
-}
