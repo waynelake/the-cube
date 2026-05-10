@@ -189,7 +189,7 @@ function Hero() {
       style={{
         position: 'relative',
         padding: '13rem 1.5rem 7rem',
-        textAlign: 'center',
+        textAlign: 'left',
         overflow: 'hidden',
         background: 'radial-gradient(ellipse 120% 65% at 50% 0%, rgba(124,58,237,0.28) 0%, transparent 65%)',
       }}
@@ -285,7 +285,7 @@ function Hero() {
 
 function StatsBar() {
   return (
-    <div style={{ maxWidth: '860px', margin: '0 auto 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
+    <div style={{ maxWidth: '860px', margin: '0 0 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
