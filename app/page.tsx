@@ -58,6 +58,39 @@ const HEADING_MEDIUM: React.CSSProperties = {
   lineHeight: 1.3,
 };
 
+const STAT_VALUE: React.CSSProperties = {
+  fontFamily: "'Inter', sans-serif",
+  fontSize: '1.75rem',
+  fontWeight: 700,
+  color: '#fff',
+  lineHeight: 1,
+};
+
+const STAT_LABEL: React.CSSProperties = {
+  fontFamily: "'Inter', sans-serif",
+  fontSize: '0.6rem',
+  color: 'rgba(255,255,255,0.38)',
+  lineHeight: 1.5,
+};
+
+const TIER_NAME: React.CSSProperties = {
+  fontFamily: "'Inter', sans-serif",
+  fontSize: '0.7rem',
+  color: 'rgba(255,255,255,0.38)',
+  letterSpacing: '0.08em',
+  textTransform: 'uppercase',
+  marginBottom: '1rem',
+};
+
+const TIER_FEATURE: React.CSSProperties = {
+  fontFamily: "'Inter', sans-serif",
+  fontSize: '0.9rem',
+  color: 'rgba(240,235,255,0.6)',
+  display: 'flex',
+  alignItems: 'center',
+  gap: '0.6rem',
+};
+
 const BODY: React.CSSProperties = {
   fontFamily: "'Inter', sans-serif",
   fontSize: '1rem',
@@ -394,8 +427,8 @@ function StatsBar() {
 
         {/* Stat 1 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>15</span>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.5 }}>
+          <span style={STAT_VALUE}>15</span>
+          <span style={STAT_LABEL}>
             Different<br />Languages
           </span>
         </div>
@@ -405,8 +438,8 @@ function StatsBar() {
 
         {/* Stat 2 */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>120+</span>
-          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.5 }}>
+          <span style={STAT_VALUE}>120+</span>
+          <span style={STAT_LABEL}>
             Years of Psychology<br />And imagery
           </span>
         </div>
@@ -434,7 +467,7 @@ function StatsBar() {
             ))}
           </div>
           <div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>100+</div>
+            <div style={{ ...STAT_VALUE, fontSize: '1.15rem' }}>100+</div>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.57rem', color: 'rgba(255,255,255,0.42)', letterSpacing: '0.02em', marginTop: '0.1rem' }}>Users Played</div>
           </div>
         </div>
@@ -1055,16 +1088,7 @@ function Pricing() {
                     </span>
                   )}
 
-                  <p
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '0.7rem',
-                      color: 'rgba(255,255,255,0.38)',
-                      letterSpacing: '0.08em',
-                      textTransform: 'uppercase',
-                      marginBottom: '1rem',
-                    }}
-                  >
+                  <p style={TIER_NAME}>
                     {tier.name}
                   </p>
 
@@ -1119,17 +1143,7 @@ function Pricing() {
                     }}
                   >
                     {tier.features.map((feature, j) => (
-                      <li
-                        key={j}
-                        style={{
-                          fontFamily: "'Inter', sans-serif",
-                          fontSize: '0.9rem',
-                          color: 'rgba(240,235,255,0.6)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          gap: '0.6rem',
-                        }}
-                      >
+                      <li key={j} style={TIER_FEATURE}>
                         <span
                           style={{
                             width: '4px',
