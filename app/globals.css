@@ -126,3 +126,7 @@
   }
 }
 
+@media (max-width: 640px) {
+  .nav-cta { display: none !important; }
+}
+

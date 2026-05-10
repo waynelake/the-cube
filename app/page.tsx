@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, type Variants, AnimatePresence } from 'framer-motion';
@@ -229,6 +229,7 @@ function Nav() {
         <ThemeToggle />
         <Link
           href="/auth?mode=signup"
+          className="nav-cta"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
