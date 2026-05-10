@@ -186,7 +186,7 @@ function Hero() {
         padding: '13rem 1.5rem 7rem',
         textAlign: 'center',
         overflow: 'hidden',
-        background: 'linear-gradient(to right, #0F0430 0%, rgba(96,78,78,0.15) 70%, #000000 100%)',
+        background: 'radial-gradient(ellipse 70% 65% at 50% 0%, rgba(124,58,237,0.2) 0%, transparent 65%)',
       }}
     >
       <img
