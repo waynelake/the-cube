@@ -6,6 +6,8 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
+import { LangToggle } from '@/app/page';
+import { useLanguage } from '@/lib/language-context';
 import {
   PaidContent, parseSummary, ReadingTraits,
   ELEMENT_KEYS, ELEMENT_LABELS, TRAIT_MAP,
@@ -230,6 +232,7 @@ function Sidebar({
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { language } = useLanguage();
   const [sessions, setSessions] = useState<SessionItem[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [pinnedIds, setPinnedIds] = useState<Set<string>>(new Set());
@@ -407,7 +410,10 @@ export default function DashboardPage() {
               </p>
             )}
           </div>
-          <ThemeToggle />
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+            <LangToggle />
+            <ThemeToggle />
+          </div>
         </nav>
 
         <div style={{ flex: 1 }}>
