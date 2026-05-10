@@ -10,7 +10,7 @@ import { ThemeToggle } from '@/components/theme-provider';
 
 const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
 import {
-  PaidContent, parseSummary, ReadingTraits,
+  PaidContent, PaywallSection, parseSummary, ReadingTraits,
   ELEMENT_KEYS, ELEMENT_LABELS, TRAIT_MAP,
 } from '@/components/reading-display';
 import { Menu, X, LogOut, Plus, MoreHorizontal, Pencil, Pin } from 'lucide-react';
