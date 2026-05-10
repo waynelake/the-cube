@@ -280,13 +280,7 @@ function Hero() {
 
 function StatsBar() {
   return (
-    <div
-      style={{
-        maxWidth: '900px',
-        margin: '0 auto 6rem',
-        padding: '0 clamp(1.5rem, 5vw, 4rem)',
-      }}
-    >
+    <div style={{ maxWidth: '860px', margin: '0 auto 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -294,60 +288,70 @@ function StatsBar() {
         transition={{ duration: 0.8, ease: EASE }}
         style={{
           display: 'flex',
-          alignItems: 'stretch',
-          flexWrap: 'wrap',
-          borderRadius: '14px',
-          border: '1px solid rgba(255,255,255,0.07)',
-          background: 'rgba(255,255,255,0.025)',
-          overflow: 'hidden',
+          alignItems: 'center',
+          padding: '0.6rem 0.6rem 0.6rem 1.25rem',
+          borderRadius: '9999px',
+          background: 'rgba(14, 12, 24, 0.9)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          gap: '1.25rem',
         }}
       >
-        {[
-          { value: '15', label: 'Different Languages', showDivider: true },
-          { value: '120+', label: 'Years of Psychology', showDivider: true },
-          { value: '100+', label: 'Users Played', showDivider: false },
-        ].map((item, i) => (
-          <div
-            key={i}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.6rem',
-              padding: '1.25rem 1.75rem',
-              borderRight: item.showDivider
-                ? '1px solid rgba(255,255,255,0.07)'
-                : 'none',
-              flex: '1 1 auto',
-            }}
-          >
-            <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '1rem', lineHeight: 1 }}>
-              •
-            </span>
-            <div>
-              <div
+        {/* Bullet */}
+        <div style={{
+          width: '28px', height: '28px', borderRadius: '50%',
+          border: '1px solid rgba(255,255,255,0.1)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          flexShrink: 0,
+        }}>
+          <div style={{ width: '5px', height: '5px', borderRadius: '50%', background: 'rgba(196,181,253,0.55)' }} />
+        </div>
+
+        {/* Stat 1 */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>15</span>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.5 }}>
+            Different<br />Languages
+          </span>
+        </div>
+
+        {/* Divider */}
+        <div style={{ width: '1px', height: '28px', background: 'rgba(255,255,255,0.1)', flexShrink: 0 }} />
+
+        {/* Stat 2 */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>120+</span>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.5 }}>
+            Years of Psychology<br />And imagery
+          </span>
+        </div>
+
+        {/* Right pill: avatars + count */}
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '0.65rem',
+          padding: '0.45rem 1rem 0.45rem 0.45rem',
+          borderRadius: '9999px',
+          background: 'rgba(6, 5, 14, 0.95)',
+          border: '1px solid rgba(255,255,255,0.06)',
+          flexShrink: 0,
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            {['?img=47', '?img=12', '?img=33'].map((q, i) => (
+              <img key={i} src={`https://i.pravatar.cc/40${q}`} alt=""
                 style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '1.25rem',
-                  fontWeight: 600,
-                  color: '#fff',
-                  lineHeight: 1.1,
+                  width: '30px', height: '30px', borderRadius: '50%',
+                  border: '2px solid rgba(6, 5, 14, 0.95)',
+                  marginLeft: i === 0 ? 0 : '-9px',
+                  objectFit: 'cover',
+                  position: 'relative', zIndex: 3 - i,
                 }}
-              >
-                {item.value}
-              </div>
-              <div
-                style={{
-                  fontFamily: "'Inter', sans-serif",
-                  fontSize: '0.7rem',
-                  color: 'rgba(255,255,255,0.38)',
-                  marginTop: '0.15rem',
-                }}
-              >
-                {item.label}
-              </div>
-            </div>
+              />
+            ))}
           </div>
-        ))}
+          <div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>100+</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.57rem', color: 'rgba(255,255,255,0.42)', letterSpacing: '0.02em', marginTop: '0.1rem' }}>Users Played</div>
+          </div>
+        </div>
       </motion.div>
     </div>
   );
