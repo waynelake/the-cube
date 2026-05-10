@@ -8,6 +8,8 @@ import { motion, type Variants, AnimatePresence } from 'framer-motion';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
 import { supabase } from '@/lib/supabase';
+import { useLanguage } from '@/lib/language-context';
+import { t } from '@/lib/translations';
 
 const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
 
@@ -101,7 +103,7 @@ function SectionPill({ label }: { label: string }) {
 
 // ─── Nav ─────────────────────────────────────────────────────────────────────
 
-function Nav() {
+function Nav({ language }: { language: 'EN' | 'DE' }) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -148,7 +150,7 @@ function Nav() {
             letterSpacing: '0.01em',
           }}
         >
-          The Cube
+          {t(language, 'nav.title')}
         </span>
       </Link>
 
@@ -174,7 +176,7 @@ function Nav() {
             whiteSpace: 'nowrap',
           }}
         >
-          Begin your reading
+          {t(language, 'nav.beginReading')}
         </Link>
       </div>
     </motion.nav>
@@ -183,7 +185,7 @@ function Nav() {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
-function Hero() {
+function Hero({ language }: { language: 'EN' | 'DE' }) {
   return (
     <section
       style={{
@@ -241,7 +243,7 @@ function Hero() {
             letterSpacing: '-0.01em',
           }}
         >
-          The Cube
+          {t(language, 'hero.title')}
         </motion.h1>
 
         <motion.p
@@ -253,7 +255,7 @@ function Hero() {
             letterSpacing: '0.01em',
           }}
         >
-          You see a cube. How Big is it?
+          {t(language, 'hero.subtitle')}
         </motion.p>
 
         <motion.div variants={fadeUp}>
@@ -273,7 +275,7 @@ function Hero() {
               boxShadow: '0 4px 24px rgba(203,194,229,0.25)',
             }}
           >
-            Begin your reading
+            {t(language, 'hero.cta')}
           </Link>
         </motion.div>
       </motion.div>
@@ -283,7 +285,7 @@ function Hero() {
 
 // ─── Stats Bar ────────────────────────────────────────────────────────────────
 
-function StatsBar() {
+function StatsBar({ language }: { language: 'EN' | 'DE' }) {
   return (
     <div style={{ maxWidth: '860px', margin: '0 0 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
       <motion.div
@@ -315,7 +317,7 @@ function StatsBar() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>15</span>
           <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.5 }}>
-            Different<br />Languages
+            {t(language, 'hero.stats.languages')}
           </span>
         </div>
 
@@ -326,7 +328,7 @@ function StatsBar() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
           <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>120+</span>
           <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.5 }}>
-            Years of Psychology<br />And imagery
+            {t(language, 'hero.stats.yearsExperience')}
           </span>
         </div>
 
@@ -354,7 +356,7 @@ function StatsBar() {
           </div>
           <div>
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>100+</div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.57rem', color: 'rgba(255,255,255,0.42)', letterSpacing: '0.02em', marginTop: '0.1rem' }}>Users Played</div>
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.57rem', color: 'rgba(255,255,255,0.42)', letterSpacing: '0.02em', marginTop: '0.1rem' }}>{t(language, 'hero.stats.usersPlayed')}</div>
           </div>
         </div>
       </motion.div>
@@ -1405,6 +1407,7 @@ function Footer() {
 
 export default function LandingPage() {
   const router = useRouter();
+  const { language } = useLanguage();
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -1437,9 +1440,9 @@ export default function LandingPage() {
           width: '100%',
         }}
       >
-        <Nav />
-        <Hero />
-        <StatsBar />
+        <Nav language={language} />
+        <Hero language={language} />
+        <StatsBar language={language} />
         <HowItWorks />
         <TheExperience />
         <Foundation />
