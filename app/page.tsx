@@ -190,20 +190,6 @@ function Hero() {
       }}
     >
       <img
-        src="/images/bg_ellipse.png"
-        alt=""
-        style={{
-          position: 'absolute',
-          left: '-10%',
-          top: '10%',
-          width: '60%',
-          height: '80%',
-          objectFit: 'contain',
-          pointerEvents: 'none',
-          opacity: 0.7,
-        }}
-      />
-      <img
         src="/images/Stars-2.png"
         alt=""
         style={{
