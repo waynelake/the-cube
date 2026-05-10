@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, type Variants, AnimatePresence } from 'framer-motion';
 import { CubeIcon } from '@/components/cube-icon';
+import HeroCube from '@/components/hero-cube';
 import { supabase } from '@/lib/supabase';
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -325,7 +326,7 @@ function Hero() {
         initial="hidden"
         animate="visible"
         variants={stagger}
-        style={{ position: 'relative' }}
+        style={{ position: 'relative', zIndex: 10 }}
       >
         <motion.h1
           variants={fadeUp}
@@ -375,6 +376,17 @@ function Hero() {
           </Link>
         </motion.div>
       </motion.div>
+
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 1,
+        pointerEvents: 'none',
+      }}>
+        <HeroCube />
+      </div>
     </section>
   );
 }
