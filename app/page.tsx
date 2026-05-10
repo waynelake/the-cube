@@ -39,14 +39,23 @@ const GLASS: React.CSSProperties = {
 const SECTION_PAD = 'clamp(6rem, 12vw, 10rem) clamp(1.5rem, 5vw, 4rem)';
 
 const H2: React.CSSProperties = {
-  fontFamily: "'Gotens', sans-serif",
+  fontFamily: "'Inter', sans-serif",
   fontSize: 'clamp(2rem, 4vw, 4rem)',
-  fontWeight: 400,
+  fontWeight: 500,
   fontStyle: 'normal',
   letterSpacing: '-0.02em',
   lineHeight: 1.05,
   color: '#fff',
   marginBottom: '1.25rem',
+};
+
+const HEADING_MEDIUM: React.CSSProperties = {
+  fontFamily: "'Inter', sans-serif",
+  fontSize: '1.25rem',
+  fontWeight: 600,
+  color: '#fff',
+  marginBottom: '0.75rem',
+  lineHeight: 1.3,
 };
 
 const BODY: React.CSSProperties = {
@@ -496,10 +505,8 @@ function HowItWorks() {
               <div style={{ marginTop: '2.5rem' }}>
                 <h3
                   style={{
-                    fontFamily: "'Inter', sans-serif",
+                    ...HEADING_MEDIUM,
                     fontSize: '1.35rem',
-                    fontWeight: 600,
-                    color: '#fff',
                     marginBottom: '0.85rem',
                     lineHeight: 1.2,
                   }}
@@ -588,16 +595,7 @@ function TheExperience() {
               >
                 <div>{f.shape}</div>
                 <div>
-                  <h3
-                    style={{
-                      fontFamily: "'Inter', sans-serif",
-                      fontSize: '1.25rem',
-                      fontWeight: 600,
-                      color: '#fff',
-                      marginBottom: '0.75rem',
-                      lineHeight: 1.3,
-                    }}
-                  >
+                  <h3 style={HEADING_MEDIUM}>
                     {f.title}
                   </h3>
                   <p style={{ ...BODY, fontSize: '0.9rem' }}>{f.body}</p>
@@ -647,9 +645,7 @@ function Foundation() {
 
           <motion.h2 variants={fadeUp} style={{
             ...H2,
-            fontFamily: "'Inter', sans-serif",
             fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
-            fontWeight: 500,
             color: 'rgba(240,235,255,0.55)',
           }}>
             Drawn from the work of{' '}
