@@ -140,7 +140,12 @@
 
 .goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed {
   color: #ffffff;
-  display: inline-flex;
+}
+
+.goog-te-gadget img {
+  vertical-align: middle;
+  border: none;
+  display: inline-block;
 }
 
 /* Hide the divider span */
