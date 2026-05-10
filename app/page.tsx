@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { motion, type Variants, AnimatePresence } from 'framer-motion';
+import { motion, type Variants, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
 import { supabase } from '@/lib/supabase';
@@ -446,24 +446,35 @@ function HowItWorks() {
 function TheExperience() {
   const features = [
     {
-      shape: <img src="/images/icon-star.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
+      shape: <img src="/images/icon-star.png" alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
       title: 'Five objects. No right answers.',
       body: 'A simple space is described to you. Five objects appear in it. You describe what you see, and how you see it.',
     },
     {
-      shape: <img src="/images/icon-small-star.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
+      shape: <img src="/images/icon-small-star.png" alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
       title: 'A reading that sees through the surface.',
       body: 'Each object maps to something real. The reading draws from depth psychology and decades of symbolic research.',
     },
     {
-      shape: <img src="/images/icon-circle.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
+      shape: <img src="/images/icon-circle.png" alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
       title: 'It names what you already knew.',
       body: 'A precise, personal reading. Not generic. Written only for what you described in your own words.',
     },
   ];
 
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'center center'],
+  });
+
+  const card1Y = useTransform(scrollYProgress, [0, 1], [0, 160]);
+  const card2Y = useTransform(scrollYProgress, [0, 1], [80, 160]);
+  const cardYs = [card1Y, card2Y, 160] as const;
+
   return (
     <section
+      ref={sectionRef}
       style={{
         padding: SECTION_PAD,
         background: 'rgba(255,255,255,0.01)',
@@ -490,14 +501,19 @@ function TheExperience() {
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))',
               gap: '1.25rem',
+              paddingBottom: '160px',
             }}
           >
             {features.map((f, i) => (
               <motion.div
                 key={i}
-                variants={fadeUp}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.7, ease: EASE, delay: i * 0.08 }}
                 style={{
                   ...GLASS,
+                  y: cardYs[i],
                   padding: '2.5rem',
                   borderRadius: '30px',
                   display: 'flex',
