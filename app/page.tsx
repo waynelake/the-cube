@@ -441,50 +441,22 @@ function HowItWorks() {
 
 // ─── The Experience ───────────────────────────────────────────────────────────
 
-function Starburst({ size = 72, opacity = 1 }: { size?: number; opacity?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 80 80" fill="none" style={{ opacity }}>
-      <path
-        d="M40 2L43.5 36.5L78 40L43.5 43.5L40 78L36.5 43.5L2 40L36.5 36.5Z"
-        fill="white"
-      />
-      <path
-        d="M40 18L42.5 37.5L62 40L42.5 42.5L40 62L37.5 42.5L18 40L37.5 37.5Z"
-        fill="white"
-        opacity="0.35"
-      />
-    </svg>
-  );
-}
 
-function PillShape() {
-  return (
-    <div
-      style={{
-        width: '52px',
-        height: '90px',
-        borderRadius: '9999px',
-        background:
-          'linear-gradient(155deg, rgba(196,181,253,0.85) 0%, rgba(124,58,237,0.5) 100%)',
-      }}
-    />
-  );
-}
 
 function TheExperience() {
   const features = [
     {
-      shape: <Starburst size={72} />,
+      shape: <img src="/images/star.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
       title: 'Five objects. No right answers.',
       body: 'A simple space is described to you. Five objects appear in it. You describe what you see, and how you see it.',
     },
     {
-      shape: <PillShape />,
+      shape: <img src="/images/small-star.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
       title: 'A reading that sees through the surface.',
       body: 'Each object maps to something real. The reading draws from depth psychology and decades of symbolic research.',
     },
     {
-      shape: <Starburst size={60} opacity={0.7} />,
+      shape: <img src="/images/Expert Team.png" alt="" style={{ width: '80px', height: '80px', objectFit: 'contain' }} />,
       title: 'It names what you already knew.',
       body: 'A precise, personal reading. Not generic. Written only for what you described in your own words.',
     },
