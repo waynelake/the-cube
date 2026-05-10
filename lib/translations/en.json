@@ -1,0 +1,149 @@
+{
+  "nav": {
+    "title": "The Cube",
+    "beginReading": "Begin your reading"
+  },
+  "hero": {
+    "title": "The Cube",
+    "subtitle": "You see a cube. How Big is it?",
+    "cta": "Begin your reading",
+    "stats": {
+      "languages": "Different Languages",
+      "yearsExperience": "Years of Psychology And imagery",
+      "usersPlayed": "Users Played"
+    }
+  },
+  "howItWorks": {
+    "steps": [
+      {
+        "number": "01",
+        "title": "Describe your space",
+        "body": "A simple space is described to you. Five objects appear in it. You describe what you see."
+      },
+      {
+        "number": "02",
+        "title": "The objects are read",
+        "body": "Each object maps to a dimension of your inner world. The reading draws from depth psychology and 50 years of symbolic research."
+      },
+      {
+        "number": "03",
+        "title": "Get your reading",
+        "body": "A precise, personal reading. Not generic. Written only for what you described."
+      }
+    ]
+  },
+  "experience": {
+    "label": "How it works",
+    "title": "The Experience",
+    "subtitle": "Answer a few questions. Receive a reading that names what you already knew.",
+    "features": [
+      {
+        "title": "Five objects. No right answers.",
+        "body": "A simple space is described to you. Five objects appear in it. You describe what you see, and how you see it."
+      },
+      {
+        "title": "A reading that sees through the surface.",
+        "body": "Each object maps to something real. The reading draws from depth psychology and decades of symbolic research."
+      },
+      {
+        "title": "It names what you already knew.",
+        "body": "A precise, personal reading. Not generic. Written only for what you described in your own words."
+      }
+    ]
+  },
+  "theoryAndResearch": {
+    "label": "What It's Based On",
+    "title": "Drawn from the work of depth psychologists who believed the psyche speaks in images.",
+    "body": "The Cube exercise has roots in object relations theory, Jungian symbolism, and decades of research into how the unconscious uses spatial metaphor. The objects you choose, and how you describe them, reveal patterns you live inside but rarely see from the outside."
+  },
+  "testimonials": {
+    "title": "What users are saying"
+  },
+  "pricing": {
+    "label": "Pricing",
+    "title": "Begin wherever you are.",
+    "billingToggle": {
+      "monthly": "Monthly",
+      "annual": "Annually (save up to 45%)"
+    },
+    "tiers": [
+      {
+        "name": "Free",
+        "price": "0€",
+        "subtitle": null,
+        "features": ["First reading preview", "Five trait summaries", "Strategic lens lines"],
+        "cta": "Begin for free"
+      },
+      {
+        "name": "Single Reading",
+        "price": "7€",
+        "subtitle": "one time",
+        "features": ["Full interpretation of one reading", "All five elements", "The pattern"],
+        "cta": "Unlock a reading"
+      },
+      {
+        "name": "Subscriber",
+        "price": "9€",
+        "subtitle": "/ month",
+        "features": ["Unlimited readings", "Post-reading conversation", "Reading history"],
+        "cta": "Start subscribing",
+        "badge": "Best value"
+      }
+    ]
+  },
+  "auth": {
+    "signUp": "Sign up",
+    "logIn": "Log in",
+    "email": "Email",
+    "password": "Password",
+    "rememberMe": "Remember me",
+    "forgotPassword": "Forgot password?",
+    "or": "or",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?"
+  },
+  "experience_page": {
+    "title": "The Cube",
+    "description": "Describe your space in as much detail as you'd like. Be specific about objects, textures, colors, distances. There are no right answers.",
+    "questions": [
+      "In this space, you see a cube. Describe it in detail.",
+      "You also see a ladder. How is it positioned? What does it look like?",
+      "There are flowers. Where are they? What kind, and what condition are they in?",
+      "You notice an animal. What is it? Where is it, and what is it doing?",
+      "Finally, there is a storm. How distant is it? What kind of storm?"
+    ],
+    "placeholder": "Describe what you see...",
+    "continue": "Continue",
+    "back": "Back"
+  },
+  "generating_page": {
+    "generating": "Generating your reading...",
+    "generatingSubtitle": "This is a moment. In a moment, you'll have your reading. Be patient."
+  },
+  "results_page": {
+    "title": "What Your Space Reveals",
+    "yourReading": "Your reading",
+    "copyReading": "Copy my reading",
+    "copied": "Copied",
+    "dashboard": "Dashboard",
+    "unlockReading": "Unlock full reading — 7 EUR",
+    "oneTimePayment": "One-time payment. Instant access.",
+    "readingContinues": "Your reading continues.",
+    "readingPreview": "You've seen enough to know this isn't generic. The full interpretation — all five elements, the pattern, and what it means — is waiting."
+  },
+  "dashboard_page": {
+    "welcome": "Welcome back",
+    "yourReadings": "Your readings",
+    "noReadings": "No readings yet. Start your first reading.",
+    "viewReading": "View reading",
+    "date": "Date",
+    "status": "Status"
+  },
+  "cube_prompts": {
+    "cube": "What does the cube represent? Describe it fully.",
+    "ladder": "What does the ladder represent? Where is it going?",
+    "flowers": "What do the flowers represent? Are they thriving or dying?",
+    "animal": "What does the animal represent? How is it behaving?",
+    "storm": "What does the storm represent? How close is it?"
+  }
+}

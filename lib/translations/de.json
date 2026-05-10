@@ -1,0 +1,149 @@
+{
+  "nav": {
+    "title": "Der Würfel",
+    "beginReading": "Beginnen Sie Ihre Lesung"
+  },
+  "hero": {
+    "title": "Der Würfel",
+    "subtitle": "Du siehst einen Würfel. Wie groß ist er?",
+    "cta": "Beginnen Sie Ihre Lesung",
+    "stats": {
+      "languages": "Verschiedene Sprachen",
+      "yearsExperience": "Jahre Psychologie und Symbolik",
+      "usersPlayed": "Benutzer"
+    }
+  },
+  "howItWorks": {
+    "steps": [
+      {
+        "number": "01",
+        "title": "Beschreiben Sie Ihren Raum",
+        "body": "Ein einfacher Raum wird Ihnen beschrieben. Fünf Objekte erscheinen darin. Sie beschreiben, was Sie sehen."
+      },
+      {
+        "number": "02",
+        "title": "Die Objekte werden gelesen",
+        "body": "Jedes Objekt ordnet sich einer Dimension Ihrer inneren Welt zu. Die Lesung zieht aus Tiefenpsychologie und 50 Jahren Symbolforschung."
+      },
+      {
+        "number": "03",
+        "title": "Erhalten Sie Ihre Lesung",
+        "body": "Eine präzise, persönliche Lesung. Nicht generisch. Geschrieben nur für das, was Sie beschrieben haben."
+      }
+    ]
+  },
+  "experience": {
+    "label": "Wie es funktioniert",
+    "title": "Die Erfahrung",
+    "subtitle": "Beantworten Sie ein paar Fragen. Erhalten Sie eine Lesung, die benennt, was Sie bereits wussten.",
+    "features": [
+      {
+        "title": "Fünf Objekte. Keine richtigen Antworten.",
+        "body": "Ein einfacher Raum wird Ihnen beschrieben. Fünf Objekte erscheinen darin. Sie beschreiben, was Sie sehen und wie Sie es sehen."
+      },
+      {
+        "title": "Eine Lesung, die unter die Oberfläche sieht.",
+        "body": "Jedes Objekt ordnet sich etwas Realem zu. Die Lesung zieht aus Tiefenpsychologie und Jahrzehnten Symbolforschung."
+      },
+      {
+        "title": "Sie benennt, was Sie bereits wussten.",
+        "body": "Eine präzise, persönliche Lesung. Nicht generisch. Geschrieben nur für das, was Sie in Ihren eigenen Worten beschrieben haben."
+      }
+    ]
+  },
+  "theoryAndResearch": {
+    "label": "Worauf es basiert",
+    "title": "Basierend auf der Arbeit von Tiefenpsychologen, die glaubten, dass die Psyche in Bildern spricht.",
+    "body": "Die Würfelübung hat Wurzeln in Objektbeziehungstheorie, Junianischer Symbolik und Jahrzehnten Forschung darüber, wie das Unbewusste räumliche Metaphern nutzt. Die Objekte, die Sie wählen, und wie Sie sie beschreiben, enthüllen Muster, in denen Sie leben, aber selten von außen sehen."
+  },
+  "testimonials": {
+    "title": "Was Benutzer sagen"
+  },
+  "pricing": {
+    "label": "Preisgestaltung",
+    "title": "Beginnen Sie überall, wo Sie sind.",
+    "billingToggle": {
+      "monthly": "Monatlich",
+      "annual": "Jährlich (sparen Sie bis zu 45%)"
+    },
+    "tiers": [
+      {
+        "name": "Kostenlos",
+        "price": "0€",
+        "subtitle": null,
+        "features": ["Vorschau der ersten Lesung", "Fünf Merkmals-Zusammenfassungen", "Strategische Linsen"],
+        "cta": "Kostenlos beginnen"
+      },
+      {
+        "name": "Einzelne Lesung",
+        "price": "7€",
+        "subtitle": "einmalig",
+        "features": ["Vollständige Interpretation einer Lesung", "Alle fünf Elemente", "Das Muster"],
+        "cta": "Lesung freischalten"
+      },
+      {
+        "name": "Abonnent",
+        "price": "9€",
+        "subtitle": "/ Monat",
+        "features": ["Unbegrenzte Lesungen", "Nachlesungs-Gespräch", "Lesungsverlauf"],
+        "cta": "Abonnement starten",
+        "badge": "Bestes Angebot"
+      }
+    ]
+  },
+  "auth": {
+    "signUp": "Registrieren",
+    "logIn": "Anmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "rememberMe": "Anmeldedaten speichern",
+    "forgotPassword": "Passwort vergessen?",
+    "or": "oder",
+    "noAccount": "Haben Sie noch kein Konto?",
+    "haveAccount": "Haben Sie bereits ein Konto?"
+  },
+  "experience_page": {
+    "title": "Der Würfel",
+    "description": "Beschreiben Sie Ihren Raum mit so vielen Details, wie Sie möchten. Seien Sie spezifisch über Objekte, Texturen, Farben, Entfernungen. Es gibt keine richtigen Antworten.",
+    "questions": [
+      "In diesem Raum sehen Sie einen Würfel. Beschreiben Sie ihn im Detail.",
+      "Sie sehen auch eine Leiter. Wie ist sie positioniert? Wie sieht sie aus?",
+      "Es gibt Blumen. Wo sind sie? Welche Art und in welchem Zustand sind sie?",
+      "Sie bemerken ein Tier. Was ist es? Wo ist es und was tut es?",
+      "Schließlich gibt es einen Sturm. Wie weit weg ist er? Welche Art von Sturm?"
+    ],
+    "placeholder": "Beschreiben Sie, was Sie sehen...",
+    "continue": "Fortfahren",
+    "back": "Zurück"
+  },
+  "generating_page": {
+    "generating": "Ihre Lesung wird generiert...",
+    "generatingSubtitle": "Dies ist ein Moment. In einem Moment haben Sie Ihre Lesung. Seien Sie geduldig."
+  },
+  "results_page": {
+    "title": "Was Ihr Raum enthüllt",
+    "yourReading": "Ihre Lesung",
+    "copyReading": "Meine Lesung kopieren",
+    "copied": "Kopiert",
+    "dashboard": "Armaturenbrett",
+    "unlockReading": "Vollständige Lesung freischalten — 7 EUR",
+    "oneTimePayment": "Einmalige Zahlung. Sofortiger Zugriff.",
+    "readingContinues": "Ihre Lesung wird fortgesetzt.",
+    "readingPreview": "Sie haben genug gesehen, um zu wissen, dass dies nicht generisch ist. Die vollständige Interpretation — alle fünf Elemente, das Muster und was es bedeutet — wartet."
+  },
+  "dashboard_page": {
+    "welcome": "Willkommen zurück",
+    "yourReadings": "Ihre Lesungen",
+    "noReadings": "Noch keine Lesungen. Starten Sie Ihre erste Lesung.",
+    "viewReading": "Lesung anzeigen",
+    "date": "Datum",
+    "status": "Status"
+  },
+  "cube_prompts": {
+    "cube": "Was stellt der Würfel dar? Beschreiben Sie ihn vollständig.",
+    "ladder": "Was stellt die Leiter dar? Wo führt sie hin?",
+    "flowers": "Was stellen die Blumen dar? Gedeihen sie oder sterben sie?",
+    "animal": "Was stellt das Tier dar? Wie verhält es sich?",
+    "storm": "Was stellt der Sturm dar? Wie nah ist er?"
+  }
+}
