@@ -379,7 +379,7 @@ function Hero() {
 
       <div style={{
         position: 'absolute',
-        top: 'calc(50% + 120px)',
+        top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
         zIndex: 1,
@@ -395,21 +395,43 @@ function Hero() {
 
 function StatsBar() {
   return (
-    <div style={{ maxWidth: '860px', margin: '0 auto 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: EASE }}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          padding: '0.6rem 0.6rem 0.6rem 1.25rem',
-          borderRadius: '9999px',
-          background: 'rgba(14, 12, 24, 0.9)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          gap: '1.25rem',
-        }}
+    <>
+      <style>{`
+        @media (max-width: 768px) {
+          .stats-container {
+            display: flex !important;
+            flex-direction: column !important;
+            border-radius: 16px !important;
+            padding: 1rem !important;
+          }
+          .stats-divider {
+            display: none !important;
+          }
+          .stat-item {
+            width: 100% !important;
+            margin-bottom: 0.75rem !important;
+          }
+          .stat-item:last-of-type {
+            margin-bottom: 0 !important;
+          }
+        }
+      `}</style>
+      <div style={{ maxWidth: '860px', margin: '0 auto 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
+        <motion.div
+          className="stats-container"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: EASE }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            padding: '0.6rem 0.6rem 0.6rem 1.25rem',
+            borderRadius: '9999px',
+            background: 'rgba(14, 12, 24, 0.9)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            gap: '1.25rem',
+          }}
       >
         {/* Bullet */}
         <div style={{
@@ -422,7 +444,7 @@ function StatsBar() {
         </div>
 
         {/* Stat 1 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <div className="stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <span style={STAT_VALUE}>15</span>
           <span style={STAT_LABEL}>
             Different<br />Languages
@@ -430,10 +452,10 @@ function StatsBar() {
         </div>
 
         {/* Divider */}
-        <div style={{ width: '1px', height: '28px', background: 'rgba(255,255,255,0.1)', flexShrink: 0 }} />
+        <div className="stats-divider" style={{ width: '1px', height: '28px', background: 'rgba(255,255,255,0.1)', flexShrink: 0 }} />
 
         {/* Stat 2 */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
+        <div className="stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
           <span style={STAT_VALUE}>120+</span>
           <span style={STAT_LABEL}>
             Years of Psychology<br />And imagery
@@ -441,7 +463,7 @@ function StatsBar() {
         </div>
 
         {/* Right pill: avatars + count */}
-        <div style={{
+        <div className="stat-item" style={{
           display: 'flex', alignItems: 'center', gap: '0.65rem',
           padding: '0.45rem 1rem 0.45rem 0.45rem',
           borderRadius: '9999px',
@@ -467,8 +489,9 @@ function StatsBar() {
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.57rem', color: 'rgba(255,255,255,0.42)', letterSpacing: '0.02em', marginTop: '0.1rem' }}>Users Played</div>
           </div>
         </div>
-      </motion.div>
-    </div>
+        </motion.div>
+      </div>
+    </>
   );
 }
 
