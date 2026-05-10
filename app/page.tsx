@@ -40,7 +40,7 @@ const SECTION_PAD = 'clamp(6rem, 12vw, 10rem) clamp(1.5rem, 5vw, 4rem)';
 
 const H2: React.CSSProperties = {
   fontFamily: "'Gotens', sans-serif",
-  fontSize: 'clamp(2.5rem, 6vw, 5rem)',
+  fontSize: 'clamp(2rem, 4vw, 4rem)',
   fontWeight: 400,
   fontStyle: 'normal',
   letterSpacing: '-0.02em',
