@@ -567,23 +567,9 @@ function Foundation() {
         position: 'relative',
         overflow: 'hidden',
         textAlign: 'center',
+        background: 'radial-gradient(ellipse 120% 70% at 50% 50%, rgba(80,30,160,0.22) 0%, transparent 70%)',
       }}
     >
-      {/* bg_ellipse centered background layer */}
-      <img
-        src="/images/bg_ellipse.png"
-        alt=""
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '80%',
-          pointerEvents: 'none',
-          opacity: 0.3,
-          zIndex: 0,
-        }}
-      />
 
       <div
         style={{
@@ -606,6 +592,7 @@ function Foundation() {
           <motion.h2 variants={fadeUp} style={{
             ...H2,
             fontFamily: "'Inter', sans-serif",
+            fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
             fontWeight: 500,
             color: 'rgba(240,235,255,0.55)',
           }}>
@@ -778,7 +765,9 @@ function Testimonials() {
       >
         <motion.div variants={fadeUp}>
           <SectionPill label="Testimonial" />
-          <h2 style={H2}>Reasons why you'll love The Cube</h2>
+          <h2 style={{ ...H2, maxWidth: '9em', margin: '0 auto 1.25rem' }}>
+            Reasons why you'll love The Cube
+          </h2>
         </motion.div>
       </motion.div>
 
@@ -909,7 +898,9 @@ function Pricing() {
         >
           <motion.div variants={fadeUp} style={{ marginBottom: '3rem' }}>
             <SectionPill label="Pricing" />
-            <h2 style={H2}>Begin wherever you are.</h2>
+            <h2 style={{ ...H2, maxWidth: '7em', margin: '0 auto 1.25rem', textAlign: 'center' }}>
+              Begin wherever you are.
+            </h2>
           </motion.div>
 
           {/* Billing toggle */}
