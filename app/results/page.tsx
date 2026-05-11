@@ -8,6 +8,7 @@ import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
 import { useLanguage } from '@/lib/language-context';
+import { t } from '@/lib/translations';
 
 const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
 
@@ -132,7 +133,7 @@ function ResultsContent() {
       <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: 'var(--bg)' }}>
         <div style={{ textAlign: 'center', maxWidth: '400px', padding: '2rem' }}>
           <p style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-primary)', fontSize: '1.3rem', marginBottom: '1rem' }}>
-            Your reading is being prepared.
+            {t(language, 'results_page.preparingReading')}
           </p>
           <p style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
             This can take a moment. Please check back shortly.
@@ -179,7 +180,7 @@ function ResultsContent() {
               textDecoration: 'none', transition: 'all 0.2s',
             }}
           >
-            Dashboard
+            {t(language, 'results_page.dashboard')}
           </Link>
           <button
             onClick={handleCopy}
@@ -190,7 +191,7 @@ function ResultsContent() {
               cursor: 'pointer', transition: 'all 0.2s',
             }}
           >
-            {copied ? 'Copied' : 'Copy my reading'}
+            {copied ? t(language, 'results_page.copied') : t(language, 'results_page.copyReading')}
           </button>
         </div>
       </nav>
@@ -201,7 +202,7 @@ function ResultsContent() {
       }}>
         <div style={{ marginBottom: '3.5rem' }}>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.75rem' }}>
-            Your reading
+            {t(language, 'results_page.yourReading')}
           </p>
           <h1 style={{
             fontFamily: "'Inter', sans-serif",
@@ -215,7 +216,7 @@ function ResultsContent() {
           </p>
         </div>
 
-        <PaidContent summary={summary} />
+        <PaidContent summary={summary} language={language} />
       </div>
     </main>
   );
@@ -315,7 +316,7 @@ function parseSummary(raw: string) {
   return { elements, patternParas, takeaways, summation };
 }
 
-function PaidContent({ summary }: { summary: string }) {
+function PaidContent({ summary, language }: { summary: string; language: 'EN' | 'DE' }) {
   const { elements, patternParas, takeaways, summation } = parseSummary(summary);
   const CARD_LABELS = ['The Cube', 'The Ladder', 'The Flowers', 'The Animal', 'The Storm'];
 
@@ -417,7 +418,7 @@ function PaidContent({ summary }: { summary: string }) {
   );
 }
 
-function PaywallSection({ sessionId, summary }: { sessionId: string; summary: string }) {
+function PaywallSection({ sessionId, summary, language }: { sessionId: string; summary: string; language: 'EN' | 'DE' }) {
   const preview = summary.split(/\n{2,}/)[0] || '';
 
   return (
@@ -446,13 +447,13 @@ function PaywallSection({ sessionId, summary }: { sessionId: string; summary: st
           fontFamily: "'Inter', Georgia, serif",
           fontSize: '1.5rem', color: 'var(--text-primary)', fontWeight: 500, marginBottom: '1rem',
         }}>
-          Your reading continues.
+          {t(language, 'results_page.readingContinues')}
         </h3>
         <p style={{
           fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', color: 'var(--text-secondary)',
           lineHeight: '1.7', maxWidth: '420px', margin: '0 auto 2rem',
         }}>
-          You&apos;ve seen enough to know this isn&apos;t generic. The full interpretation of your space — all five elements, the pattern that runs through them, and what it means — is waiting.
+          {t(language, 'results_page.readingPreview')}
         </p>
         <Link
           href={`/unlock?session=${sessionId}`}
@@ -464,10 +465,10 @@ function PaywallSection({ sessionId, summary }: { sessionId: string; summary: st
             transition: 'all 0.2s',
           }}
         >
-          Unlock full reading — 7 EUR
+          {t(language, 'results_page.unlockReading')}
         </Link>
         <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.76rem', color: 'var(--text-muted)', marginTop: '1rem' }}>
-          One-time payment. Instant access.
+          {t(language, 'results_page.oneTimePayment')}
         </p>
       </div>
     </div>

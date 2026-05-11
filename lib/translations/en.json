@@ -156,12 +156,18 @@
     "unlockReading": "Unlock full reading — 7 EUR",
     "oneTimePayment": "One-time payment. Instant access.",
     "readingContinues": "Your reading continues.",
-    "readingPreview": "You've seen enough to know this isn't generic. The full interpretation — all five elements, the pattern, and what it means — is waiting."
+    "readingPreview": "You've seen enough to know this isn't generic. The full interpretation — all five elements, the pattern, and what it means — is waiting.",
+    "preparingReading": "Your reading is being prepared."
   },
   "dashboard_page": {
     "welcome": "Welcome back",
     "yourReadings": "Your readings",
-    "noReadings": "No readings yet. Start your first reading.",
+    "noReadings": "No readings yet.",
+    "noReadingsDesc": "Start your first reading.",
+    "newReading": "New reading",
+    "loading": "Loading...",
+    "loadingReadings": "Loading your readings...",
+    "logout": "Logout",
     "viewReading": "View reading",
     "date": "Date",
     "status": "Status"
