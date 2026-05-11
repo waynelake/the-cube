@@ -7,11 +7,13 @@
   src: url('/fonts/Gotens-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
-  font-display: swap;
 }
 
 :root,
 [data-theme="dark"] {
+  --font-sans: "'Inter', sans-serif";
+  --font-serif: "'Georgia', serif";
+  --font-display: "'Inter', sans-serif";
   --bg: #0a0a0f;
   --surface: #13131a;
   --surface-hover: #1a1a24;
@@ -25,6 +27,9 @@
 }
 
 [data-theme="light"] {
+  --font-sans: "'Inter', sans-serif";
+  --font-serif: "'Georgia', serif";
+  --font-display: "'Inter', sans-serif";
   --bg: #f5f0eb;
   --surface: #ede8e1;
   --surface-hover: #e5dfd8;

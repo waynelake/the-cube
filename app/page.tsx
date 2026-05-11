@@ -6,19 +6,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { motion, type Variants, AnimatePresence } from 'framer-motion';
 import { CubeIcon } from '@/components/cube-icon';
-import HeroCube from '@/components/hero-cube';
+import { ThemeToggle } from '@/components/theme-provider';
 import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/lib/language-context';
-<<<<<<< HEAD
-import { t } from '@/lib/translations/index';
-import { LangToggle } from '@/components/lang-toggle';
-
-export const dynamic = 'force-dynamic';
-=======
 import { t } from '@/lib/translations';
 
 const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
->>>>>>> claude/determined-banzai-95f34d
 
 const EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
@@ -53,54 +46,12 @@ const SECTION_PAD = 'clamp(6rem, 12vw, 10rem) clamp(1.5rem, 5vw, 4rem)';
 const H2: React.CSSProperties = {
   fontFamily: "'Inter', sans-serif",
   fontSize: 'clamp(2rem, 4vw, 4rem)',
-  fontWeight: 500,
+  fontWeight: 400,
   fontStyle: 'normal',
   letterSpacing: '-0.02em',
   lineHeight: 1.05,
   color: '#fff',
   marginBottom: '1.25rem',
-};
-
-const HEADING_MEDIUM: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
-  fontSize: '1.25rem',
-  fontWeight: 600,
-  color: '#fff',
-  marginBottom: '0.75rem',
-  lineHeight: 1.3,
-};
-
-const STAT_VALUE: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
-  fontSize: '1.75rem',
-  fontWeight: 700,
-  color: '#fff',
-  lineHeight: 1,
-};
-
-const STAT_LABEL: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
-  fontSize: '0.6rem',
-  color: 'rgba(255,255,255,0.38)',
-  lineHeight: 1.5,
-};
-
-const TIER_NAME: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
-  fontSize: '0.7rem',
-  color: 'rgba(255,255,255,0.38)',
-  letterSpacing: '0.08em',
-  textTransform: 'uppercase',
-  marginBottom: '1rem',
-};
-
-const TIER_FEATURE: React.CSSProperties = {
-  fontFamily: "'Inter', sans-serif",
-  fontSize: '0.9rem',
-  color: 'rgba(240,235,255,0.6)',
-  display: 'flex',
-  alignItems: 'center',
-  gap: '0.6rem',
 };
 
 const BODY: React.CSSProperties = {
@@ -149,15 +100,11 @@ function SectionPill({ label }: { label: string }) {
   );
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> claude/determined-banzai-95f34d
 // ─── Nav ─────────────────────────────────────────────────────────────────────
 
 function Nav({ language }: { language: 'EN' | 'DE' }) {
   const [scrolled, setScrolled] = useState(false);
-  const { language } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -209,6 +156,7 @@ function Nav({ language }: { language: 'EN' | 'DE' }) {
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
         <LangToggle />
+        <ThemeToggle />
         <Link
           href="/auth?mode=signup"
           className="nav-cta"
@@ -237,19 +185,13 @@ function Nav({ language }: { language: 'EN' | 'DE' }) {
 
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 
-<<<<<<< HEAD
-function Hero() {
-  const { language } = useLanguage();
-
-=======
 function Hero({ language }: { language: 'EN' | 'DE' }) {
->>>>>>> claude/determined-banzai-95f34d
   return (
     <section
       style={{
         position: 'relative',
         padding: '13rem 1.5rem 7rem',
-        textAlign: 'left',
+        textAlign: 'center',
         overflow: 'hidden',
         background: 'radial-gradient(ellipse 120% 65% at 50% 0%, rgba(124,58,237,0.28) 0%, transparent 65%)',
       }}
@@ -268,12 +210,26 @@ function Hero({ language }: { language: 'EN' | 'DE' }) {
           opacity: 0.8,
         }}
       />
+      <img
+        src="/images/Stars-a.png"
+        alt=""
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          left: '20%',
+          width: '50%',
+          height: '60%',
+          objectFit: 'contain',
+          pointerEvents: 'none',
+          opacity: 0.6,
+        }}
+      />
 
       <motion.div
         initial="hidden"
         animate="visible"
         variants={stagger}
-        style={{ position: 'relative', zIndex: 10 }}
+        style={{ position: 'relative', maxWidth: '900px', margin: '0 auto' }}
       >
         <motion.h1
           variants={fadeUp}
@@ -323,69 +279,15 @@ function Hero({ language }: { language: 'EN' | 'DE' }) {
           </Link>
         </motion.div>
       </motion.div>
-
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 1,
-        pointerEvents: 'none',
-      }}>
-        <HeroCube />
-      </div>
     </section>
   );
 }
 
 // ─── Stats Bar ────────────────────────────────────────────────────────────────
 
-<<<<<<< HEAD
-function StatsBar() {
-  const { language } = useLanguage();
-
-  return (
-    <>
-      <style>{`
-        @media (max-width: 768px) {
-          .stats-container {
-            display: flex !important;
-            flex-direction: column !important;
-            border-radius: 16px !important;
-            padding: 1rem !important;
-          }
-          .stats-divider {
-            display: none !important;
-          }
-          .stat-item {
-            width: 100% !important;
-            margin-bottom: 0.75rem !important;
-          }
-          .stat-item:last-of-type {
-            margin-bottom: 0 !important;
-          }
-        }
-      `}</style>
-      <div style={{ maxWidth: '860px', margin: '0 auto 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
-        <motion.div
-          className="stats-container"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: EASE }}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            padding: '0.6rem 0.6rem 0.6rem 1.25rem',
-            borderRadius: '9999px',
-            background: 'rgba(14, 12, 24, 0.9)',
-            border: '1px solid rgba(255,255,255,0.08)',
-            gap: '1.25rem',
-          }}
-=======
 function StatsBar({ language }: { language: 'EN' | 'DE' }) {
   return (
-    <div style={{ maxWidth: '860px', margin: '0 0 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
+    <div style={{ maxWidth: '860px', margin: '0 auto 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -400,7 +302,6 @@ function StatsBar({ language }: { language: 'EN' | 'DE' }) {
           border: '1px solid rgba(255,255,255,0.08)',
           gap: '1.25rem',
         }}
->>>>>>> claude/determined-banzai-95f34d
       >
         {/* Bullet */}
         <div style={{
@@ -413,38 +314,26 @@ function StatsBar({ language }: { language: 'EN' | 'DE' }) {
         </div>
 
         {/* Stat 1 */}
-<<<<<<< HEAD
-        <div className="stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <span style={STAT_VALUE}>15</span>
-          <span style={STAT_LABEL}>
-=======
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
           <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>15</span>
           <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.5 }}>
->>>>>>> claude/determined-banzai-95f34d
             {t(language, 'hero.stats.languages')}
           </span>
         </div>
 
         {/* Divider */}
-        <div className="stats-divider" style={{ width: '1px', height: '28px', background: 'rgba(255,255,255,0.1)', flexShrink: 0 }} />
+        <div style={{ width: '1px', height: '28px', background: 'rgba(255,255,255,0.1)', flexShrink: 0 }} />
 
         {/* Stat 2 */}
-<<<<<<< HEAD
-        <div className="stat-item" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
-          <span style={STAT_VALUE}>120+</span>
-          <span style={STAT_LABEL}>
-=======
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', flex: 1 }}>
           <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.75rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>120+</span>
           <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.6rem', color: 'rgba(255,255,255,0.38)', lineHeight: 1.5 }}>
->>>>>>> claude/determined-banzai-95f34d
             {t(language, 'hero.stats.yearsExperience')}
           </span>
         </div>
 
         {/* Right pill: avatars + count */}
-        <div className="stat-item" style={{
+        <div style={{
           display: 'flex', alignItems: 'center', gap: '0.65rem',
           padding: '0.45rem 1rem 0.45rem 0.45rem',
           borderRadius: '9999px',
@@ -466,24 +355,20 @@ function StatsBar({ language }: { language: 'EN' | 'DE' }) {
             ))}
           </div>
           <div>
-<<<<<<< HEAD
-            <div style={{ ...STAT_VALUE, fontSize: '1.15rem' }}>100+</div>
-=======
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.15rem', fontWeight: 700, color: '#fff', lineHeight: 1 }}>100+</div>
->>>>>>> claude/determined-banzai-95f34d
             <div style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.57rem', color: 'rgba(255,255,255,0.42)', letterSpacing: '0.02em', marginTop: '0.1rem' }}>{t(language, 'hero.stats.usersPlayed')}</div>
           </div>
         </div>
-        </motion.div>
-      </div>
-    </>
+      </motion.div>
+    </div>
   );
 }
 
 // ─── How It Works ─────────────────────────────────────────────────────────────
 
-function HowItWorks() {
-  const steps = [
+function HowItWorks({ language }: { language: 'EN' | 'DE' }) {
+  const stepsData = t(language, 'howItWorks.steps');
+  const steps = Array.isArray(stepsData) ? stepsData : [
     {
       number: '01',
       title: 'Describe your space',
@@ -542,8 +427,10 @@ function HowItWorks() {
               <div style={{ marginTop: '2.5rem' }}>
                 <h3
                   style={{
-                    ...HEADING_MEDIUM,
+                    fontFamily: "'Inter', sans-serif",
                     fontSize: '1.35rem',
+                    fontWeight: 600,
+                    color: '#fff',
                     marginBottom: '0.85rem',
                     lineHeight: 1.2,
                   }}
@@ -564,50 +451,36 @@ function HowItWorks() {
 
 
 
-function TheExperience() {
-  const features = [
+function TheExperience({ language }: { language: 'EN' | 'DE' }) {
+  const experienceFeaturesData = t(language, 'experience.features');
+  const experienceFeatures = Array.isArray(experienceFeaturesData) ? experienceFeaturesData : [
     {
-      shape: <img src="/images/icon-star.png" alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
       title: 'Five objects. No right answers.',
       body: 'A simple space is described to you. Five objects appear in it. You describe what you see, and how you see it.',
     },
     {
-      shape: <img src="/images/icon-small-star.png" alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
       title: 'A reading that sees through the surface.',
       body: 'Each object maps to something real. The reading draws from depth psychology and decades of symbolic research.',
     },
     {
-      shape: <img src="/images/icon-circle.png" alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
       title: 'It names what you already knew.',
       body: 'A precise, personal reading. Not generic. Written only for what you described in your own words.',
     },
   ];
+  const features = experienceFeatures.map((f, i) => ({
+    shape: <img src={["/images/icon-star.png", "/images/icon-small-star.png", "/images/icon-circle.png"][i]} alt="" style={{ width: '125px', height: '125px', objectFit: 'contain' }} />,
+    title: f.title,
+    body: f.body,
+  }));
 
   return (
     <section
       style={{
         padding: SECTION_PAD,
         background: 'rgba(255,255,255,0.01)',
-        position: 'relative',
-        overflow: 'hidden',
       }}
     >
-      <img
-        src="/images/Stars-a.png"
-        alt=""
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          left: '80%',
-          width: '50%',
-          height: '60%',
-          objectFit: 'contain',
-          pointerEvents: 'none',
-          opacity: 0.6,
-          transform: 'translateX(-50%)',
-        }}
-      />
-      <div style={{ maxWidth: '1100px', margin: '0 auto', position: 'relative', zIndex: 1 }}>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -615,11 +488,10 @@ function TheExperience() {
           variants={stagger}
         >
           <motion.div variants={fadeUp} style={{ marginBottom: '3rem' }}>
-            <SectionPill label="How it works" />
-            <h2 style={{ ...H2 }}>The Experience</h2>
+            <SectionPill label={t(language, 'experience.label')} />
+            <h2 style={{ ...H2 }}>{t(language, 'experience.title')}</h2>
             <p style={{ ...BODY, maxWidth: '420px' }}>
-              Answer a few questions. Receive a reading that names what you
-              already knew.
+              {t(language, 'experience.subtitle')}
             </p>
           </motion.div>
 
@@ -649,7 +521,16 @@ function TheExperience() {
               >
                 <div>{f.shape}</div>
                 <div>
-                  <h3 style={HEADING_MEDIUM}>
+                  <h3
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: '1.25rem',
+                      fontWeight: 600,
+                      color: '#fff',
+                      marginBottom: '0.75rem',
+                      lineHeight: 1.3,
+                    }}
+                  >
                     {f.title}
                   </h3>
                   <p style={{ ...BODY, fontSize: '0.9rem' }}>{f.body}</p>
@@ -665,7 +546,7 @@ function TheExperience() {
 
 // ─── Foundation ───────────────────────────────────────────────────────────────
 
-function Foundation() {
+function Foundation({ language }: { language: 'EN' | 'DE' }) {
   const authors = ['Jung', 'Hillman', 'von Franz', 'Estés', 'Winnicott'];
 
   return (
@@ -694,18 +575,17 @@ function Foundation() {
           variants={stagger}
         >
           <motion.div variants={fadeUp}>
-            <SectionPill label="What It's Based On" />
+            <SectionPill label={t(language, 'theoryAndResearch.label')} />
           </motion.div>
 
           <motion.h2 variants={fadeUp} style={{
             ...H2,
+            fontFamily: "'Inter', sans-serif",
             fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
+            fontWeight: 500,
             color: 'rgba(240,235,255,0.55)',
           }}>
-            Drawn from the work of{' '}
-            <span style={{ color: '#fff' }}>depth psychologists</span>{' '}
-            who{' '}
-            <span style={{ color: '#fff' }}>believed the psyche speaks in images.</span>
+            {t(language, 'theoryAndResearch.title')}
           </motion.h2>
 
           <motion.p
@@ -716,10 +596,45 @@ function Foundation() {
               margin: '0 auto 3rem',
             }}
           >
-            The Cube exercise has roots in object relations theory, Jungian
-            symbolism, and decades of research into how the unconscious uses
-            spatial metaphor. The objects you choose, and how you describe them,
-            reveal patterns you live inside but rarely see from the outside.
+            {(() => {
+              let text = t(language, 'theoryAndResearch.body');
+              const phrasesToHighlight = language === 'EN'
+                ? [{ phrase: 'depth psychologists', regex: /depth psychologists/gi },
+                   { phrase: 'believed the psyche speaks in images', regex: /believed the psyche speaks in images/gi }]
+                : [{ phrase: 'Tiefenpsychologen', regex: /Tiefenpsychologen/gi },
+                   { phrase: 'die glaubten, dass die Psyche in Bildern spricht', regex: /die glaubten, dass die Psyche in Bildern spricht/gi }];
+
+              let parts: (string | JSX.Element)[] = [];
+              let lastIndex = 0;
+              let allMatches: Array<{ start: number; end: number; text: string }> = [];
+
+              phrasesToHighlight.forEach(({ regex }) => {
+                let match;
+                while ((match = regex.exec(text)) !== null) {
+                  allMatches.push({ start: match.index, end: match.index + match[0].length, text: match[0] });
+                }
+              });
+
+              allMatches.sort((a, b) => a.start - b.start);
+
+              allMatches.forEach((match, i) => {
+                if (match.start > lastIndex) {
+                  parts.push(text.substring(lastIndex, match.start));
+                }
+                parts.push(
+                  <span key={`highlight-${i}`} style={{ color: '#ffffff' }}>
+                    {match.text}
+                  </span>
+                );
+                lastIndex = match.end;
+              });
+
+              if (lastIndex < text.length) {
+                parts.push(text.substring(lastIndex));
+              }
+
+              return parts.length > 0 ? parts : text;
+            })()}
           </motion.p>
 
           <motion.div
@@ -756,7 +671,7 @@ function Foundation() {
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────
 
-const TESTIMONIALS = [
+const TESTIMONIALS_EN = [
   {
     quote:
       "It bypasses the way I think. If you'd asked me directly, I don't know if I'd have answered as honestly, or even known how to answer.",
@@ -776,7 +691,27 @@ const TESTIMONIALS = [
   },
 ];
 
-function TestimonialCard({ t }: { t: typeof TESTIMONIALS[number] }) {
+const TESTIMONIALS_DE = [
+  {
+    quote:
+      "Es umgeht die Art, wie ich denke. Wenn Sie mich direkt gefragt hätten, weiß ich nicht, ob ich so ehrlich geantwortet hätte.",
+    name: 'Sarah K.',
+    role: 'Designer',
+  },
+  {
+    quote: "Erschreckend genau. Das habe ich wirklich nicht erwartet.",
+    name: 'Tom R.',
+    role: 'Founder',
+  },
+  {
+    quote:
+      "Es benannte etwas, das ich wusste, das es da war, aber nicht in Worte fassen konnte.",
+    name: 'Maya L.',
+    role: 'Content Strategist',
+  },
+];
+
+function TestimonialCard({ t }: { t: typeof TESTIMONIALS_EN[number] }) {
   return (
     <div
       style={{
@@ -845,8 +780,9 @@ function TestimonialCard({ t }: { t: typeof TESTIMONIALS[number] }) {
   );
 }
 
-function Testimonials() {
-  const doubled = [...TESTIMONIALS, ...TESTIMONIALS];
+function Testimonials({ language }: { language: 'EN' | 'DE' }) {
+  const testimonials = language === 'EN' ? TESTIMONIALS_EN : TESTIMONIALS_DE;
+  const doubled = [...testimonials, ...testimonials];
 
   return (
     <section
@@ -870,10 +806,9 @@ function Testimonials() {
         }}
       >
         <motion.div variants={fadeUp} style={{ textAlign: 'center' }}>
-          <SectionPill label="Testimonial" />
+          <SectionPill label={t(language, 'testimonials.label')} />
           <h2 style={{ ...H2, textAlign: 'center', margin: '0 auto 1.25rem' }}>
-            <span style={{ display: 'block' }}>Reasons why you'll</span>
-            <span style={{ display: 'block' }}>love The Cube</span>
+            {t(language, 'testimonials.title')}
           </h2>
         </motion.div>
       </motion.div>
@@ -949,26 +884,23 @@ interface PricingTier {
   badge?: string;
 }
 
-function Pricing() {
+function Pricing({ language }: { language: 'EN' | 'DE' }) {
   const [billing, setBilling] = useState<Billing>('annual');
 
-  const tiers: PricingTier[] = [
+  const pricingTiersData = t(language, 'pricing.tiers');
+  const pricingTiers = Array.isArray(pricingTiersData) ? pricingTiersData : [
     {
       name: 'Free',
-      priceMonthly: '0€',
-      priceAnnual: '0€',
-      subtitleMonthly: null,
-      subtitleAnnual: null,
+      price: '0€',
+      subtitle: null,
       features: ['First reading preview', 'Five trait summaries', 'Strategic lens lines'],
       cta: 'Begin for free',
       highlighted: false,
     },
     {
       name: 'Single Reading',
-      priceMonthly: '7€',
-      priceAnnual: '7€',
-      subtitleMonthly: 'one time',
-      subtitleAnnual: 'one time',
+      price: '7€',
+      subtitle: 'one time',
       features: [
         'Full interpretation of one reading',
         'All five elements',
@@ -979,10 +911,8 @@ function Pricing() {
     },
     {
       name: 'Subscriber',
-      priceMonthly: '9€',
-      priceAnnual: '59€',
-      subtitleMonthly: '/ month',
-      subtitleAnnual: '/ year',
+      price: '9€',
+      subtitle: '/ month',
       features: [
         'Unlimited readings',
         'Post-reading conversation',
@@ -994,6 +924,14 @@ function Pricing() {
     },
   ];
 
+  const tiers: PricingTier[] = pricingTiers.map(tier => ({
+    ...tier,
+    priceMonthly: tier.price,
+    priceAnnual: tier.price,
+    subtitleMonthly: tier.subtitle,
+    subtitleAnnual: tier.subtitle,
+  }));
+
   return (
     <section style={{ padding: SECTION_PAD }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
@@ -1004,10 +942,9 @@ function Pricing() {
           variants={stagger}
         >
           <motion.div variants={fadeUp} style={{ marginBottom: '3rem', textAlign: 'center' }}>
-            <SectionPill label="Pricing" />
+            <SectionPill label={t(language, 'pricing.label')} />
             <h2 style={{ ...H2, textAlign: 'center', margin: '0 auto 1.25rem' }}>
-              <span style={{ display: 'block' }}>Begin wherever</span>
-              <span style={{ display: 'block' }}>you are.</span>
+              {t(language, 'pricing.title')}
             </h2>
           </motion.div>
 
@@ -1042,7 +979,7 @@ function Pricing() {
                     'background 0.28s cubic-bezier(0.16,1,0.3,1), color 0.28s cubic-bezier(0.16,1,0.3,1)',
                 }}
               >
-                {period === 'monthly' ? 'Monthly' : 'Annually (save up to 45%)'}
+                {period === 'monthly' ? t(language, 'pricing.billingToggle.monthly') : t(language, 'pricing.billingToggle.annual')}
               </button>
             ))}
           </motion.div>
@@ -1075,13 +1012,13 @@ function Pricing() {
                     padding: 'clamp(1.75rem, 3vw, 2.5rem)',
                     borderRadius: '30px',
                     background: tier.highlighted
-                      ? 'rgba(124,58,237,0.18)'
+                      ? 'rgba(124,58,237,0.25)'
                       : GLASS.background,
                     border: tier.highlighted
-                      ? '1px solid rgba(124,58,237,0.5)'
+                      ? '1.5px solid rgba(124,58,237,0.8)'
                       : GLASS.border,
                     boxShadow: tier.highlighted
-                      ? 'inset 0 1px 0 rgba(255,255,255,0.12), 0 0 60px rgba(124,58,237,0.2), 0 8px 32px rgba(0,0,0,0.4)'
+                      ? 'inset 0 1px 0 rgba(255,255,255,0.12), 0 0 80px rgba(124,58,237,0.35), 0 0 40px rgba(167,139,250,0.2), 0 8px 32px rgba(0,0,0,0.4)'
                       : GLASS.boxShadow,
                     position: 'relative',
                   }}
@@ -1093,23 +1030,33 @@ function Pricing() {
                         top: '-0.65rem',
                         left: '50%',
                         transform: 'translateX(-50%)',
-                        background: '#7c3aed',
+                        background: 'linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)',
                         color: '#fff',
                         fontFamily: "'Inter', sans-serif",
                         fontSize: '0.6rem',
-                        fontWeight: 600,
+                        fontWeight: 700,
                         letterSpacing: '0.14em',
                         textTransform: 'uppercase',
-                        padding: '0.2rem 0.7rem',
+                        padding: '0.3rem 0.9rem',
                         borderRadius: '9999px',
                         whiteSpace: 'nowrap',
+                        boxShadow: '0 0 20px rgba(124,58,237,0.5), 0 0 40px rgba(167,139,250,0.3)',
                       }}
                     >
                       {tier.badge}
                     </span>
                   )}
 
-                  <p style={TIER_NAME}>
+                  <p
+                    style={{
+                      fontFamily: "'Inter', sans-serif",
+                      fontSize: '0.7rem',
+                      color: 'rgba(255,255,255,0.38)',
+                      letterSpacing: '0.08em',
+                      textTransform: 'uppercase',
+                      marginBottom: '1rem',
+                    }}
+                  >
                     {tier.name}
                   </p>
 
@@ -1125,7 +1072,7 @@ function Pricing() {
                       style={{
                         fontFamily: "'Inter', sans-serif",
                         fontSize: 'clamp(2.5rem, 4.5vw, 3.5rem)',
-                        fontWeight: 600,
+                        fontWeight: 400,
                         color: '#fff',
                         lineHeight: 1,
                       }}
@@ -1164,7 +1111,17 @@ function Pricing() {
                     }}
                   >
                     {tier.features.map((feature, j) => (
-                      <li key={j} style={TIER_FEATURE}>
+                      <li
+                        key={j}
+                        style={{
+                          fontFamily: "'Inter', sans-serif",
+                          fontSize: '0.9rem',
+                          color: 'rgba(240,235,255,0.6)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.6rem',
+                        }}
+                      >
                         <span
                           style={{
                             width: '4px',
@@ -1215,31 +1172,11 @@ function Pricing() {
 
 // ─── FAQ ──────────────────────────────────────────────────────────────────────
 
-const FAQ_ITEMS = [
-  {
-    q: 'What exactly is The Cube?',
-    a: 'The Cube is a symbolic psychological exercise rooted in depth psychology. You imagine a space and describe five objects in it. Each object maps to a dimension of your inner world, and we generate a personal reading based on what you described.',
-  },
-  {
-    q: 'How long does a reading take?',
-    a: 'Most people spend 5–10 minutes answering the questions. The reading itself is delivered immediately and takes another few minutes to read through.',
-  },
-  {
-    q: 'Is the reading personalised to what I describe?',
-    a: 'Yes. Every reading is generated from your specific answers. Two people can describe the same object completely differently, and their readings will reflect that difference.',
-  },
-  {
-    q: 'What is it based on?',
-    a: "The exercise draws from Jungian symbolism, object relations theory, and 50+ years of depth psychology research, including the work of Jung, Hillman, von Franz, Estés, and Winnicott.",
-  },
-  {
-    q: 'Can I do more than one reading?',
-    a: 'Yes. You can do unlimited readings, see your full reading history, and track patterns over time across all your readings.',
-  },
-];
 
-function FAQ() {
+function FAQ({ language }: { language: 'EN' | 'DE' }) {
   const [open, setOpen] = useState<number | null>(null);
+  const faqData = t(language, 'faq');
+  const faqItems = Array.isArray(faqData.items) ? faqData.items : [];
 
   return (
     <section
@@ -1265,9 +1202,9 @@ function FAQ() {
           variants={stagger}
         >
           <motion.div variants={fadeUp}>
-            <SectionPill label="FAQ" />
+            <SectionPill label={faqData.label} />
             <h2 style={H2}>
-              Questions &<br />Answers
+              {faqData.title}
             </h2>
           </motion.div>
         </motion.div>
@@ -1279,7 +1216,7 @@ function FAQ() {
           variants={stagger}
           style={{ display: 'flex', flexDirection: 'column' }}
         >
-          {FAQ_ITEMS.map((item, i) => (
+          {faqItems.map((item: any, i: number) => (
             <motion.div key={i} variants={fadeUp}>
               <button
                 onClick={() => setOpen(open === i ? null : i)}
@@ -1360,7 +1297,7 @@ function FAQ() {
 
 // ─── Footer CTA ───────────────────────────────────────────────────────────────
 
-function FooterCTA() {
+function FooterCTA({ language }: { language: 'EN' | 'DE' }) {
   return (
     <section
       style={{
@@ -1389,16 +1326,18 @@ function FooterCTA() {
         <motion.h2
           variants={fadeUp}
           style={{
-            fontFamily: "'Gotens', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             fontSize: 'clamp(3rem, 9vw, 6.5rem)',
             fontWeight: 400,
             fontStyle: 'normal',
             color: '#fff',
-            lineHeight: 1.0,
+            lineHeight: 1.15,
             marginBottom: '1.5rem',
+            maxWidth: '700px',
+            margin: '0 auto 1.5rem',
           }}
         >
-          Start your<br />Experience Today
+          {t(language, 'footerCta.title')}
         </motion.h2>
 
         <motion.p
@@ -1409,8 +1348,7 @@ function FooterCTA() {
             margin: '0 auto 2.5rem',
           }}
         >
-          Join thousands of users discovering themselves through The Cube
-          experience.
+          {t(language, 'footerCta.subtitle')}
         </motion.p>
 
         <motion.div variants={fadeUp}>
@@ -1430,7 +1368,7 @@ function FooterCTA() {
               textDecoration: 'none',
             }}
           >
-            Begin your reading
+            {t(language, 'footerCta.cta')}
           </Link>
         </motion.div>
       </motion.div>
@@ -1440,7 +1378,7 @@ function FooterCTA() {
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 
-function Footer() {
+function Footer({ language }: { language: 'EN' | 'DE' }) {
   return (
     <footer
       style={{
@@ -1461,7 +1399,7 @@ function Footer() {
           <CubeIcon size={17} />
           <span
             style={{
-              fontFamily: "'Gotens', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.9rem',
               color: 'rgba(255,255,255,0.35)',
             }}
@@ -1472,11 +1410,11 @@ function Footer() {
 
         <div style={{ display: 'flex', gap: '2rem' }}>
           {[
-            { label: 'Privacy Policy', href: '/privacy' },
-            { label: 'Terms of Service', href: '/terms' },
-          ].map(({ label, href }) => (
+            { labelKey: 'footer.privacyPolicy', href: '/privacy' },
+            { labelKey: 'footer.termsOfService', href: '/terms' },
+          ].map(({ labelKey, href }) => (
             <Link
-              key={label}
+              key={labelKey}
               href={href}
               style={{
                 fontFamily: "'Inter', sans-serif",
@@ -1485,7 +1423,7 @@ function Footer() {
                 textDecoration: 'none',
               }}
             >
-              {label}
+              {t(language, labelKey)}
             </Link>
           ))}
         </div>
@@ -1497,7 +1435,7 @@ function Footer() {
             color: 'rgba(255,255,255,0.2)',
           }}
         >
-          &copy; 2026 The Cube. All rights reserved.
+          {t(language, 'footer.copyright')}
         </p>
       </div>
     </footer>
@@ -1544,14 +1482,14 @@ export default function LandingPage() {
         <Nav language={language} />
         <Hero language={language} />
         <StatsBar language={language} />
-        <HowItWorks />
-        <TheExperience />
-        <Foundation />
-        <Testimonials />
-        <Pricing />
-        <FAQ />
-        <FooterCTA />
-        <Footer />
+        <HowItWorks language={language} />
+        <TheExperience language={language} />
+        <Foundation language={language} />
+        <Testimonials language={language} />
+        <Pricing language={language} />
+        <FAQ language={language} />
+        <FooterCTA language={language} />
+        <Footer language={language} />
       </main>
     </>
   );

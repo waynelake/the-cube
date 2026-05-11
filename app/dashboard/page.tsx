@@ -7,13 +7,8 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
-<<<<<<< HEAD
 import { LangToggle } from '@/components/lang-toggle';
 import { useLanguage } from '@/lib/language-context';
-=======
-
-const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
->>>>>>> claude/determined-banzai-95f34d
 import {
   PaidContent, parseSummary, ReadingTraits,
   ELEMENT_KEYS, ELEMENT_LABELS, TRAIT_MAP,
@@ -425,22 +420,13 @@ export default function DashboardPage() {
         <div style={{ flex: 1 }}>
           {loading ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
-<<<<<<< HEAD
               <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>Loading your readings...</p>
-=======
-              <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>Loading your readings...</p>
->>>>>>> claude/determined-banzai-95f34d
             </div>
           ) : sessions.length === 0 ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', padding: '2rem' }}>
               <div style={{ textAlign: 'center', maxWidth: '400px' }}>
-<<<<<<< HEAD
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 500 }}>No readings yet.</p>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2rem' }}>
-=======
-                <p style={{ fontFamily: "'Inter', Georgia, serif", fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 500 }}>No readings yet.</p>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2rem' }}>
->>>>>>> claude/determined-banzai-95f34d
                   Start a reading to get your first symbolic interpretation.
                 </p>
                 <Link href="/experience" style={{ display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px', background: 'var(--accent)', color: '#ffffff', fontFamily: "'Inter', sans-serif", fontSize: '0.92rem', fontWeight: 500, textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.3)' }}>
@@ -450,22 +436,14 @@ export default function DashboardPage() {
             </div>
           ) : !selected || !selected.insight ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
-<<<<<<< HEAD
               <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
-=======
-              <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
->>>>>>> claude/determined-banzai-95f34d
                 {selected ? 'This reading is still being prepared.' : 'Select a reading.'}
               </p>
             </div>
           ) : (
             <div className="reading-container">
               <div style={{ marginBottom: '3.5rem' }}>
-<<<<<<< HEAD
                 <h1 style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem' }}>
-=======
-                <h1 style={{ fontFamily: "'Inter', Georgia, serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem' }}>
->>>>>>> claude/determined-banzai-95f34d
                   What Your Space Reveals
                 </h1>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
@@ -473,34 +451,7 @@ export default function DashboardPage() {
                 </p>
               </div>
 
-<<<<<<< HEAD
               <PaidContent summary={selected.insight?.summary ?? ''} />
-=======
-              {!paidSessionIds.has(selected.id) && (
-                <div style={{ marginBottom: '3rem' }}>
-                  {ELEMENT_KEYS.map((key, i) => (
-                    <div key={key}>
-                      <div style={{ padding: '1.5rem 0' }}>
-                        <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.65rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.6rem' }}>
-                          {ELEMENT_LABELS[key]}
-                        </p>
-                        <p style={{ fontFamily: "'Inter', Georgia, serif", fontSize: 'clamp(1.1rem, 2.2vw, 1.3rem)', color: 'var(--text-primary)', lineHeight: '1.5', fontWeight: 400 }}>
-                          {selected.insight?.traits?.[TRAIT_MAP[key]]}
-                        </p>
-                      </div>
-                      {i < ELEMENT_KEYS.length - 1 && (
-                        <div style={{ height: '1px', background: 'linear-gradient(90deg, transparent, rgba(124,58,237,0.15), transparent)' }} />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {paidSessionIds.has(selected.id)
-                ? <PaidContent summary={selected.insight?.summary ?? ''} />
-                : <PaywallSection sessionId={selected.id} summary={selected.insight?.summary ?? ''} />
-              }
->>>>>>> claude/determined-banzai-95f34d
             </div>
           )}
         </div>

@@ -1,10 +1,10 @@
 {
   "nav": {
-    "title": "Der Würfel",
+    "title": "The Cube",
     "beginReading": "Beginnen Sie Ihre Lesung"
   },
   "hero": {
-    "title": "Der Würfel",
+    "title": "The Cube",
     "subtitle": "Du siehst einen Würfel. Wie groß ist er?",
     "cta": "Beginnen Sie Ihre Lesung",
     "stats": {
@@ -57,7 +57,34 @@
     "body": "Die Würfelübung hat Wurzeln in Objektbeziehungstheorie, Junianischer Symbolik und Jahrzehnten Forschung darüber, wie das Unbewusste räumliche Metaphern nutzt. Die Objekte, die Sie wählen, und wie Sie sie beschreiben, enthüllen Muster, in denen Sie leben, aber selten von außen sehen."
   },
   "testimonials": {
+    "label": "Testimonial",
     "title": "Was Benutzer sagen"
+  },
+  "faq": {
+    "label": "FAQ",
+    "title": "Fragen & Antworten",
+    "items": [
+      {
+        "q": "Was genau ist Der Würfel?",
+        "a": "Der Würfel ist eine symbolische psychologische Übung, die in der Tiefenpsychologie verwurzelt ist. Sie stellen sich einen Raum vor und beschreiben fünf Objekte darin. Jedes Objekt entspricht einer Dimension Ihrer inneren Welt, und wir erstellen eine persönliche Lesung auf der Grundlage dessen, was Sie beschrieben haben."
+      },
+      {
+        "q": "Wie lange dauert eine Lesung?",
+        "a": "Die meisten Menschen verbringen 5–10 Minuten damit, die Fragen zu beantworten. Die Lesung selbst wird sofort geliefert und dauert noch einige Minuten zum Lesen."
+      },
+      {
+        "q": "Wird die Lesung an das zugeschnitten, was ich beschreibe?",
+        "a": "Ja. Jede Lesung wird auf der Grundlage Ihrer spezifischen Antworten erstellt. Zwei Menschen können das gleiche Objekt völlig unterschiedlich beschreiben, und ihre Lesungen werden diesen Unterschied widerspiegeln."
+      },
+      {
+        "q": "Worauf basiert es?",
+        "a": "Die Übung basiert auf junianischer Symbolik, Objektbeziehungstheorie und 50+ Jahren tiefenpsychologischer Forschung, einschließlich der Arbeiten von Jung, Hillman, von Franz, Estés und Winnicott."
+      },
+      {
+        "q": "Kann ich mehr als eine Lesung machen?",
+        "a": "Ja. Mit einem Abonnement erhalten Sie unbegrenzte Lesungen, ein Gespräch nach der Lesung, um die Interpretation weiter zu erkunden, und einen Lesungsverlauf, um Muster im Laufe der Zeit zu verfolgen."
+      }
+    ]
   },
   "pricing": {
     "label": "Preisgestaltung",
@@ -145,5 +172,15 @@
     "flowers": "Was stellen die Blumen dar? Gedeihen sie oder sterben sie?",
     "animal": "Was stellt das Tier dar? Wie verhält es sich?",
     "storm": "Was stellt der Sturm dar? Wie nah ist er?"
+  },
+  "footerCta": {
+    "title": "Beginnen Sie heute Ihre Erfahrung",
+    "subtitle": "Schließen Sie sich Tausenden von Nutzern an, die sich durch die Würfel-Erfahrung selbst entdecken.",
+    "cta": "Beginnen Sie Ihre Lesung"
+  },
+  "footer": {
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "termsOfService": "Nutzungsbedingungen",
+    "copyright": "© 2026 Der Würfel. Alle Rechte vorbehalten."
   }
 }
