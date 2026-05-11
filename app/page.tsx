@@ -597,36 +597,43 @@ function Foundation({ language }: { language: 'EN' | 'DE' }) {
             }}
           >
             {(() => {
-              const text = t(language, 'theoryAndResearch.body');
-              const highlights = language === 'EN'
-                ? ['depth psychologists', 'believed the psyche speaks in images']
-                : ['Tiefenpsychologen', 'die glaubten, dass die Psyche in Bildern spricht'];
+              let text = t(language, 'theoryAndResearch.body');
+              const phrasesToHighlight = language === 'EN'
+                ? [{ phrase: 'depth psychologists', regex: /depth psychologists/gi },
+                   { phrase: 'believed the psyche speaks in images', regex: /believed the psyche speaks in images/gi }]
+                : [{ phrase: 'Tiefenpsychologen', regex: /Tiefenpsychologen/gi },
+                   { phrase: 'die glaubten, dass die Psyche in Bildern spricht', regex: /die glaubten, dass die Psyche in Bildern spricht/gi }];
 
-              let parts: (string | JSX.Element)[] = [text];
-              let keyCounter = 0;
+              let parts: (string | JSX.Element)[] = [];
+              let lastIndex = 0;
+              let allMatches: Array<{ start: number; end: number; text: string }> = [];
 
-              highlights.forEach(highlight => {
-                const newParts: (string | JSX.Element)[] = [];
-                parts.forEach(part => {
-                  if (typeof part === 'string') {
-                    const regex = new RegExp(`(${highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
-                    const split = part.split(regex);
-                    split.forEach((s, i) => {
-                      if (s) {
-                        if (s.toLowerCase() === highlight.toLowerCase()) {
-                          newParts.push(<span key={keyCounter++} style={{ color: '#ffffff' }}>{s}</span>);
-                        } else {
-                          newParts.push(s);
-                        }
-                      }
-                    });
-                  } else {
-                    newParts.push(part);
-                  }
-                });
-                parts = newParts;
+              phrasesToHighlight.forEach(({ regex }) => {
+                let match;
+                while ((match = regex.exec(text)) !== null) {
+                  allMatches.push({ start: match.index, end: match.index + match[0].length, text: match[0] });
+                }
               });
-              return parts;
+
+              allMatches.sort((a, b) => a.start - b.start);
+
+              allMatches.forEach((match, i) => {
+                if (match.start > lastIndex) {
+                  parts.push(text.substring(lastIndex, match.start));
+                }
+                parts.push(
+                  <span key={`highlight-${i}`} style={{ color: '#ffffff' }}>
+                    {match.text}
+                  </span>
+                );
+                lastIndex = match.end;
+              });
+
+              if (lastIndex < text.length) {
+                parts.push(text.substring(lastIndex));
+              }
+
+              return parts.length > 0 ? parts : text;
             })()}
           </motion.p>
 
