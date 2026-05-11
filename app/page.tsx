@@ -1333,7 +1333,7 @@ function FooterCTA({ language }: { language: 'EN' | 'DE' }) {
             color: '#fff',
             lineHeight: 1.15,
             marginBottom: '1.5rem',
-            maxWidth: '700px',
+            maxWidth: '420px',
             margin: '0 auto 1.5rem',
           }}
         >
