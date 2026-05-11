@@ -144,7 +144,7 @@ function Nav({ language }: { language: 'EN' | 'DE' }) {
         <CubeIcon size={20} />
         <span
           style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "'Gotens', sans-serif",
             fontSize: '1rem',
             color: '#fff',
             letterSpacing: '0.01em',
@@ -234,7 +234,7 @@ function Hero({ language }: { language: 'EN' | 'DE' }) {
         <motion.h1
           variants={fadeUp}
           style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "'Gotens', sans-serif",
             fontSize: 'clamp(5.5rem, 16vw, 11rem)',
             lineHeight: 0.92,
             fontWeight: 400,
