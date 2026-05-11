@@ -157,7 +157,15 @@
     "oneTimePayment": "Einmalige Zahlung. Sofortiger Zugriff.",
     "readingContinues": "Ihre Lesung wird fortgesetzt.",
     "readingPreview": "Sie haben genug gesehen, um zu wissen, dass dies nicht generisch ist. Die vollständige Interpretation — alle fünf Elemente, das Muster und was es bedeutet — wartet.",
-    "preparingReading": "Ihre Lesung wird vorbereitet."
+    "preparingReading": "Ihre Lesung wird vorbereitet.",
+    "whatYourSpaceReveals": "Was Ihr Raum offenbart",
+    "thePattern": "Das Muster",
+    "refresh": "Aktualisieren",
+    "cube": "Der Würfel",
+    "ladder": "Die Leiter",
+    "flowers": "Die Blumen",
+    "animal": "Das Tier",
+    "storm": "Der Sturm"
   },
   "dashboard_page": {
     "welcome": "Willkommen zurück",
@@ -170,7 +178,15 @@
     "logout": "Abmelden",
     "viewReading": "Lesung anzeigen",
     "date": "Datum",
-    "status": "Status"
+    "status": "Status",
+    "selectReading": "Wählen Sie eine Lesung.",
+    "whatYourSpaceReveals": "Was Ihr Raum offenbart",
+    "rename": "Umbenennen",
+    "pin": "Anheften",
+    "unpin": "Loslösen",
+    "hide": "Verbergen",
+    "save": "Speichern",
+    "cancel": "Abbrechen"
   },
   "cube_prompts": {
     "cube": "Was stellt der Würfel dar? Beschreiben Sie ihn vollständig.",

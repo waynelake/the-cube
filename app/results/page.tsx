@@ -144,7 +144,7 @@ function ResultsContent() {
               fontFamily: "'Inter', sans-serif", fontSize: '0.88rem', cursor: 'pointer',
             }}
           >
-            Refresh
+            {t(language, 'results_page.refresh')}
           </button>
         </div>
       </main>
@@ -207,7 +207,7 @@ function ResultsContent() {
             fontSize: 'clamp(2rem, 4vw, 2.8rem)',
             color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem',
           }}>
-            What Your Space Reveals
+            {t(language, 'results_page.whatYourSpaceReveals')}
           </h1>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
             {sessionDate}
@@ -316,7 +316,13 @@ function parseSummary(raw: string) {
 
 function PaidContent({ summary, language }: { summary: string; language: 'EN' | 'DE' }) {
   const { elements, patternParas, takeaways, summation } = parseSummary(summary);
-  const CARD_LABELS = ['The Cube', 'The Ladder', 'The Flowers', 'The Animal', 'The Storm'];
+  const CARD_LABELS = [
+    t(language, 'results_page.cube'),
+    t(language, 'results_page.ladder'),
+    t(language, 'results_page.flowers'),
+    t(language, 'results_page.animal'),
+    t(language, 'results_page.storm'),
+  ];
 
   return (
     <div style={{ marginBottom: '3.5rem' }}>
@@ -372,7 +378,7 @@ function PaidContent({ summary, language }: { summary: string; language: 'EN' | 
             fontFamily: "'Inter', sans-serif",
             fontSize: '2rem', color: 'var(--text-primary)', fontWeight: 500, marginBottom: '2rem',
           }}>
-            The Pattern
+            {t(language, 'results_page.thePattern')}
           </h2>
           {patternParas.map((para, i) => (
             <p key={i} style={{

@@ -157,7 +157,15 @@
     "oneTimePayment": "One-time payment. Instant access.",
     "readingContinues": "Your reading continues.",
     "readingPreview": "You've seen enough to know this isn't generic. The full interpretation — all five elements, the pattern, and what it means — is waiting.",
-    "preparingReading": "Your reading is being prepared."
+    "preparingReading": "Your reading is being prepared.",
+    "whatYourSpaceReveals": "What Your Space Reveals",
+    "thePattern": "The Pattern",
+    "refresh": "Refresh",
+    "cube": "The Cube",
+    "ladder": "The Ladder",
+    "flowers": "The Flowers",
+    "animal": "The Animal",
+    "storm": "The Storm"
   },
   "dashboard_page": {
     "welcome": "Welcome back",
@@ -170,7 +178,15 @@
     "logout": "Logout",
     "viewReading": "View reading",
     "date": "Date",
-    "status": "Status"
+    "status": "Status",
+    "selectReading": "Select a reading.",
+    "whatYourSpaceReveals": "What Your Space Reveals",
+    "rename": "Rename",
+    "pin": "Pin",
+    "unpin": "Unpin",
+    "hide": "Hide",
+    "save": "Save",
+    "cancel": "Cancel"
   },
   "cube_prompts": {
     "cube": "What does the cube represent? Describe it fully.",

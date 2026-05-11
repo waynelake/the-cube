@@ -112,8 +112,8 @@ function Sidebar({
                     }}
                   />
                   <div style={{ display: 'flex', gap: '0.4rem' }}>
-                    <button onClick={() => { onRename(s.id, titleInput); setEditingTitleId(null); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Save</button>
-                    <button onClick={() => setEditingTitleId(null)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Cancel</button>
+                    <button onClick={() => { onRename(s.id, titleInput); setEditingTitleId(null); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>{t(language, 'dashboard_page.save')}</button>
+                    <button onClick={() => setEditingTitleId(null)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>{t(language, 'dashboard_page.cancel')}</button>
                   </div>
                 </div>
               ) : (
@@ -152,7 +152,7 @@ function Sidebar({
                 <div style={{ position: 'absolute', right: '0.5rem', top: 'calc(100% - 0.5rem)', zIndex: 20, background: 'var(--surface)', border: '1px solid var(--border)', borderRadius: '8px', boxShadow: '0 4px 16px rgba(0,0,0,0.3)', overflow: 'hidden', minWidth: '120px' }}>
                   {[
                     {
-                      label: 'Rename',
+                      label: t(language, 'dashboard_page.rename'),
                       action: () => {
                         setEditingTitleId(s.id);
                         setTitleInput(title);
@@ -160,18 +160,18 @@ function Sidebar({
                       },
                     },
                     {
-                      label: pinnedIds.has(s.id) ? 'Unpin' : 'Pin',
+                      label: pinnedIds.has(s.id) ? t(language, 'dashboard_page.unpin') : t(language, 'dashboard_page.pin'),
                       action: () => { onPin(s.id); setMenuOpenId(null); },
                     },
                     {
-                      label: 'Hide',
+                      label: t(language, 'dashboard_page.hide'),
                       action: () => { onHide(s.id); setMenuOpenId(null); },
                     },
                   ].map(({ label, action }) => (
                     <button
                       key={label}
                       onClick={action}
-                      style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem 0.875rem', background: 'none', border: 'none', color: label === 'Hide' ? '#e05a5a' : 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', cursor: 'pointer' }}
+                      style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem 0.875rem', background: 'none', border: 'none', color: label === t(language, 'dashboard_page.hide') ? '#e05a5a' : 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', cursor: 'pointer' }}
                     >
                       {label}
                     </button>
@@ -199,8 +199,8 @@ function Sidebar({
                   }}
                 />
                 <div style={{ display: 'flex', gap: '0.4rem' }}>
-                  <button onClick={() => { onSaveName(nameInput); setEditingName(false); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Save</button>
-                  <button onClick={() => setEditingName(false)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Cancel</button>
+                  <button onClick={() => { onSaveName(nameInput); setEditingName(false); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>{t(language, 'dashboard_page.save')}</button>
+                  <button onClick={() => setEditingName(false)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>{t(language, 'dashboard_page.cancel')}</button>
                 </div>
               </div>
             ) : (
@@ -440,14 +440,14 @@ export default function DashboardPage() {
           ) : !selected || !selected.insight ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
               <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
-                {selected ? t(language, 'results_page.preparingReading') : 'Select a reading.'}
+                {selected ? t(language, 'results_page.preparingReading') : t(language, 'dashboard_page.selectReading')}
               </p>
             </div>
           ) : (
             <div className="reading-container">
               <div style={{ marginBottom: '3.5rem' }}>
                 <h1 style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem' }}>
-                  What Your Space Reveals
+                  {t(language, 'dashboard_page.whatYourSpaceReveals')}
                 </h1>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                   {formatDate(selected.started_at)}
