@@ -660,7 +660,7 @@ function Foundation({ language }: { language: 'EN' | 'DE' }) {
 
 // ─── Testimonials ─────────────────────────────────────────────────────────────
 
-const TESTIMONIALS = [
+const TESTIMONIALS_EN = [
   {
     quote:
       "It bypasses the way I think. If you'd asked me directly, I don't know if I'd have answered as honestly, or even known how to answer.",
@@ -680,7 +680,27 @@ const TESTIMONIALS = [
   },
 ];
 
-function TestimonialCard({ t }: { t: typeof TESTIMONIALS[number] }) {
+const TESTIMONIALS_DE = [
+  {
+    quote:
+      "Es umgeht die Art, wie ich denke. Wenn Sie mich direkt gefragt hätten, weiß ich nicht, ob ich so ehrlich geantwortet hätte.",
+    name: 'Sarah K.',
+    role: 'Designer',
+  },
+  {
+    quote: "Erschreckend genau. Das habe ich wirklich nicht erwartet.",
+    name: 'Tom R.',
+    role: 'Founder',
+  },
+  {
+    quote:
+      "Es benannte etwas, das ich wusste, das es da war, aber nicht in Worte fassen konnte.",
+    name: 'Maya L.',
+    role: 'Content Strategist',
+  },
+];
+
+function TestimonialCard({ t }: { t: typeof TESTIMONIALS_EN[number] }) {
   return (
     <div
       style={{
@@ -750,7 +770,8 @@ function TestimonialCard({ t }: { t: typeof TESTIMONIALS[number] }) {
 }
 
 function Testimonials({ language }: { language: 'EN' | 'DE' }) {
-  const doubled = [...TESTIMONIALS, ...TESTIMONIALS];
+  const testimonials = language === 'EN' ? TESTIMONIALS_EN : TESTIMONIALS_DE;
+  const doubled = [...testimonials, ...testimonials];
 
   return (
     <section
