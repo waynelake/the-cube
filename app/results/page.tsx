@@ -1,16 +1,14 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import dynamic from 'next/dynamic';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
+import { LangToggle } from '@/components/lang-toggle';
 import { useLanguage } from '@/lib/language-context';
 import { t } from '@/lib/translations';
-
-const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
 
 const ELEMENT_KEYS = ['cube', 'ladder', 'flowers', 'animal', 'storm'] as const;
 type ElementKey = typeof ELEMENT_KEYS[number];
