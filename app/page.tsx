@@ -1156,7 +1156,7 @@ function FAQ({ language }: { language: 'EN' | 'DE' }) {
           variants={stagger}
           style={{ display: 'flex', flexDirection: 'column' }}
         >
-          {faqItems.map((item: any, i) => (
+          {faqItems.map((item: any, i: number) => (
             <motion.div key={i} variants={fadeUp}>
               <button
                 onClick={() => setOpen(open === i ? null : i)}
