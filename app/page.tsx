@@ -1328,12 +1328,11 @@ function FooterCTA({ language }: { language: 'EN' | 'DE' }) {
           style={{
             fontFamily: "'Inter', sans-serif",
             fontSize: 'clamp(3rem, 9vw, 6.5rem)',
-            fontWeight: 400,
+            fontWeight: 700,
             fontStyle: 'normal',
             color: '#fff',
-            lineHeight: 1.15,
-            marginBottom: '1.5rem',
-            maxWidth: '700px',
+            lineHeight: 1.1,
+            maxWidth: '900px',
             margin: '0 auto 1.5rem',
           }}
         >
