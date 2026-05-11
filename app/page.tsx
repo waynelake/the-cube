@@ -287,7 +287,7 @@ function Hero({ language }: { language: 'EN' | 'DE' }) {
 
 function StatsBar({ language }: { language: 'EN' | 'DE' }) {
   return (
-    <div style={{ maxWidth: '860px', margin: '0 0 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
+    <div style={{ maxWidth: '860px', margin: '0 auto 6rem', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -602,18 +602,22 @@ function Foundation({ language }: { language: 'EN' | 'DE' }) {
                 ? ['depth psychologists', 'believed the psyche speaks in images']
                 : ['Tiefenpsychologen', 'die glaubten, dass die Psyche in Bildern spricht'];
 
-              let parts = [text];
+              let parts: (string | JSX.Element)[] = [text];
+              let keyCounter = 0;
+
               highlights.forEach(highlight => {
                 const newParts: (string | JSX.Element)[] = [];
                 parts.forEach(part => {
                   if (typeof part === 'string') {
-                    const regex = new RegExp(`(${highlight})`, 'gi');
+                    const regex = new RegExp(`(${highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
                     const split = part.split(regex);
                     split.forEach((s, i) => {
-                      if (regex.test(s)) {
-                        newParts.push(<span key={i} style={{ color: '#ffffff' }}>{s}</span>);
-                      } else {
-                        newParts.push(s);
+                      if (s) {
+                        if (s.toLowerCase() === highlight.toLowerCase()) {
+                          newParts.push(<span key={keyCounter++} style={{ color: '#ffffff' }}>{s}</span>);
+                        } else {
+                          newParts.push(s);
+                        }
                       }
                     });
                   } else {
