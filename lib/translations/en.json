@@ -131,6 +131,10 @@
   },
   "experience_page": {
     "title": "The Cube",
+    "duration": "This will take about 4-6 minutes. There are no right answers.",
+    "intro": "You're in a space of your own design. It can be anything — a room, a landscape, somewhere abstract.",
+    "cubeIntro": "In this space, there is a cube.",
+    "cubeQuestion": "Describe the cube.",
     "description": "Describe your space in as much detail as you'd like. Be specific about objects, textures, colors, distances. There are no right answers.",
     "questions": [
       "In this space, you see a cube. Describe it in detail.",
@@ -140,6 +144,8 @@
       "Finally, there is a storm. How distant is it? What kind of storm?"
     ],
     "placeholder": "Describe what you see...",
+    "dontOverthink": "Don't overthink this. Go with what appears first.",
+    "needNudge": "Need a nudge?",
     "continue": "Continue",
     "back": "Back"
   },

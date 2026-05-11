@@ -131,6 +131,10 @@
   },
   "experience_page": {
     "title": "Der Würfel",
+    "duration": "Dies wird etwa 4-6 Minuten dauern. Es gibt keine richtigen Antworten.",
+    "intro": "Sie befinden sich in einem Raum Ihrer eigenen Gestaltung. Es kann alles sein — ein Zimmer, eine Landschaft, etwas Abstraktes.",
+    "cubeIntro": "In diesem Raum gibt es einen Würfel.",
+    "cubeQuestion": "Beschreiben Sie den Würfel.",
     "description": "Beschreiben Sie Ihren Raum mit so vielen Details, wie Sie möchten. Seien Sie spezifisch über Objekte, Texturen, Farben, Entfernungen. Es gibt keine richtigen Antworten.",
     "questions": [
       "In diesem Raum sehen Sie einen Würfel. Beschreiben Sie ihn im Detail.",
@@ -140,6 +144,8 @@
       "Schließlich gibt es einen Sturm. Wie weit weg ist er? Welche Art von Sturm?"
     ],
     "placeholder": "Beschreiben Sie, was Sie sehen...",
+    "dontOverthink": "Überlegen Sie nicht zu viel. Vertrauen Sie auf das, was Ihnen zuerst in den Sinn kommt.",
+    "needNudge": "Brauchen Sie einen Anstoß?",
     "continue": "Fortfahren",
     "back": "Zurück"
   },

@@ -6,6 +6,7 @@ import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { X, ChevronDown, ChevronUp } from 'lucide-react';
 import { useLanguage } from '@/lib/language-context';
+import { t } from '@/lib/translations';
 
 type QuestionKey = 'cube' | 'ladder' | 'flowers' | 'animal' | 'storm';
 
@@ -17,94 +18,96 @@ interface Question {
   placeholder: string;
 }
 
-const QUESTIONS: Question[] = [
-  {
-    key: 'cube',
-    title: 'The Cube',
-    prompt: [
-      "You're in a space of your own design. It can be anything — a room, a landscape, somewhere abstract.",
-      'In this space, there is a cube.',
-      'Describe the cube.',
-    ],
-    nudges: [
-      'How big is it?',
-      'What is it made of?',
-      'Where is it placed?',
-      'What color is it?',
-      'Do you see one side or multiple sides?',
-      'Is it solid, transparent, moving, or still?',
-      'Do you interact with it?',
-    ],
-    placeholder: 'Describe what you see...',
-  },
-  {
-    key: 'ladder',
-    title: 'The Ladder',
-    prompt: [
-      'In the same space, there is a ladder.',
-      'Describe the ladder.',
-    ],
-    nudges: [
-      'How tall is it?',
-      'Where does it lead?',
-      'Is it stable or unstable?',
-      'What is it leaning on, if anything?',
-      'Do you use it?',
-      'If you tried to climb it, what would happen?',
-    ],
-    placeholder: 'Describe what you see...',
-  },
-  {
-    key: 'flowers',
-    title: 'The Flowers',
-    prompt: [
-      'In this space, there are flowers.',
-      'Describe the flowers.',
-    ],
-    nudges: [
-      'How many are there?',
-      'Where are they?',
-      'Are they growing, cut, or arranged?',
-      'Are they cared for?',
-      'What kind of flowers are they?',
-      'What happens if one of them dies?',
-    ],
-    placeholder: 'Describe what you see...',
-  },
-  {
-    key: 'animal',
-    title: 'The Animal',
-    prompt: [
-      'There is an animal in the space.',
-      'What animal is it? Describe it.',
-    ],
-    nudges: [
-      'What is its temperament?',
-      'Where is it positioned?',
-      'Is it aware of you?',
-      'Do you feel safe around it?',
-      'What would happen if it moved?',
-    ],
-    placeholder: 'Describe what you see...',
-  },
-  {
-    key: 'storm',
-    title: 'The Storm',
-    prompt: [
-      'There is a storm.',
-      'Describe the storm.',
-    ],
-    nudges: [
-      'How big is it?',
-      'Where is it?',
-      'Is it inside the space or outside of it?',
-      'Is it calm or destructive?',
-      'Is it moving toward you or away from you?',
-      'How do you feel about it?',
-    ],
-    placeholder: 'Describe what you see...',
-  },
-];
+function getQuestions(language: 'EN' | 'DE'): Question[] {
+  return [
+    {
+      key: 'cube',
+      title: t(language, 'results_page.cube'),
+      prompt: [
+        t(language, 'experience_page.intro'),
+        t(language, 'experience_page.cubeIntro'),
+        t(language, 'experience_page.cubeQuestion'),
+      ],
+      nudges: [
+        'How big is it?',
+        'What is it made of?',
+        'Where is it placed?',
+        'What color is it?',
+        'Do you see one side or multiple sides?',
+        'Is it solid, transparent, moving, or still?',
+        'Do you interact with it?',
+      ],
+      placeholder: t(language, 'experience_page.placeholder'),
+    },
+    {
+      key: 'ladder',
+      title: t(language, 'results_page.ladder'),
+      prompt: [
+        'In the same space, there is a ladder.',
+        'Describe the ladder.',
+      ],
+      nudges: [
+        'How tall is it?',
+        'Where does it lead?',
+        'Is it stable or unstable?',
+        'What is it leaning on, if anything?',
+        'Do you use it?',
+        'If you tried to climb it, what would happen?',
+      ],
+      placeholder: t(language, 'experience_page.placeholder'),
+    },
+    {
+      key: 'flowers',
+      title: t(language, 'results_page.flowers'),
+      prompt: [
+        'In this space, there are flowers.',
+        'Describe the flowers.',
+      ],
+      nudges: [
+        'How many are there?',
+        'Where are they?',
+        'Are they growing, cut, or arranged?',
+        'Are they cared for?',
+        'What kind of flowers are they?',
+        'What happens if one of them dies?',
+      ],
+      placeholder: t(language, 'experience_page.placeholder'),
+    },
+    {
+      key: 'animal',
+      title: t(language, 'results_page.animal'),
+      prompt: [
+        'There is an animal in the space.',
+        'What animal is it? Describe it.',
+      ],
+      nudges: [
+        'What is its temperament?',
+        'Where is it positioned?',
+        'Is it aware of you?',
+        'Do you feel safe around it?',
+        'What would happen if it moved?',
+      ],
+      placeholder: t(language, 'experience_page.placeholder'),
+    },
+    {
+      key: 'storm',
+      title: t(language, 'results_page.storm'),
+      prompt: [
+        'There is a storm.',
+        'Describe the storm.',
+      ],
+      nudges: [
+        'How big is it?',
+        'Where is it?',
+        'Is it inside the space or outside of it?',
+        'Is it calm or destructive?',
+        'Is it moving toward you or away from you?',
+        'How do you feel about it?',
+      ],
+      placeholder: t(language, 'experience_page.placeholder'),
+    },
+  ];
+}
 
 export default function ExperiencePage() {
   const router = useRouter();
@@ -120,7 +123,8 @@ export default function ExperiencePage() {
   const [visible, setVisible] = useState(true);
   const [submitting, setSubmitting] = useState(false);
 
-  const question = QUESTIONS[step];
+  const questions = getQuestions(language);
+  const question = questions[step];
 
   const initSession = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser();
@@ -182,7 +186,7 @@ export default function ExperiencePage() {
   };
 
   const handleContinue = async () => {
-    if (step < QUESTIONS.length - 1) {
+    if (step < questions.length - 1) {
       await goToStep(step + 1);
     } else {
       await handleReveal();
@@ -197,7 +201,7 @@ export default function ExperiencePage() {
     setSubmitting(true);
     if (!sessionId || !profileId) return;
 
-    const insertions = QUESTIONS.map((q) => ({
+    const insertions = questions.map((q) => ({
       session_id: sessionId,
       profile_id: profileId,
       question_key: q.key,
@@ -314,7 +318,7 @@ export default function ExperiencePage() {
                 marginBottom: '2.5rem',
               }}
             >
-              This will take about 4-6 minutes. There are no right answers.
+              {t(language, 'experience_page.duration')}
             </p>
           )}
 
@@ -384,7 +388,7 @@ export default function ExperiencePage() {
               marginBottom: '1.5rem',
             }}
           >
-            Don&apos;t overthink this. Go with what appears first.
+            {t(language, 'experience_page.dontOverthink')}
           </p>
 
           <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
@@ -403,7 +407,7 @@ export default function ExperiencePage() {
                 transition: 'color 0.2s',
               }}
             >
-              Need a nudge?
+              {t(language, 'experience_page.needNudge')}
               {nudgesOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
             </button>
 
@@ -454,7 +458,7 @@ export default function ExperiencePage() {
                   transition: 'all 0.2s',
                 }}
               >
-                Back
+                {t(language, 'experience_page.back')}
               </button>
             )}
 
@@ -476,7 +480,7 @@ export default function ExperiencePage() {
                 opacity: submitting ? 0.7 : 1,
               }}
             >
-              {submitting ? 'Preparing...' : step === QUESTIONS.length - 1 ? 'Reveal my reading' : 'Continue'}
+              {submitting ? 'Preparing...' : step === questions.length - 1 ? 'Reveal my reading' : t(language, 'experience_page.continue')}
             </button>
           </div>
         </div>
