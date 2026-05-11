@@ -152,16 +152,22 @@
     "yourReading": "Ihre Lesung",
     "copyReading": "Meine Lesung kopieren",
     "copied": "Kopiert",
-    "dashboard": "Armaturenbrett",
+    "dashboard": "Dashboard",
     "unlockReading": "Vollständige Lesung freischalten — 7 EUR",
     "oneTimePayment": "Einmalige Zahlung. Sofortiger Zugriff.",
     "readingContinues": "Ihre Lesung wird fortgesetzt.",
-    "readingPreview": "Sie haben genug gesehen, um zu wissen, dass dies nicht generisch ist. Die vollständige Interpretation — alle fünf Elemente, das Muster und was es bedeutet — wartet."
+    "readingPreview": "Sie haben genug gesehen, um zu wissen, dass dies nicht generisch ist. Die vollständige Interpretation — alle fünf Elemente, das Muster und was es bedeutet — wartet.",
+    "preparingReading": "Ihre Lesung wird vorbereitet."
   },
   "dashboard_page": {
     "welcome": "Willkommen zurück",
     "yourReadings": "Ihre Lesungen",
-    "noReadings": "Noch keine Lesungen. Starten Sie Ihre erste Lesung.",
+    "noReadings": "Noch keine Lesungen.",
+    "noReadingsDesc": "Starten Sie Ihre erste Lesung.",
+    "newReading": "Neue Lesung",
+    "loading": "Wird geladen...",
+    "loadingReadings": "Ihre Lesungen werden geladen...",
+    "logout": "Abmelden",
     "viewReading": "Lesung anzeigen",
     "date": "Datum",
     "status": "Status"

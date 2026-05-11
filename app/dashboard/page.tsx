@@ -9,6 +9,7 @@ import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
 import { LangToggle } from '@/components/lang-toggle';
 import { useLanguage } from '@/lib/language-context';
+import { t } from '@/lib/translations';
 import {
   PaidContent, parseSummary, ReadingTraits,
   ELEMENT_KEYS, ELEMENT_LABELS, TRAIT_MAP,
@@ -34,7 +35,7 @@ const MIN_W = 200, MAX_W = 400, DEFAULT_W = 280;
 
 function Sidebar({
   sessions, selectedId, loading, email, displayName,
-  pinnedIds, onSelect, onClose, onSignOut, onSaveName, onPin, onHide, onRename,
+  pinnedIds, onSelect, onClose, onSignOut, onSaveName, onPin, onHide, onRename, language,
 }: {
   sessions: SessionItem[]; selectedId: string | null; loading: boolean;
   email: string; displayName: string; pinnedIds: Set<string>;
@@ -43,6 +44,7 @@ function Sidebar({
   onPin: (id: string) => void;
   onHide: (id: string) => void;
   onRename: (id: string, title: string) => Promise<void>;
+  language: 'EN' | 'DE';
 }) {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const [menuOpenId, setMenuOpenId] = useState<string | null>(null);
@@ -77,15 +79,15 @@ function Sidebar({
           }}
         >
           <Plus size={14} />
-          New reading
+          {t(language, 'dashboard_page.newReading')}
         </Link>
       </div>
 
       <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem 0' }}>
         {loading ? (
-          <p style={{ padding: '1rem 1.5rem', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>Loading...</p>
+          <p style={{ padding: '1rem 1.5rem', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t(language, 'dashboard_page.loading')}</p>
         ) : sessions.length === 0 ? (
-          <p style={{ padding: '1rem 1.5rem', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>No readings yet.</p>
+          <p style={{ padding: '1rem 1.5rem', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t(language, 'dashboard_page.noReadings')}</p>
         ) : sessions.map(s => {
           const title = s.insight?.custom_title
             || parseSummary(s.insight?.summary || '').summation
@@ -383,6 +385,7 @@ export default function DashboardPage() {
     pinnedIds,
     onSelect: handleSelect, onSignOut: handleSignOut,
     onSaveName: handleSaveName, onPin: handlePin, onHide: handleHide, onRename: handleRename,
+    language,
   };
 
   return (
@@ -420,24 +423,24 @@ export default function DashboardPage() {
         <div style={{ flex: 1 }}>
           {loading ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
-              <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>Loading your readings...</p>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>{t(language, 'dashboard_page.loadingReadings')}</p>
             </div>
           ) : sessions.length === 0 ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', padding: '2rem' }}>
               <div style={{ textAlign: 'center', maxWidth: '400px' }}>
-                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 500 }}>No readings yet.</p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 500 }}>{t(language, 'dashboard_page.noReadings')}</p>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2rem' }}>
-                  Start a reading to get your first symbolic interpretation.
+                  {t(language, 'dashboard_page.noReadingsDesc')}
                 </p>
                 <Link href="/experience" style={{ display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px', background: 'var(--accent)', color: '#ffffff', fontFamily: "'Inter', sans-serif", fontSize: '0.92rem', fontWeight: 500, textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.3)' }}>
-                  Start your reading
+                  {t(language, 'dashboard_page.newReading')}
                 </Link>
               </div>
             </div>
           ) : !selected || !selected.insight ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
               <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
-                {selected ? 'This reading is still being prepared.' : 'Select a reading.'}
+                {selected ? t(language, 'results_page.preparingReading') : 'Select a reading.'}
               </p>
             </div>
           ) : (
