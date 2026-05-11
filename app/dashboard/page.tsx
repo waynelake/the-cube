@@ -7,10 +7,15 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
+<<<<<<< HEAD
+import { LangToggle } from '@/components/lang-toggle';
+import { useLanguage } from '@/lib/language-context';
+=======
 
 const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
+>>>>>>> claude/determined-banzai-95f34d
 import {
-  PaidContent, PaywallSection, parseSummary, ReadingTraits,
+  PaidContent, parseSummary, ReadingTraits,
   ELEMENT_KEYS, ELEMENT_LABELS, TRAIT_MAP,
 } from '@/components/reading-display';
 import { Menu, X, LogOut, Plus, MoreHorizontal, Pencil, Pin } from 'lucide-react';
@@ -33,11 +38,11 @@ function formatName(email: string): string {
 const MIN_W = 200, MAX_W = 400, DEFAULT_W = 280;
 
 function Sidebar({
-  sessions, selectedId, loading, email, displayName, isPaid,
+  sessions, selectedId, loading, email, displayName,
   pinnedIds, onSelect, onClose, onSignOut, onSaveName, onPin, onHide, onRename,
 }: {
   sessions: SessionItem[]; selectedId: string | null; loading: boolean;
-  email: string; displayName: string; isPaid: boolean; pinnedIds: Set<string>;
+  email: string; displayName: string; pinnedIds: Set<string>;
   onSelect: (id: string) => void; onClose?: () => void; onSignOut: () => void;
   onSaveName: (name: string) => Promise<void>;
   onPin: (id: string) => void;
@@ -57,7 +62,7 @@ function Sidebar({
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.25rem' }}>
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
             <CubeIcon size={20} />
-            <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.68rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.68rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
               The Cube
             </span>
           </Link>
@@ -72,7 +77,7 @@ function Sidebar({
           style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem',
             padding: '0.55rem 1rem', borderRadius: '8px', background: 'var(--accent)',
-            color: '#ffffff', fontFamily: "'DM Sans', sans-serif",
+            color: '#ffffff', fontFamily: "'Inter', sans-serif",
             fontSize: '0.82rem', fontWeight: 500, textDecoration: 'none',
           }}
         >
@@ -83,9 +88,9 @@ function Sidebar({
 
       <div style={{ flex: 1, overflowY: 'auto', padding: '0.5rem 0' }}>
         {loading ? (
-          <p style={{ padding: '1rem 1.5rem', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>Loading...</p>
+          <p style={{ padding: '1rem 1.5rem', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>Loading...</p>
         ) : sessions.length === 0 ? (
-          <p style={{ padding: '1rem 1.5rem', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>No readings yet.</p>
+          <p style={{ padding: '1rem 1.5rem', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>No readings yet.</p>
         ) : sessions.map(s => {
           const title = s.insight?.custom_title
             || parseSummary(s.insight?.summary || '').summation
@@ -103,15 +108,15 @@ function Sidebar({
                     autoFocus
                     value={titleInput}
                     onChange={e => setTitleInput(e.target.value)}
-                    style={{ width: '100%', padding: '0.3rem 0.5rem', borderRadius: '6px', border: '1px solid rgba(124,58,237,0.3)', background: 'var(--bg)', color: 'var(--text-primary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', outline: 'none', boxSizing: 'border-box' }}
+                    style={{ width: '100%', padding: '0.3rem 0.5rem', borderRadius: '6px', border: '1px solid rgba(124,58,237,0.3)', background: 'var(--bg)', color: 'var(--text-primary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', outline: 'none', boxSizing: 'border-box' }}
                     onKeyDown={e => {
                       if (e.key === 'Enter') { onRename(s.id, titleInput); setEditingTitleId(null); }
                       if (e.key === 'Escape') setEditingTitleId(null);
                     }}
                   />
                   <div style={{ display: 'flex', gap: '0.4rem' }}>
-                    <button onClick={() => { onRename(s.id, titleInput); setEditingTitleId(null); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif" }}>Save</button>
-                    <button onClick={() => setEditingTitleId(null)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif" }}>Cancel</button>
+                    <button onClick={() => { onRename(s.id, titleInput); setEditingTitleId(null); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Save</button>
+                    <button onClick={() => setEditingTitleId(null)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Cancel</button>
                   </div>
                 </div>
               ) : (
@@ -127,11 +132,11 @@ function Sidebar({
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.3rem' }}>
                     {pinnedIds.has(s.id) && <Pin size={10} style={{ color: 'var(--accent)', flexShrink: 0 }} />}
-                    <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', color: 'var(--text-muted)' }}>
+                    <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.72rem', color: 'var(--text-muted)' }}>
                       {formatDate(s.started_at)}
                     </p>
                   </div>
-                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                  <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.82rem', color: 'var(--text-secondary)', lineHeight: '1.4', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                     {title}
                   </p>
                 </button>
@@ -169,7 +174,7 @@ function Sidebar({
                     <button
                       key={label}
                       onClick={action}
-                      style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem 0.875rem', background: 'none', border: 'none', color: label === 'Hide' ? '#e05a5a' : 'var(--text-secondary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', cursor: 'pointer' }}
+                      style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem 0.875rem', background: 'none', border: 'none', color: label === 'Hide' ? '#e05a5a' : 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', cursor: 'pointer' }}
                     >
                       {label}
                     </button>
@@ -182,16 +187,6 @@ function Sidebar({
       </div>
 
       <div style={{ borderTop: '1px solid rgba(124,58,237,0.08)', padding: '1rem 1.5rem', flexShrink: 0 }}>
-        {!isPaid && sessions.length > 0 && selectedId && (
-          <div style={{ marginBottom: '1rem', padding: '0.875rem 0.875rem 0.875rem 1rem', background: 'rgba(124,58,237,0.06)', borderRadius: '10px', border: '1px solid rgba(124,58,237,0.12)' }}>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.74rem', color: 'var(--text-secondary)', marginBottom: '0.4rem', lineHeight: '1.5' }}>
-              Unlock the full reading — all five elements and the pattern.
-            </p>
-            <Link href={`/unlock?session=${selectedId}`} style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.74rem', color: 'var(--accent-text)', textDecoration: 'none', fontWeight: 500 }}>
-              Unlock for 7 EUR →
-            </Link>
-          </div>
-        )}
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem' }}>
           <div style={{ overflow: 'hidden', flex: 1 }}>
             {editingName ? (
@@ -200,20 +195,20 @@ function Sidebar({
                   autoFocus
                   value={nameInput}
                   onChange={e => setNameInput(e.target.value)}
-                  style={{ padding: '0.3rem 0.5rem', borderRadius: '6px', border: '1px solid rgba(124,58,237,0.3)', background: 'var(--bg)', color: 'var(--text-primary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
+                  style={{ padding: '0.3rem 0.5rem', borderRadius: '6px', border: '1px solid rgba(124,58,237,0.3)', background: 'var(--bg)', color: 'var(--text-primary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
                   onKeyDown={e => {
                     if (e.key === 'Enter') { onSaveName(nameInput); setEditingName(false); }
                     if (e.key === 'Escape') setEditingName(false);
                   }}
                 />
                 <div style={{ display: 'flex', gap: '0.4rem' }}>
-                  <button onClick={() => { onSaveName(nameInput); setEditingName(false); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif" }}>Save</button>
-                  <button onClick={() => setEditingName(false)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'DM Sans', sans-serif" }}>Cancel</button>
+                  <button onClick={() => { onSaveName(nameInput); setEditingName(false); }} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: 'none', background: 'var(--accent)', color: '#fff', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Save</button>
+                  <button onClick={() => setEditingName(false)} style={{ flex: 1, padding: '0.25rem', borderRadius: '4px', border: '1px solid var(--border)', background: 'transparent', color: 'var(--text-muted)', fontSize: '0.72rem', cursor: 'pointer', fontFamily: "'Inter', sans-serif" }}>Cancel</button>
                 </div>
               </div>
             ) : (
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', marginBottom: '0.15rem' }}>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.82rem', color: 'var(--text-primary)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.82rem', color: 'var(--text-primary)', fontWeight: 500, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flex: 1 }}>
                   {displayName}
                 </p>
                 <button
@@ -225,7 +220,7 @@ function Sidebar({
               </div>
             )}
             {!editingName && (
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.72rem', color: 'var(--text-muted)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                 {email}
               </p>
             )}
@@ -243,9 +238,9 @@ function Sidebar({
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { language } = useLanguage();
   const [sessions, setSessions] = useState<SessionItem[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const [paidSessionIds, setPaidSessionIds] = useState<Set<string>>(new Set());
   const [pinnedIds, setPinnedIds] = useState<Set<string>>(new Set());
   const [email, setEmail] = useState('');
   const [displayName, setDisplayName] = useState('');
@@ -259,7 +254,7 @@ export default function DashboardPage() {
 
   useEffect(() => { currentWidthRef.current = sidebarWidth; }, [sidebarWidth]);
 
-  const loadDashboard = useCallback(async (urlSession: string | null = null, forceIsPaid = false) => {
+  const loadDashboard = useCallback(async (urlSession: string | null = null) => {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { router.push('/auth?mode=signin'); return; }
 
@@ -304,15 +299,6 @@ export default function DashboardPage() {
         },
       }));
 
-    const { data: payments } = await supabase
-      .from('session_payments')
-      .select('session_id')
-      .eq('profile_id', profile.id);
-
-    const paidSet = new Set((payments || []).map(p => p.session_id as string));
-    if (forceIsPaid && urlSession) paidSet.add(urlSession);
-    setPaidSessionIds(paidSet);
-
     setSessions(items);
     const preselect = urlSession && items.find(s => s.id === urlSession) ? urlSession : (items[0]?.id ?? null);
     setSelectedId(preselect);
@@ -331,8 +317,7 @@ export default function DashboardPage() {
 
     const params = new URLSearchParams(window.location.search);
     const urlSession = params.get('session');
-    const forceIsPaid = params.get('payment') === 'success';
-    loadDashboard(urlSession, forceIsPaid);
+    loadDashboard(urlSession);
   }, [loadDashboard]);
 
   useEffect(() => {
@@ -400,7 +385,7 @@ export default function DashboardPage() {
 
   const sidebarProps = {
     sessions: sortedSessions, selectedId, loading, email, displayName,
-    isPaid: paidSessionIds.has(selectedId ?? ''), pinnedIds,
+    pinnedIds,
     onSelect: handleSelect, onSignOut: handleSignOut,
     onSaveName: handleSaveName, onPin: handlePin, onHide: handleHide, onRename: handleRename,
   };
@@ -426,7 +411,7 @@ export default function DashboardPage() {
           </button>
           <div>
             {selected && (
-              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
+              <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                 {formatDate(selected.started_at)}
               </p>
             )}
@@ -440,37 +425,57 @@ export default function DashboardPage() {
         <div style={{ flex: 1 }}>
           {loading ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
+<<<<<<< HEAD
+              <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>Loading your readings...</p>
+=======
               <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>Loading your readings...</p>
+>>>>>>> claude/determined-banzai-95f34d
             </div>
           ) : sessions.length === 0 ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh', padding: '2rem' }}>
               <div style={{ textAlign: 'center', maxWidth: '400px' }}>
+<<<<<<< HEAD
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 500 }}>No readings yet.</p>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2rem' }}>
+=======
                 <p style={{ fontFamily: "'Inter', Georgia, serif", fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem', fontWeight: 500 }}>No readings yet.</p>
                 <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.9rem', color: 'var(--text-secondary)', lineHeight: '1.7', marginBottom: '2rem' }}>
+>>>>>>> claude/determined-banzai-95f34d
                   Start a reading to get your first symbolic interpretation.
                 </p>
-                <Link href="/experience" style={{ display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px', background: 'var(--accent)', color: '#ffffff', fontFamily: "'DM Sans', sans-serif", fontSize: '0.92rem', fontWeight: 500, textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.3)' }}>
+                <Link href="/experience" style={{ display: 'inline-block', padding: '0.9rem 2.5rem', borderRadius: '8px', background: 'var(--accent)', color: '#ffffff', fontFamily: "'Inter', sans-serif", fontSize: '0.92rem', fontWeight: 500, textDecoration: 'none', boxShadow: '0 0 32px rgba(124,58,237,0.3)' }}>
                   Start your reading
                 </Link>
               </div>
             </div>
           ) : !selected || !selected.insight ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '60vh' }}>
+<<<<<<< HEAD
+              <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+=======
               <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+>>>>>>> claude/determined-banzai-95f34d
                 {selected ? 'This reading is still being prepared.' : 'Select a reading.'}
               </p>
             </div>
           ) : (
             <div className="reading-container">
               <div style={{ marginBottom: '3.5rem' }}>
+<<<<<<< HEAD
+                <h1 style={{ fontFamily: "'Inter', sans-serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem' }}>
+=======
                 <h1 style={{ fontFamily: "'Inter', Georgia, serif", fontSize: 'clamp(1.8rem, 3.5vw, 2.6rem)', color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem' }}>
+>>>>>>> claude/determined-banzai-95f34d
                   What Your Space Reveals
                 </h1>
-                <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
                   {formatDate(selected.started_at)}
                 </p>
               </div>
 
+<<<<<<< HEAD
+              <PaidContent summary={selected.insight?.summary ?? ''} />
+=======
               {!paidSessionIds.has(selected.id) && (
                 <div style={{ marginBottom: '3rem' }}>
                   {ELEMENT_KEYS.map((key, i) => (
@@ -495,6 +500,7 @@ export default function DashboardPage() {
                 ? <PaidContent summary={selected.insight?.summary ?? ''} />
                 : <PaywallSection sessionId={selected.id} summary={selected.insight?.summary ?? ''} />
               }
+>>>>>>> claude/determined-banzai-95f34d
             </div>
           )}
         </div>

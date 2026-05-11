@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { ThemeToggle } from '@/components/theme-provider';
+import { LangToggle } from '@/components/lang-toggle';
+import { useLanguage } from '@/lib/language-context';
 
 const LangToggle = dynamic(() => import('@/components/lang-toggle').then(mod => ({ default: mod.LangToggle })), { ssr: false });
 
@@ -48,12 +50,11 @@ function formatName(email: string): string {
 function ResultsContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { language } = useLanguage();
   const sessionId = searchParams.get('session');
-  const paymentStatus = searchParams.get('payment');
 
   const [traits, setTraits] = useState<ReadingTraits | null>(null);
   const [summary, setSummary] = useState('');
-  const [isPaid, setIsPaid] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userName, setUserName] = useState('');
   const [sessionDate, setSessionDate] = useState('');
@@ -73,8 +74,6 @@ function ResultsContent() {
     if (profile) {
       setUserName(profile.email ? formatName(profile.email) : '');
     }
-
-    setIsPaid(true);
 
     const { data: insight } = await supabase
       .from('derived_insights')
@@ -122,7 +121,11 @@ function ResultsContent() {
       <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: 'var(--bg)' }}>
         <div className="pointer-events-none fixed inset-0 glow-pulse-bg"
           style={{ background: 'radial-gradient(ellipse 700px 500px at 50% 45%, rgba(124,58,237,0.1) 0%, transparent 70%)' }} />
+<<<<<<< HEAD
+        <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+=======
         <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', color: 'var(--text-muted)', fontSize: '1.1rem' }}>
+>>>>>>> claude/determined-banzai-95f34d
           Loading your reading...
         </p>
       </main>
@@ -133,10 +136,14 @@ function ResultsContent() {
     return (
       <main className="relative min-h-screen diagonal-grid flex items-center justify-center" style={{ backgroundColor: 'var(--bg)' }}>
         <div style={{ textAlign: 'center', maxWidth: '400px', padding: '2rem' }}>
+<<<<<<< HEAD
+          <p style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-primary)', fontSize: '1.3rem', marginBottom: '1rem' }}>
+=======
           <p style={{ fontFamily: "'Inter', Georgia, serif", color: 'var(--text-primary)', fontSize: '1.3rem', marginBottom: '1rem' }}>
+>>>>>>> claude/determined-banzai-95f34d
             Your reading is being prepared.
           </p>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", color: 'var(--text-secondary)', fontSize: '0.9rem', marginBottom: '2rem' }}>
             This can take a moment. Please check back shortly.
           </p>
           <button
@@ -144,7 +151,7 @@ function ResultsContent() {
             style={{
               padding: '0.7rem 1.75rem', borderRadius: '8px', border: 'none',
               background: 'var(--accent)', color: 'var(--text-primary)',
-              fontFamily: "'DM Sans', sans-serif", fontSize: '0.88rem', cursor: 'pointer',
+              fontFamily: "'Inter', sans-serif", fontSize: '0.88rem', cursor: 'pointer',
             }}
           >
             Refresh
@@ -165,7 +172,7 @@ function ResultsContent() {
       }}>
         <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', textDecoration: 'none' }}>
           <CubeIcon size={22} />
-          <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
+          <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.7rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
             The Cube
           </span>
         </Link>
@@ -177,25 +184,23 @@ function ResultsContent() {
             style={{
               padding: '0.5rem 1.25rem', borderRadius: '6px',
               border: '1px solid rgba(124,58,237,0.25)', background: 'transparent',
-              color: 'var(--text-secondary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem',
+              color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem',
               textDecoration: 'none', transition: 'all 0.2s',
             }}
           >
             Dashboard
           </Link>
-          {isPaid && (
-            <button
-              onClick={handleCopy}
-              style={{
-                padding: '0.5rem 1.25rem', borderRadius: '6px',
-                border: '1px solid rgba(124,58,237,0.25)', background: 'transparent',
-                color: 'var(--text-secondary)', fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem',
-                cursor: 'pointer', transition: 'all 0.2s',
-              }}
-            >
-              {copied ? 'Copied' : 'Copy my reading'}
-            </button>
-          )}
+          <button
+            onClick={handleCopy}
+            style={{
+              padding: '0.5rem 1.25rem', borderRadius: '6px',
+              border: '1px solid rgba(124,58,237,0.25)', background: 'transparent',
+              color: 'var(--text-secondary)', fontFamily: "'Inter', sans-serif", fontSize: '0.8rem',
+              cursor: 'pointer', transition: 'all 0.2s',
+            }}
+          >
+            {copied ? 'Copied' : 'Copy my reading'}
+          </button>
         </div>
       </nav>
 
@@ -204,21 +209,28 @@ function ResultsContent() {
         position: 'relative', zIndex: 10,
       }}>
         <div style={{ marginBottom: '3.5rem' }}>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.75rem' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.72rem', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '0.75rem' }}>
             Your reading
           </p>
           <h1 style={{
+<<<<<<< HEAD
+            fontFamily: "'Inter', sans-serif",
+=======
             fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
             fontSize: 'clamp(2rem, 4vw, 2.8rem)',
             color: 'var(--text-primary)', fontWeight: 500, lineHeight: '1.2', marginBottom: '0.6rem',
           }}>
             What Your Space Reveals
           </h1>
-          <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+          <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.8rem', color: 'var(--text-muted)' }}>
             {sessionDate}
           </p>
         </div>
 
+<<<<<<< HEAD
+        <PaidContent summary={summary} />
+=======
         {!isPaid && (
           <div style={{ marginBottom: '3rem' }}>
             {ELEMENT_KEYS.map((key, i) => (
@@ -244,6 +256,7 @@ function ResultsContent() {
         ) : (
           <PaywallSection sessionId={sessionId || ''} summary={summary} />
         )}
+>>>>>>> claude/determined-banzai-95f34d
       </div>
     </main>
   );
@@ -370,21 +383,25 @@ function PaidContent({ summary }: { summary: string }) {
             ...(i === 4 ? { gridColumn: '1 / -1' } : {}),
           }}>
             <p style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.65rem', letterSpacing: '0.2em',
               textTransform: 'uppercase', color: 'var(--accent)', marginBottom: '1rem',
             }}>
               {CARD_LABELS[i]}
             </p>
             <p style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.95rem', color: 'var(--text-primary)', lineHeight: '1.9',
               whiteSpace: 'pre-wrap',
             }}>
               {el.body}
             </p>
             <p style={{
+<<<<<<< HEAD
+              fontFamily: "'Inter', sans-serif",
+=======
               fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
               fontStyle: 'italic', fontSize: '1rem', color: 'var(--accent-text)', lineHeight: '1.6',
               marginTop: '1.5rem', paddingTop: '1.5rem',
               borderTop: '1px solid rgba(124,58,237,0.15)',
@@ -398,14 +415,18 @@ function PaidContent({ summary }: { summary: string }) {
       {patternParas.length > 0 && (
         <div style={{ marginTop: '3rem' }}>
           <h2 style={{
+<<<<<<< HEAD
+            fontFamily: "'Inter', sans-serif",
+=======
             fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
             fontSize: '2rem', color: 'var(--text-primary)', fontWeight: 500, marginBottom: '2rem',
           }}>
             The Pattern
           </h2>
           {patternParas.map((para, i) => (
             <p key={i} style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '1rem', color: 'var(--text-primary)', lineHeight: '1.9',
               marginBottom: '1.5rem',
             }}>
@@ -419,7 +440,11 @@ function PaidContent({ summary }: { summary: string }) {
         <div style={{ marginTop: '2rem', marginBottom: '2rem' }}>
           {takeaways.map((t, i) => (
             <p key={i} style={{
+<<<<<<< HEAD
+              fontFamily: "'Inter', sans-serif",
+=======
               fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
               fontStyle: 'italic', fontSize: '1.2rem', color: 'var(--text-primary)', lineHeight: '1.6',
               paddingLeft: '1rem', marginBottom: '0.75rem',
             }}>
@@ -431,7 +456,11 @@ function PaidContent({ summary }: { summary: string }) {
 
       {summation && (
         <p style={{
+<<<<<<< HEAD
+          fontFamily: "'Inter', sans-serif",
+=======
           fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
           fontStyle: 'italic', fontSize: '1.4rem', color: 'var(--text-primary)',
           textAlign: 'center', lineHeight: '1.6',
           marginTop: '3rem', marginBottom: '3rem',
@@ -445,6 +474,8 @@ function PaidContent({ summary }: { summary: string }) {
   );
 }
 
+<<<<<<< HEAD
+=======
 function PaywallSection({ sessionId, summary }: { sessionId: string; summary: string }) {
   const preview = summary.split(/\n{2,}/)[0] || '';
 
@@ -502,6 +533,7 @@ function PaywallSection({ sessionId, summary }: { sessionId: string; summary: st
   );
 }
 
+>>>>>>> claude/determined-banzai-95f34d
 export default function ResultsPage() {
   return (
     <Suspense fallback={null}>

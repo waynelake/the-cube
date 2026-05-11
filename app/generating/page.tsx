@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from '@/lib/supabase';
+import { useLanguage } from '@/lib/language-context';
+import type { Language } from '@/lib/language-context';
 
 const ELEMENT_LABELS = [
   { key: 'cube', label: 'The Cube' },
@@ -21,11 +23,13 @@ const STATUS_LINES = [
 function GeneratingContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { language: contextLanguage } = useLanguage();
   const sessionId = searchParams.get('session');
   const [visibleLines, setVisibleLines] = useState(0);
   const [visibleCards, setVisibleCards] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showLoader, setShowLoader] = useState(false);
+  const [language, setLanguage] = useState<Language>(contextLanguage);
   const synthesisStarted = useRef(false);
 
   useEffect(() => {
@@ -41,6 +45,16 @@ function GeneratingContent() {
         const map: Record<string, string> = {};
         data.forEach(r => { map[r.question_key] = r.answer_text; });
         setAnswers(map);
+      }
+
+      const { data: sessionData } = await supabase
+        .from('sessions')
+        .select('language')
+        .eq('id', sessionId)
+        .single();
+
+      if (sessionData?.language) {
+        setLanguage(sessionData.language as Language);
       }
     };
 
@@ -88,7 +102,7 @@ function GeneratingContent() {
           'Authorization': `Bearer ${token}`,
           'apikey': SUPABASE_ANON_KEY,
         },
-        body: JSON.stringify({ session_id: sessionId }),
+        body: JSON.stringify({ session_id: sessionId, language: language }),
       });
 
       if (res.ok) {
@@ -145,7 +159,11 @@ function GeneratingContent() {
             <p
               key={i}
               style={{
+<<<<<<< HEAD
+                fontFamily: "'Inter', sans-serif",
+=======
                 fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
                 fontStyle: 'italic',
                 fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
                 color: visibleLines > i ? 'var(--text-primary)' : 'transparent',
@@ -175,7 +193,7 @@ function GeneratingContent() {
             >
               <p
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '0.65rem',
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
@@ -187,7 +205,7 @@ function GeneratingContent() {
               </p>
               <p
                 style={{
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '0.88rem',
                   color: 'var(--text-muted)',
                   lineHeight: '1.5',
@@ -205,7 +223,11 @@ function GeneratingContent() {
         </div>
 
         <div style={{ marginTop: '2rem', textAlign: 'center', opacity: showLoader ? 1 : 0, transition: 'opacity 1.2s ease' }}>
+<<<<<<< HEAD
+          <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
+=======
           <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
+>>>>>>> claude/determined-banzai-95f34d
             Interpreting your space...
           </p>
           <div style={{ height: '2px', maxWidth: '200px', margin: '0 auto', borderRadius: '2px', background: 'rgba(124,58,237,0.15)', overflow: 'hidden' }}>

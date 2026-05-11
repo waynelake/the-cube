@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
 import { X, ChevronDown, ChevronUp } from 'lucide-react';
+import { useLanguage } from '@/lib/language-context';
 
 type QuestionKey = 'cube' | 'ladder' | 'flowers' | 'animal' | 'storm';
 
@@ -107,6 +108,7 @@ const QUESTIONS: Question[] = [
 
 export default function ExperiencePage() {
   const router = useRouter();
+  const { language } = useLanguage();
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<Record<QuestionKey, string>>({
     cube: '', ladder: '', flowers: '', animal: '', storm: '',
@@ -156,6 +158,7 @@ export default function ExperiencePage() {
         status: 'active',
         synthesis_status: 'pending',
         session_number: (count ?? 0) + 1,
+        language: language,
       })
       .select('id')
       .single();
@@ -164,7 +167,7 @@ export default function ExperiencePage() {
       setSessionId(session.id);
       setProfileId(profile.id);
     }
-  }, [router]);
+  }, [router, language]);
 
   useEffect(() => {
     initSession();
@@ -237,7 +240,7 @@ export default function ExperiencePage() {
       >
         <div
           style={{
-            fontFamily: "'DM Sans', sans-serif",
+            fontFamily: "'Inter', sans-serif",
             fontSize: '0.75rem',
             letterSpacing: '0.12em',
             textTransform: 'uppercase',
@@ -303,7 +306,11 @@ export default function ExperiencePage() {
           {step === 0 && (
             <p
               style={{
+<<<<<<< HEAD
+                fontFamily: "'Inter', sans-serif",
+=======
                 fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
                 fontStyle: 'italic',
                 fontSize: '0.9rem',
                 color: 'var(--text-muted)',
@@ -317,7 +324,7 @@ export default function ExperiencePage() {
 
           <p
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.72rem',
               letterSpacing: '0.2em',
               textTransform: 'uppercase',
@@ -334,7 +341,11 @@ export default function ExperiencePage() {
               <p
                 key={i}
                 style={{
+<<<<<<< HEAD
+                  fontFamily: "'Inter', sans-serif",
+=======
                   fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
                   fontSize: 'clamp(1.4rem, 3vw, 1.9rem)',
                   lineHeight: '1.4',
                   color: 'var(--text-primary)',
@@ -360,7 +371,7 @@ export default function ExperiencePage() {
                 border: '1px solid rgba(124,58,237,0.18)',
                 background: 'var(--surface)',
                 color: 'var(--text-primary)',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '1rem',
                 lineHeight: '1.7',
                 outline: 'none',
@@ -374,7 +385,7 @@ export default function ExperiencePage() {
 
           <p
             style={{
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: '0.78rem',
               color: 'var(--text-muted)',
               textAlign: 'center',
@@ -390,7 +401,7 @@ export default function ExperiencePage() {
               style={{
                 background: 'none',
                 border: 'none',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '0.8rem',
                 color: 'var(--text-secondary)',
                 cursor: 'pointer',
@@ -423,7 +434,7 @@ export default function ExperiencePage() {
                   <li
                     key={i}
                     style={{
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "'Inter', sans-serif",
                       fontSize: '0.82rem',
                       color: 'var(--text-secondary)',
                     }}
@@ -445,7 +456,7 @@ export default function ExperiencePage() {
                   border: '1px solid var(--border)',
                   background: 'transparent',
                   color: 'var(--text-secondary)',
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '0.88rem',
                   cursor: 'pointer',
                   transition: 'all 0.2s',
@@ -464,7 +475,7 @@ export default function ExperiencePage() {
                 border: 'none',
                 background: 'var(--accent)',
                 color: 'var(--text-primary)',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: '0.92rem',
                 fontWeight: 500,
                 cursor: submitting ? 'not-allowed' : 'pointer',
@@ -505,7 +516,11 @@ export default function ExperiencePage() {
           >
             <h3
               style={{
+<<<<<<< HEAD
+                fontFamily: "'Inter', sans-serif",
+=======
                 fontFamily: "'Inter', Georgia, serif",
+>>>>>>> claude/determined-banzai-95f34d
                 fontSize: '1.3rem',
                 color: 'var(--text-primary)',
                 marginBottom: '0.75rem',
@@ -514,7 +529,7 @@ export default function ExperiencePage() {
             >
               Leave the reading?
             </h3>
-            <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.75rem', lineHeight: '1.6' }}>
+            <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '1.75rem', lineHeight: '1.6' }}>
               Your answers won&apos;t be saved if you leave now.
             </p>
             <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
@@ -526,7 +541,7 @@ export default function ExperiencePage() {
                   border: '1px solid var(--border)',
                   background: 'transparent',
                   color: 'var(--text-secondary)',
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '0.85rem',
                   cursor: 'pointer',
                 }}
@@ -541,7 +556,7 @@ export default function ExperiencePage() {
                   border: 'none',
                   background: 'rgba(224,90,90,0.15)',
                   color: '#e05a5a',
-                  fontFamily: "'DM Sans', sans-serif",
+                  fontFamily: "'Inter', sans-serif",
                   fontSize: '0.85rem',
                   cursor: 'pointer',
                 }}
