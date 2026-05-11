@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
 
 export type Language = 'EN' | 'DE';
 
@@ -18,10 +18,8 @@ const LanguageContext = createContext<LanguageContextType>(defaultContextValue);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [language, setLanguageState] = useState<Language>('EN');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const stored = localStorage.getItem('cube-language') as Language | null;
     if (stored && (stored === 'EN' || stored === 'DE')) {
       setLanguageState(stored);
@@ -35,8 +33,10 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  const value = useMemo(() => ({ language, setLanguage }), [language]);
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage }}>
+    <LanguageContext.Provider value={value}>
       {children}
     </LanguageContext.Provider>
   );
