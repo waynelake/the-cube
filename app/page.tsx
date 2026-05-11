@@ -191,7 +191,7 @@ function Hero({ language }: { language: 'EN' | 'DE' }) {
       style={{
         position: 'relative',
         padding: '13rem 1.5rem 7rem',
-        textAlign: 'left',
+        textAlign: 'center',
         overflow: 'hidden',
         background: 'radial-gradient(ellipse 120% 65% at 50% 0%, rgba(124,58,237,0.28) 0%, transparent 65%)',
       }}
@@ -229,7 +229,7 @@ function Hero({ language }: { language: 'EN' | 'DE' }) {
         initial="hidden"
         animate="visible"
         variants={stagger}
-        style={{ position: 'relative' }}
+        style={{ position: 'relative', maxWidth: '900px', margin: '0 auto' }}
       >
         <motion.h1
           variants={fadeUp}
