@@ -19,6 +19,12 @@ interface Question {
 }
 
 function getQuestions(language: 'EN' | 'DE'): Question[] {
+  const cubeNudges = t(language, 'experience_page.cubeNudges') as string[];
+  const ladderNudges = t(language, 'experience_page.ladderNudges') as string[];
+  const flowersNudges = t(language, 'experience_page.flowersNudges') as string[];
+  const animalNudges = t(language, 'experience_page.animalNudges') as string[];
+  const stormNudges = t(language, 'experience_page.stormNudges') as string[];
+
   return [
     {
       key: 'cube',
@@ -28,82 +34,47 @@ function getQuestions(language: 'EN' | 'DE'): Question[] {
         t(language, 'experience_page.cubeIntro'),
         t(language, 'experience_page.cubeQuestion'),
       ],
-      nudges: [
-        'How big is it?',
-        'What is it made of?',
-        'Where is it placed?',
-        'What color is it?',
-        'Do you see one side or multiple sides?',
-        'Is it solid, transparent, moving, or still?',
-        'Do you interact with it?',
-      ],
+      nudges: cubeNudges,
       placeholder: t(language, 'experience_page.placeholder'),
     },
     {
       key: 'ladder',
       title: t(language, 'results_page.ladder'),
       prompt: [
-        'In the same space, there is a ladder.',
-        'Describe the ladder.',
+        t(language, 'experience_page.ladderIntro'),
+        t(language, 'experience_page.ladderQuestion'),
       ],
-      nudges: [
-        'How tall is it?',
-        'Where does it lead?',
-        'Is it stable or unstable?',
-        'What is it leaning on, if anything?',
-        'Do you use it?',
-        'If you tried to climb it, what would happen?',
-      ],
+      nudges: ladderNudges,
       placeholder: t(language, 'experience_page.placeholder'),
     },
     {
       key: 'flowers',
       title: t(language, 'results_page.flowers'),
       prompt: [
-        'In this space, there are flowers.',
-        'Describe the flowers.',
+        t(language, 'experience_page.flowersIntro'),
+        t(language, 'experience_page.flowersQuestion'),
       ],
-      nudges: [
-        'How many are there?',
-        'Where are they?',
-        'Are they growing, cut, or arranged?',
-        'Are they cared for?',
-        'What kind of flowers are they?',
-        'What happens if one of them dies?',
-      ],
+      nudges: flowersNudges,
       placeholder: t(language, 'experience_page.placeholder'),
     },
     {
       key: 'animal',
       title: t(language, 'results_page.animal'),
       prompt: [
-        'There is an animal in the space.',
-        'What animal is it? Describe it.',
+        t(language, 'experience_page.animalIntro'),
+        t(language, 'experience_page.animalQuestion'),
       ],
-      nudges: [
-        'What is its temperament?',
-        'Where is it positioned?',
-        'Is it aware of you?',
-        'Do you feel safe around it?',
-        'What would happen if it moved?',
-      ],
+      nudges: animalNudges,
       placeholder: t(language, 'experience_page.placeholder'),
     },
     {
       key: 'storm',
       title: t(language, 'results_page.storm'),
       prompt: [
-        'There is a storm.',
-        'Describe the storm.',
+        t(language, 'experience_page.stormIntro'),
+        t(language, 'experience_page.stormQuestion'),
       ],
-      nudges: [
-        'How big is it?',
-        'Where is it?',
-        'Is it inside the space or outside of it?',
-        'Is it calm or destructive?',
-        'Is it moving toward you or away from you?',
-        'How do you feel about it?',
-      ],
+      nudges: stormNudges,
       placeholder: t(language, 'experience_page.placeholder'),
     },
   ];

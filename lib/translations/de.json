@@ -135,6 +135,14 @@
     "intro": "Sie befinden sich in einem Raum Ihrer eigenen Gestaltung. Es kann alles sein — ein Zimmer, eine Landschaft, etwas Abstraktes.",
     "cubeIntro": "In diesem Raum gibt es einen Würfel.",
     "cubeQuestion": "Beschreiben Sie den Würfel.",
+    "ladderIntro": "Im gleichen Raum gibt es eine Leiter.",
+    "ladderQuestion": "Beschreiben Sie die Leiter.",
+    "flowersIntro": "In diesem Raum gibt es Blumen.",
+    "flowersQuestion": "Beschreiben Sie die Blumen.",
+    "animalIntro": "Es gibt ein Tier im Raum.",
+    "animalQuestion": "Welches Tier ist es? Beschreiben Sie es.",
+    "stormIntro": "Es gibt einen Sturm.",
+    "stormQuestion": "Beschreiben Sie den Sturm.",
     "description": "Beschreiben Sie Ihren Raum mit so vielen Details, wie Sie möchten. Seien Sie spezifisch über Objekte, Texturen, Farben, Entfernungen. Es gibt keine richtigen Antworten.",
     "questions": [
       "In diesem Raum sehen Sie einen Würfel. Beschreiben Sie ihn im Detail.",
@@ -147,7 +155,12 @@
     "dontOverthink": "Überlegen Sie nicht zu viel. Vertrauen Sie auf das, was Ihnen zuerst in den Sinn kommt.",
     "needNudge": "Brauchen Sie einen Anstoß?",
     "continue": "Fortfahren",
-    "back": "Zurück"
+    "back": "Zurück",
+    "cubeNudges": ["Wie groß ist es?", "Woraus ist es gemacht?", "Wo ist es positioniert?", "Welche Farbe hat es?", "Sehen Sie eine Seite oder mehrere Seiten?", "Ist es fest, transparent, beweglich oder still?", "Interagieren Sie damit?"],
+    "ladderNudges": ["Wie hoch ist sie?", "Wohin führt sie?", "Ist sie stabil oder instabil?", "Worauf lehnt sie sich, falls überhaupt?", "Benutzen Sie sie?", "Was würde passieren, wenn Sie sie erklimmen wollten?"],
+    "flowersNudges": ["Wie viele gibt es?", "Wo sind sie?", "Wachsen sie, sind sie geschnitten oder arrangiert?", "Werden sie gepflegt?", "Welche Art von Blumen sind es?", "Was passiert, wenn eine von ihnen stirbt?"],
+    "animalNudges": ["Wie ist sein Temperament?", "Wo ist es positioniert?", "Ist es sich Ihrer bewusst?", "Fühlen Sie sich sicher in seiner Nähe?", "Was würde passieren, wenn es sich bewegte?"],
+    "stormNudges": ["Wie groß ist es?", "Wo ist es?", "Ist es im Raum oder außerhalb?", "Ist es ruhig oder zerstörerisch?", "Bewegt es sich auf Sie zu oder weg von Ihnen?", "Wie fühlen Sie sich dabei?"]
   },
   "generating_page": {
     "generating": "Ihre Lesung wird generiert...",

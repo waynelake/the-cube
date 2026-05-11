@@ -135,6 +135,14 @@
     "intro": "You're in a space of your own design. It can be anything — a room, a landscape, somewhere abstract.",
     "cubeIntro": "In this space, there is a cube.",
     "cubeQuestion": "Describe the cube.",
+    "ladderIntro": "In the same space, there is a ladder.",
+    "ladderQuestion": "Describe the ladder.",
+    "flowersIntro": "In this space, there are flowers.",
+    "flowersQuestion": "Describe the flowers.",
+    "animalIntro": "There is an animal in the space.",
+    "animalQuestion": "What animal is it? Describe it.",
+    "stormIntro": "There is a storm.",
+    "stormQuestion": "Describe the storm.",
     "description": "Describe your space in as much detail as you'd like. Be specific about objects, textures, colors, distances. There are no right answers.",
     "questions": [
       "In this space, you see a cube. Describe it in detail.",
@@ -147,7 +155,12 @@
     "dontOverthink": "Don't overthink this. Go with what appears first.",
     "needNudge": "Need a nudge?",
     "continue": "Continue",
-    "back": "Back"
+    "back": "Back",
+    "cubeNudges": ["How big is it?", "What is it made of?", "Where is it placed?", "What color is it?", "Do you see one side or multiple sides?", "Is it solid, transparent, moving, or still?", "Do you interact with it?"],
+    "ladderNudges": ["How tall is it?", "Where does it lead?", "Is it stable or unstable?", "What is it leaning on, if anything?", "Do you use it?", "If you tried to climb it, what would happen?"],
+    "flowersNudges": ["How many are there?", "Where are they?", "Are they growing, cut, or arranged?", "Are they cared for?", "What kind of flowers are they?", "What happens if one of them dies?"],
+    "animalNudges": ["What is its temperament?", "Where is it positioned?", "Is it aware of you?", "Do you feel safe around it?", "What would happen if it moved?"],
+    "stormNudges": ["How big is it?", "Where is it?", "Is it inside the space or outside of it?", "Is it calm or destructive?", "Is it moving toward you or away from you?", "How do you feel about it?"]
   },
   "generating_page": {
     "generating": "Generating your reading...",
