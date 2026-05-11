@@ -596,7 +596,34 @@ function Foundation({ language }: { language: 'EN' | 'DE' }) {
               margin: '0 auto 3rem',
             }}
           >
-            {t(language, 'theoryAndResearch.body')}
+            {(() => {
+              const text = t(language, 'theoryAndResearch.body');
+              const highlights = language === 'EN'
+                ? ['depth psychologists', 'believed the psyche speaks in images']
+                : ['Tiefenpsychologen', 'die glaubten, dass die Psyche in Bildern spricht'];
+
+              let parts = [text];
+              highlights.forEach(highlight => {
+                const newParts: (string | JSX.Element)[] = [];
+                parts.forEach(part => {
+                  if (typeof part === 'string') {
+                    const regex = new RegExp(`(${highlight})`, 'gi');
+                    const split = part.split(regex);
+                    split.forEach((s, i) => {
+                      if (regex.test(s)) {
+                        newParts.push(<span key={i} style={{ color: '#ffffff' }}>{s}</span>);
+                      } else {
+                        newParts.push(s);
+                      }
+                    });
+                  } else {
+                    newParts.push(part);
+                  }
+                });
+                parts = newParts;
+              });
+              return parts;
+            })()}
           </motion.p>
 
           <motion.div
@@ -953,13 +980,13 @@ function Pricing({ language }: { language: 'EN' | 'DE' }) {
                     padding: 'clamp(1.75rem, 3vw, 2.5rem)',
                     borderRadius: '30px',
                     background: tier.highlighted
-                      ? 'rgba(124,58,237,0.18)'
+                      ? 'rgba(124,58,237,0.25)'
                       : GLASS.background,
                     border: tier.highlighted
-                      ? '1px solid rgba(124,58,237,0.5)'
+                      ? '1.5px solid rgba(124,58,237,0.8)'
                       : GLASS.border,
                     boxShadow: tier.highlighted
-                      ? 'inset 0 1px 0 rgba(255,255,255,0.12), 0 0 60px rgba(124,58,237,0.2), 0 8px 32px rgba(0,0,0,0.4)'
+                      ? 'inset 0 1px 0 rgba(255,255,255,0.12), 0 0 80px rgba(124,58,237,0.35), 0 0 40px rgba(167,139,250,0.2), 0 8px 32px rgba(0,0,0,0.4)'
                       : GLASS.boxShadow,
                     position: 'relative',
                   }}
@@ -971,16 +998,17 @@ function Pricing({ language }: { language: 'EN' | 'DE' }) {
                         top: '-0.65rem',
                         left: '50%',
                         transform: 'translateX(-50%)',
-                        background: '#7c3aed',
+                        background: 'linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)',
                         color: '#fff',
                         fontFamily: "'Inter', sans-serif",
                         fontSize: '0.6rem',
-                        fontWeight: 600,
+                        fontWeight: 700,
                         letterSpacing: '0.14em',
                         textTransform: 'uppercase',
-                        padding: '0.2rem 0.7rem',
+                        padding: '0.3rem 0.9rem',
                         borderRadius: '9999px',
                         whiteSpace: 'nowrap',
+                        boxShadow: '0 0 20px rgba(124,58,237,0.5), 0 0 40px rgba(167,139,250,0.3)',
                       }}
                     >
                       {tier.badge}
@@ -1271,8 +1299,10 @@ function FooterCTA({ language }: { language: 'EN' | 'DE' }) {
             fontWeight: 400,
             fontStyle: 'normal',
             color: '#fff',
-            lineHeight: 1.0,
+            lineHeight: 1.15,
             marginBottom: '1.5rem',
+            maxWidth: '700px',
+            margin: '0 auto 1.5rem',
           }}
         >
           {t(language, 'footerCta.title')}
