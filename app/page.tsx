@@ -579,13 +579,26 @@ function Foundation({ language }: { language: 'EN' | 'DE' }) {
           </motion.div>
 
           <motion.h2 variants={fadeUp} style={{
-            ...H2,
             fontFamily: "'Inter', sans-serif",
             fontSize: 'clamp(1.75rem, 3.5vw, 4rem)',
             fontWeight: 500,
-            color: 'rgba(240,235,255,0.55)',
+            fontStyle: 'normal',
+            letterSpacing: '-0.02em',
+            lineHeight: 1.05,
+            color: 'rgba(240, 235, 255, 0.55)',
+            marginBottom: '1.25rem',
+            opacity: 1,
+            transform: 'none',
           }}>
-            {t(language, 'theoryAndResearch.title')}
+            {language === 'EN' ? (
+              <>
+                Drawn from the work of<span style={{ color: '#fff' }}>depth psychologists</span> who<span style={{ color: '#fff' }}>believed the psyche speaks in images.</span>
+              </>
+            ) : (
+              <>
+                Basierend auf der Arbeit von <span style={{ color: '#fff' }}>Tiefenpsychologen</span>, <span style={{ color: '#fff' }}>die glaubten, dass die Psyche in Bildern spricht</span>.
+              </>
+            )}
           </motion.h2>
 
           <motion.p
@@ -1008,17 +1021,18 @@ function Pricing({ language }: { language: 'EN' | 'DE' }) {
                   whileHover={{ y: -4 }}
                   transition={{ duration: 0.28, ease: EASE }}
                   style={{
-                    ...GLASS,
                     padding: 'clamp(1.75rem, 3vw, 2.5rem)',
                     borderRadius: '30px',
                     background: tier.highlighted
-                      ? 'rgba(124,58,237,0.25)'
+                      ? 'rgba(124, 58, 237, 0.18)'
                       : GLASS.background,
+                    backdropFilter: 'blur(24px) brightness(1.1)',
+                    WebkitBackdropFilter: 'blur(24px) brightness(1.1)',
                     border: tier.highlighted
-                      ? '1.5px solid rgba(124,58,237,0.8)'
+                      ? '1px solid rgba(124, 58, 237, 0.5)'
                       : GLASS.border,
                     boxShadow: tier.highlighted
-                      ? 'inset 0 1px 0 rgba(255,255,255,0.12), 0 0 80px rgba(124,58,237,0.35), 0 0 40px rgba(167,139,250,0.2), 0 8px 32px rgba(0,0,0,0.4)'
+                      ? 'rgba(255, 255, 255, 0.12) 0px 1px 0px inset, rgba(124, 58, 237, 0.2) 0px 0px 60px, rgba(0, 0, 0, 0.4) 0px 8px 32px'
                       : GLASS.boxShadow,
                     position: 'relative',
                   }}
@@ -1030,17 +1044,16 @@ function Pricing({ language }: { language: 'EN' | 'DE' }) {
                         top: '-0.65rem',
                         left: '50%',
                         transform: 'translateX(-50%)',
-                        background: 'linear-gradient(135deg, #a78bfa 0%, #7c3aed 100%)',
+                        background: '#7c3aed',
                         color: '#fff',
                         fontFamily: "'Inter', sans-serif",
                         fontSize: '0.6rem',
-                        fontWeight: 700,
+                        fontWeight: 600,
                         letterSpacing: '0.14em',
                         textTransform: 'uppercase',
-                        padding: '0.3rem 0.9rem',
+                        padding: '0.2rem 0.7rem',
                         borderRadius: '9999px',
                         whiteSpace: 'nowrap',
-                        boxShadow: '0 0 20px rgba(124,58,237,0.5), 0 0 40px rgba(167,139,250,0.3)',
                       }}
                     >
                       {tier.badge}
@@ -1332,7 +1345,7 @@ function FooterCTA({ language }: { language: 'EN' | 'DE' }) {
             fontStyle: 'normal',
             color: '#fff',
             lineHeight: 1.1,
-            maxWidth: '900px',
+            maxWidth: language === 'DE' ? '1000px' : '900px',
             margin: '0 auto 1.5rem',
           }}
         >
