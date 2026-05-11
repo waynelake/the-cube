@@ -57,6 +57,7 @@
     "body": "The Cube exercise has roots in object relations theory, Jungian symbolism, and decades of research into how the unconscious uses spatial metaphor. The objects you choose, and how you describe them, reveal patterns you live inside but rarely see from the outside."
   },
   "testimonials": {
+    "label": "Testimonial",
     "title": "What users are saying"
   },
   "faq": {
@@ -171,5 +172,15 @@
     "flowers": "What do the flowers represent? Are they thriving or dying?",
     "animal": "What does the animal represent? How is it behaving?",
     "storm": "What does the storm represent? How close is it?"
+  },
+  "footerCta": {
+    "title": "Start your Experience Today",
+    "subtitle": "Join thousands of users discovering themselves through The Cube experience.",
+    "cta": "Begin your reading"
+  },
+  "footer": {
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "copyright": "© 2026 The Cube. All rights reserved."
   }
 }

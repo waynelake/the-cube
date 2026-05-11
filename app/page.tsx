@@ -747,7 +747,7 @@ function Testimonials({ language }: { language: 'EN' | 'DE' }) {
         }}
       >
         <motion.div variants={fadeUp} style={{ textAlign: 'center' }}>
-          <SectionPill label="Testimonial" />
+          <SectionPill label={t(language, 'testimonials.label')} />
           <h2 style={{ ...H2, textAlign: 'center', margin: '0 auto 1.25rem' }}>
             {t(language, 'testimonials.title')}
           </h2>
@@ -1275,7 +1275,7 @@ function FooterCTA({ language }: { language: 'EN' | 'DE' }) {
             marginBottom: '1.5rem',
           }}
         >
-          Start your<br />Experience Today
+          {t(language, 'footerCta.title')}
         </motion.h2>
 
         <motion.p
@@ -1286,8 +1286,7 @@ function FooterCTA({ language }: { language: 'EN' | 'DE' }) {
             margin: '0 auto 2.5rem',
           }}
         >
-          Join thousands of users discovering themselves through The Cube
-          experience.
+          {t(language, 'footerCta.subtitle')}
         </motion.p>
 
         <motion.div variants={fadeUp}>
@@ -1307,7 +1306,7 @@ function FooterCTA({ language }: { language: 'EN' | 'DE' }) {
               textDecoration: 'none',
             }}
           >
-            Begin your reading
+            {t(language, 'footerCta.cta')}
           </Link>
         </motion.div>
       </motion.div>
@@ -1349,11 +1348,11 @@ function Footer({ language }: { language: 'EN' | 'DE' }) {
 
         <div style={{ display: 'flex', gap: '2rem' }}>
           {[
-            { label: 'Privacy Policy', href: '/privacy' },
-            { label: 'Terms of Service', href: '/terms' },
-          ].map(({ label, href }) => (
+            { labelKey: 'footer.privacyPolicy', href: '/privacy' },
+            { labelKey: 'footer.termsOfService', href: '/terms' },
+          ].map(({ labelKey, href }) => (
             <Link
-              key={label}
+              key={labelKey}
               href={href}
               style={{
                 fontFamily: "'Inter', sans-serif",
@@ -1362,7 +1361,7 @@ function Footer({ language }: { language: 'EN' | 'DE' }) {
                 textDecoration: 'none',
               }}
             >
-              {label}
+              {t(language, labelKey)}
             </Link>
           ))}
         </div>
@@ -1374,7 +1373,7 @@ function Footer({ language }: { language: 'EN' | 'DE' }) {
             color: 'rgba(255,255,255,0.2)',
           }}
         >
-          &copy; 2026 The Cube. All rights reserved.
+          {t(language, 'footer.copyright')}
         </p>
       </div>
     </footer>

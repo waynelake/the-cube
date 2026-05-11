@@ -57,6 +57,7 @@
     "body": "Die Würfelübung hat Wurzeln in Objektbeziehungstheorie, Junianischer Symbolik und Jahrzehnten Forschung darüber, wie das Unbewusste räumliche Metaphern nutzt. Die Objekte, die Sie wählen, und wie Sie sie beschreiben, enthüllen Muster, in denen Sie leben, aber selten von außen sehen."
   },
   "testimonials": {
+    "label": "Testimonial",
     "title": "Was Benutzer sagen"
   },
   "faq": {
@@ -171,5 +172,15 @@
     "flowers": "Was stellen die Blumen dar? Gedeihen sie oder sterben sie?",
     "animal": "Was stellt das Tier dar? Wie verhält es sich?",
     "storm": "Was stellt der Sturm dar? Wie nah ist er?"
+  },
+  "footerCta": {
+    "title": "Beginnen Sie heute Ihre Erfahrung",
+    "subtitle": "Schließen Sie sich Tausenden von Nutzern an, die sich durch die Würfel-Erfahrung selbst entdecken.",
+    "cta": "Beginnen Sie Ihre Lesung"
+  },
+  "footer": {
+    "privacyPolicy": "Datenschutzrichtlinie",
+    "termsOfService": "Nutzungsbedingungen",
+    "copyright": "© 2026 Der Würfel. Alle Rechte vorbehalten."
   }
 }
