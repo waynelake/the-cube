@@ -159,11 +159,7 @@ function GeneratingContent() {
             <p
               key={i}
               style={{
-<<<<<<< HEAD
                 fontFamily: "'Inter', sans-serif",
-=======
-                fontFamily: "'Inter', Georgia, serif",
->>>>>>> claude/determined-banzai-95f34d
                 fontStyle: 'italic',
                 fontSize: 'clamp(1.1rem, 2.5vw, 1.4rem)',
                 color: visibleLines > i ? 'var(--text-primary)' : 'transparent',
@@ -223,11 +219,7 @@ function GeneratingContent() {
         </div>
 
         <div style={{ marginTop: '2rem', textAlign: 'center', opacity: showLoader ? 1 : 0, transition: 'opacity 1.2s ease' }}>
-<<<<<<< HEAD
           <p style={{ fontFamily: "'Inter', sans-serif", fontStyle: 'italic', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
-=======
-          <p style={{ fontFamily: "'Inter', Georgia, serif", fontStyle: 'italic', fontSize: '1rem', color: 'var(--text-muted)', marginBottom: '1.25rem' }}>
->>>>>>> claude/determined-banzai-95f34d
             Interpreting your space...
           </p>
           <div style={{ height: '2px', maxWidth: '200px', margin: '0 auto', borderRadius: '2px', background: 'rgba(124,58,237,0.15)', overflow: 'hidden' }}>
