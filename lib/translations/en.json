@@ -156,6 +156,8 @@
     "needNudge": "Need a nudge?",
     "continue": "Continue",
     "back": "Back",
+    "reveal": "Reveal my reading",
+    "preparing": "Preparing...",
     "cubeNudges": ["How big is it?", "What is it made of?", "Where is it placed?", "What color is it?", "Do you see one side or multiple sides?", "Is it solid, transparent, moving, or still?", "Do you interact with it?"],
     "ladderNudges": ["How tall is it?", "Where does it lead?", "Is it stable or unstable?", "What is it leaning on, if anything?", "Do you use it?", "If you tried to climb it, what would happen?"],
     "flowersNudges": ["How many are there?", "Where are they?", "Are they growing, cut, or arranged?", "Are they cared for?", "What kind of flowers are they?", "What happens if one of them dies?"],

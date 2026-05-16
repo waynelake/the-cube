@@ -451,7 +451,7 @@ export default function ExperiencePage() {
                 opacity: submitting ? 0.7 : 1,
               }}
             >
-              {submitting ? 'Preparing...' : step === questions.length - 1 ? 'Reveal my reading' : t(language, 'experience_page.continue')}
+              {submitting ? t(language, 'experience_page.preparing') : step === questions.length - 1 ? t(language, 'experience_page.reveal') : t(language, 'experience_page.continue')}
             </button>
           </div>
         </div>

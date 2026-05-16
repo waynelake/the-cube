@@ -156,6 +156,8 @@
     "needNudge": "Brauchen Sie einen Anstoß?",
     "continue": "Fortfahren",
     "back": "Zurück",
+    "reveal": "Meine Lesung offenbaren",
+    "preparing": "Vorbereitung läuft...",
     "cubeNudges": ["Wie groß ist es?", "Woraus ist es gemacht?", "Wo ist es positioniert?", "Welche Farbe hat es?", "Sehen Sie eine Seite oder mehrere Seiten?", "Ist es fest, transparent, beweglich oder still?", "Interagieren Sie damit?"],
     "ladderNudges": ["Wie hoch ist sie?", "Wohin führt sie?", "Ist sie stabil oder instabil?", "Worauf lehnt sie sich, falls überhaupt?", "Benutzen Sie sie?", "Was würde passieren, wenn Sie sie erklimmen wollten?"],
     "flowersNudges": ["Wie viele gibt es?", "Wo sind sie?", "Wachsen sie, sind sie geschnitten oder arrangiert?", "Werden sie gepflegt?", "Welche Art von Blumen sind es?", "Was passiert, wenn eine von ihnen stirbt?"],
