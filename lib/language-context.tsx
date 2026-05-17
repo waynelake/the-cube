@@ -1,6 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import { supabase } from '@/lib/supabase';
 
 export type Language = 'EN' | 'DE';
 
@@ -26,10 +27,31 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  const setLanguage = (lang: Language) => {
+  const setLanguage = async (lang: Language) => {
     setLanguageState(lang);
     if (typeof window !== 'undefined') {
       localStorage.setItem('cube-language', lang);
+    }
+
+    // Save to database if user is authenticated
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('id')
+          .eq('auth_user_id', user.id)
+          .maybeSingle();
+
+        if (profile) {
+          await supabase
+            .from('profiles')
+            .update({ language: lang })
+            .eq('id', profile.id);
+        }
+      }
+    } catch (err) {
+      console.error('Failed to save language preference:', err);
     }
   };
 

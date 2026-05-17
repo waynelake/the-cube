@@ -106,7 +106,7 @@ export default function ExperiencePage() {
 
     let { data: profile } = await supabase
       .from('profiles')
-      .select('id')
+      .select('id, language')
       .eq('auth_user_id', user.id)
       .maybeSingle();
 
@@ -114,12 +114,15 @@ export default function ExperiencePage() {
       const { data: newProfile } = await supabase
         .from('profiles')
         .insert({ auth_user_id: user.id, email: user.email })
-        .select('id')
+        .select('id, language')
         .single();
       profile = newProfile;
     }
 
     if (!profile) return;
+
+    // Use profile's language preference if available, otherwise use current language context
+    const sessionLanguage = profile.language || language;
 
     const { count } = await supabase
       .from('sessions')
@@ -133,7 +136,7 @@ export default function ExperiencePage() {
         status: 'active',
         synthesis_status: 'pending',
         session_number: (count ?? 0) + 1,
-        language: language,
+        language: sessionLanguage,
       })
       .select('id')
       .single();
