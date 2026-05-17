@@ -200,6 +200,7 @@ function AuthContent() {
               onChange={(e) => setPassword(e.target.value)}
               required
               placeholder="••••••••"
+              autoComplete={mode === 'signin' ? 'current-password' : 'new-password'}
               style={{
                 width: '100%',
                 padding: '0.7rem 1rem',
