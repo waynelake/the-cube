@@ -4,21 +4,8 @@ import { useState, useEffect, useRef, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from '@/lib/supabase';
 import { useLanguage } from '@/lib/language-context';
+import { t } from '@/lib/translations';
 import type { Language } from '@/lib/language-context';
-
-const ELEMENT_LABELS = [
-  { key: 'cube', label: 'The Cube' },
-  { key: 'ladder', label: 'The Ladder' },
-  { key: 'flowers', label: 'The Flowers' },
-  { key: 'animal', label: 'The Animal' },
-  { key: 'storm', label: 'The Storm' },
-];
-
-const STATUS_LINES = [
-  'Mapping your room...',
-  'Reading the objects...',
-  'Finding the pattern...',
-];
 
 function GeneratingContent() {
   const searchParams = useSearchParams();
@@ -31,6 +18,20 @@ function GeneratingContent() {
   const [showLoader, setShowLoader] = useState(false);
   const [language, setLanguage] = useState<Language>(contextLanguage);
   const synthesisStarted = useRef(false);
+
+  const STATUS_LINES = [
+    t(language, 'generating_page.mappingRoom'),
+    t(language, 'generating_page.readingObjects'),
+    t(language, 'generating_page.findingPattern'),
+  ];
+
+  const ELEMENT_LABELS_TRANSLATED = [
+    { key: 'cube', label: t(language, 'generating_page.cubeLabel') },
+    { key: 'ladder', label: t(language, 'generating_page.ladderLabel') },
+    { key: 'flowers', label: t(language, 'generating_page.flowersLabel') },
+    { key: 'animal', label: t(language, 'generating_page.animalLabel') },
+    { key: 'storm', label: t(language, 'generating_page.stormLabel') },
+  ];
 
   useEffect(() => {
     if (!sessionId) { router.push('/'); return; }
@@ -64,7 +65,7 @@ function GeneratingContent() {
     const t2 = setTimeout(() => setVisibleLines(2), 1800);
     const t3 = setTimeout(() => setVisibleLines(3), 3200);
 
-    const cardTimers = ELEMENT_LABELS.map((_, i) =>
+    const cardTimers = ELEMENT_LABELS_TRANSLATED.map((_, i) =>
       setTimeout(() => setVisibleCards(n => Math.max(n, i + 1)), 3000 + i * 900)
     );
 
@@ -174,7 +175,7 @@ function GeneratingContent() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-          {ELEMENT_LABELS.map(({ key, label }, i) => (
+          {ELEMENT_LABELS_TRANSLATED.map(({ key, label }, i) => (
             <div
               key={key}
               style={{

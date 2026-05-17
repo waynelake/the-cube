@@ -166,7 +166,15 @@
   },
   "generating_page": {
     "generating": "Generating your reading...",
-    "generatingSubtitle": "This is a moment. In a moment, you'll have your reading. Be patient."
+    "generatingSubtitle": "This is a moment. In a moment, you'll have your reading. Be patient.",
+    "mappingRoom": "Mapping your room...",
+    "readingObjects": "Reading the objects...",
+    "findingPattern": "Finding the pattern...",
+    "cubeLabel": "The Cube",
+    "ladderLabel": "The Ladder",
+    "flowersLabel": "The Flowers",
+    "animalLabel": "The Animal",
+    "stormLabel": "The Storm"
   },
   "results_page": {
     "title": "What Your Space Reveals",

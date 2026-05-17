@@ -166,7 +166,15 @@
   },
   "generating_page": {
     "generating": "Ihre Lesung wird generiert...",
-    "generatingSubtitle": "Dies ist ein Moment. In einem Moment haben Sie Ihre Lesung. Seien Sie geduldig."
+    "generatingSubtitle": "Dies ist ein Moment. In einem Moment haben Sie Ihre Lesung. Seien Sie geduldig.",
+    "mappingRoom": "Ihren Raum kartographieren...",
+    "readingObjects": "Die Objekte lesen...",
+    "findingPattern": "Das Muster finden...",
+    "cubeLabel": "Der Würfel",
+    "ladderLabel": "Die Leiter",
+    "flowersLabel": "Die Blumen",
+    "animalLabel": "Das Tier",
+    "stormLabel": "Der Sturm"
   },
   "results_page": {
     "title": "Was Ihr Raum enthüllt",
