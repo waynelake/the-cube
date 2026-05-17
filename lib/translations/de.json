@@ -136,7 +136,9 @@
     "checkEmailReset": "Überprüfen Sie Ihre E-Mail auf einen Link zum Zurücksetzen des Passworts.",
     "confirmationSent": "Bestätigungse-Mail versendet!",
     "checkEmail": "Wir haben einen Bestätigungslink an Ihre E-Mail gesendet. Bitte bestätigen Sie Ihre E-Mail, um fortzufahren. Wenn Sie sie nicht sehen, überprüfen Sie Ihren Spam- oder Junk-Ordner.",
-    "backToSignIn": "Zurück zur Anmeldung"
+    "backToSignIn": "Zurück zur Anmeldung",
+    "rateLimitError": "Zu viele Anmeldeversuche. Bitte warten Sie ein paar Minuten und versuchen Sie es erneut.",
+    "emailNotConfirmed": "Bitte bestätigen Sie zunächst Ihre E-Mail. Suchen Sie in Ihrem Posteingang (und dem Spam-Ordner) nach dem Bestätigungslink."
   },
   "experience_page": {
     "title": "Der Würfel",

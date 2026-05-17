@@ -34,15 +34,28 @@ function AuthContent() {
     try {
       if (mode === 'signup') {
         const { error } = await supabase.auth.signUp({ email, password });
-        if (error) throw error;
+        if (error) {
+          // Handle rate limit error
+          if (error.message?.includes('rate') || error.message?.includes('limit')) {
+            throw new Error(t(language, 'auth.rateLimitError'));
+          }
+          throw error;
+        }
         setConfirmationSent(true);
       } else {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
-        if (error) throw error;
+        if (error) {
+          // Handle email not confirmed error
+          if (error.message?.includes('Email not confirmed')) {
+            throw new Error(t(language, 'auth.emailNotConfirmed'));
+          }
+          throw error;
+        }
         router.push('/dashboard');
       }
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Something went wrong.');
+      const errorMessage = err instanceof Error ? err.message : 'Something went wrong.';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }

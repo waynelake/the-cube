@@ -136,7 +136,9 @@
     "checkEmailReset": "Check your email for a password reset link.",
     "confirmationSent": "Confirmation email sent!",
     "checkEmail": "We've sent a confirmation link to your email. Please verify your email to continue. If you don't see it, check your spam or junk folder.",
-    "backToSignIn": "Back to sign in"
+    "backToSignIn": "Back to sign in",
+    "rateLimitError": "Too many signup attempts. Please wait a few minutes and try again.",
+    "emailNotConfirmed": "Please confirm your email first. Check your inbox (and spam folder) for the confirmation link."
   },
   "experience_page": {
     "title": "The Cube",
