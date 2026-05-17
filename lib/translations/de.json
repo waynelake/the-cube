@@ -133,7 +133,10 @@
     "beginReading": "Beginnen Sie Ihre Lesung.",
     "continueWhere": "Setzen Sie fort, wo Sie aufgehört haben.",
     "enterEmailFirst": "Geben Sie zuerst Ihre E-Mail-Adresse ein.",
-    "checkEmailReset": "Überprüfen Sie Ihre E-Mail auf einen Link zum Zurücksetzen des Passworts."
+    "checkEmailReset": "Überprüfen Sie Ihre E-Mail auf einen Link zum Zurücksetzen des Passworts.",
+    "confirmationSent": "Bestätigungse-Mail versendet!",
+    "checkEmail": "Wir haben einen Bestätigungslink an Ihre E-Mail gesendet. Bitte bestätigen Sie Ihre E-Mail, um fortzufahren. Wenn Sie sie nicht sehen, überprüfen Sie Ihren Spam- oder Junk-Ordner.",
+    "backToSignIn": "Zurück zur Anmeldung"
   },
   "experience_page": {
     "title": "Der Würfel",

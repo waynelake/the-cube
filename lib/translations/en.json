@@ -133,7 +133,10 @@
     "beginReading": "Begin your reading.",
     "continueWhere": "Continue where you left off.",
     "enterEmailFirst": "Enter your email address first.",
-    "checkEmailReset": "Check your email for a password reset link."
+    "checkEmailReset": "Check your email for a password reset link.",
+    "confirmationSent": "Confirmation email sent!",
+    "checkEmail": "We've sent a confirmation link to your email. Please verify your email to continue. If you don't see it, check your spam or junk folder.",
+    "backToSignIn": "Back to sign in"
   },
   "experience_page": {
     "title": "The Cube",
