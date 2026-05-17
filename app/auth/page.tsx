@@ -5,10 +5,13 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
 import { CubeIcon } from '@/components/cube-icon';
+import { useLanguage } from '@/lib/language-context';
+import { t } from '@/lib/translations';
 
 function AuthContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { language } = useLanguage();
   const [mode, setMode] = useState<'signin' | 'signup'>(
     (searchParams.get('mode') as 'signin' | 'signup') || 'signup'
   );
@@ -54,13 +57,13 @@ function AuthContent() {
 
   const handleForgotPassword = async () => {
     if (!email) {
-      setError('Enter your email address first.');
+      setError(t(language, 'auth.enterEmailFirst'));
       return;
     }
     const { error } = await supabase.auth.resetPasswordForEmail(email);
     if (error) setError(error.message);
     else setError('');
-    alert('Check your email for a password reset link.');
+    alert(t(language, 'auth.checkEmailReset'));
   };
 
   if (!mounted) return null;
@@ -112,10 +115,10 @@ function AuthContent() {
               marginBottom: '0.4rem',
             }}
           >
-            {mode === 'signup' ? 'Create your account' : 'Welcome back'}
+            {mode === 'signup' ? t(language, 'auth.createAccount') : t(language, 'auth.welcomeBack')}
           </h2>
           <p style={{ fontFamily: "'Inter', sans-serif", fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-            {mode === 'signup' ? 'Begin your reading.' : 'Continue where you left off.'}
+            {mode === 'signup' ? t(language, 'auth.beginReading') : t(language, 'auth.continueWhere')}
           </p>
         </div>
 

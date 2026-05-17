@@ -127,7 +127,13 @@
     "forgotPassword": "Passwort vergessen?",
     "or": "oder",
     "noAccount": "Haben Sie noch kein Konto?",
-    "haveAccount": "Haben Sie bereits ein Konto?"
+    "haveAccount": "Haben Sie bereits ein Konto?",
+    "createAccount": "Erstellen Sie Ihr Konto",
+    "welcomeBack": "Willkommen zurück",
+    "beginReading": "Beginnen Sie Ihre Lesung.",
+    "continueWhere": "Setzen Sie fort, wo Sie aufgehört haben.",
+    "enterEmailFirst": "Geben Sie zuerst Ihre E-Mail-Adresse ein.",
+    "checkEmailReset": "Überprüfen Sie Ihre E-Mail auf einen Link zum Zurücksetzen des Passworts."
   },
   "experience_page": {
     "title": "Der Würfel",

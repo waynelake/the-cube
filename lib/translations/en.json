@@ -127,7 +127,13 @@
     "forgotPassword": "Forgot password?",
     "or": "or",
     "noAccount": "Don't have an account?",
-    "haveAccount": "Already have an account?"
+    "haveAccount": "Already have an account?",
+    "createAccount": "Create your account",
+    "welcomeBack": "Welcome back",
+    "beginReading": "Begin your reading.",
+    "continueWhere": "Continue where you left off.",
+    "enterEmailFirst": "Enter your email address first.",
+    "checkEmailReset": "Check your email for a password reset link."
   },
   "experience_page": {
     "title": "The Cube",
