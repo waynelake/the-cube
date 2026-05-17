@@ -662,7 +662,21 @@ arrived before the mind tried to correct it. The correction itself is data.
       `FLOWERS: ${answerMap["flowers"] || "(not described)"}\n` +
       `ANIMAL: ${answerMap["animal"] || "(not described)"}\n` +
       `STORM: ${answerMap["storm"] || "(not described)"}\n\n` +
-      `Generate the full reading following all instructions in your system prompt.\n\n` +
+      `CRITICAL FORMATTING REQUIREMENT:\n\n` +
+      `Your response MUST have this exact structure for EACH of the 5 elements:\n\n` +
+      `THE CUBE\n` +
+      `[one to three lines of Observation]\n` +
+      `\n` +
+      `[four to six+ paragraphs of Interpretation in flowing prose]\n` +
+      `\n` +
+      `Strategic Lens: [one bold imperative sentence specific to their imagery]\n` +
+      `\n` +
+      `THE LADDER\n` +
+      `[repeat structure above]\n` +
+      `\n` +
+      `[Continue for FLOWERS, ANIMAL, STORM using the same format]\n\n` +
+      `AFTER all 5 elements are complete, write the Final Synthesis (2-3 paragraphs + 5 takeaways + closing line).\n\n` +
+      `VALIDATION RULE: Your response MUST contain exactly 5 lines matching "Strategic Lens:" (one for each element).\n\n` +
       `After your complete reading, append a traits summary in this exact format:\n` +
       `---TRAITS---\n` +
       `{\n` +
@@ -705,6 +719,13 @@ arrived before the mind tried to correct it. The correction itself is data.
     }
     const traits = JSON.parse(traitsMatch[1].trim());
     const summary = rawContent.slice(0, rawContent.indexOf("---TRAITS---")).trim();
+
+    // Validation: Check if response has the expected 5 "Strategic Lens:" markers
+    const lensMatches = summary.match(/Strategic Lens[:\s]*/gi);
+    const lensCount = lensMatches ? lensMatches.length : 0;
+    if (lensCount < 5) {
+      console.warn(`Warning: Response has ${lensCount} Strategic Lens markers, expected 5. Response format may not be ideal.`);
+    }
 
     const { error: insertError } = await supabase
       .from("derived_insights")

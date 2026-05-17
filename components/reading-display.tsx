@@ -38,6 +38,12 @@ export function parseSummary(raw: string) {
   const lensMatch = (l: string) =>
     l.trim().match(/^Strategic Lens[:\s]*(.*)/i);
 
+  // Debug logging
+  const debugLensLines = lines.filter(l => /strategic lens/i.test(l));
+  if (debugLensLines.length < 5) {
+    console.debug(`parseSummary: Found ${debugLensLines.length} Strategic Lens lines (expected 5)`);
+  }
+
   const elements: { body: string; lens: string }[] = [];
   let bodyLines: string[] = [];
   let lensLines: string[] = [];
