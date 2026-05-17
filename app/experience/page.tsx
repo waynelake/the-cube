@@ -170,25 +170,43 @@ export default function ExperiencePage() {
 
   const handleReveal = async () => {
     setSubmitting(true);
-    if (!sessionId || !profileId) return;
+    if (!sessionId || !profileId) {
+      console.error('Missing sessionId or profileId');
+      setSubmitting(false);
+      return;
+    }
 
-    const insertions = questions.map((q) => ({
-      session_id: sessionId,
-      profile_id: profileId,
-      question_key: q.key,
-      answer_text: answers[q.key],
-    }));
+    try {
+      const insertions = questions.map((q) => ({
+        session_id: sessionId,
+        profile_id: profileId,
+        question_key: q.key,
+        answer_text: answers[q.key],
+      }));
 
-    await supabase.from('responses_raw').insert(insertions);
+      const { error: insertError } = await supabase.from('responses_raw').insert(insertions);
+      if (insertError) {
+        console.error('Insert responses failed:', insertError);
+        setSubmitting(false);
+        return;
+      }
 
-    const { error: updateError } = await supabase
-      .from('sessions')
-      .update({ status: 'completed', synthesis_status: 'generating' })
-      .eq('id', sessionId);
+      const { error: updateError } = await supabase
+        .from('sessions')
+        .update({ status: 'completed', synthesis_status: 'generating' })
+        .eq('id', sessionId);
 
-    if (updateError) console.error('Session update failed:', updateError);
+      if (updateError) {
+        console.error('Session update failed:', updateError);
+        setSubmitting(false);
+        return;
+      }
 
-    router.push(`/generating?session=${sessionId}`);
+      router.push(`/generating?session=${sessionId}`);
+    } catch (err) {
+      console.error('Reveal error:', err);
+      setSubmitting(false);
+    }
   };
 
   const currentAnswer = answers[question.key];
