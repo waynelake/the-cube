@@ -1,12 +1,13 @@
 'use client';
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase, SUPABASE_URL, SUPABASE_ANON_KEY } from '@/lib/supabase';
 import MessageThread from '@/components/ChatMessageThread';
 
 function ChatContent() {
   const router = useRouter();
+  const inputRef = useRef<HTMLInputElement>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Array<{ id: string; role: string; content: string }>>([]);
   const [input, setInput] = useState('');
@@ -68,16 +69,25 @@ What does it look like?`,
     initChat();
   }, [router]);
 
+  // Auto-focus input after message is sent
+  useEffect(() => {
+    if (!loading && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [loading]);
+
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!input.trim() || !conversationId || !user) return;
 
+    const userInput = input;
+
     // Add user message to UI
     const userMessage = {
       id: 'user-' + Date.now(),
       role: 'user',
-      content: input,
+      content: userInput,
     };
 
     setMessages((prev) => [...prev, userMessage]);
@@ -94,7 +104,7 @@ What does it look like?`,
         },
         body: JSON.stringify({
           conversationId,
-          message: input,
+          message: userInput,
           userId: user.id,
         }),
       });
@@ -167,11 +177,13 @@ What does it look like?`,
           }}
         >
           <input
+            ref={inputRef}
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your response..."
             disabled={loading}
+            autoFocus
             style={{
               flex: 1,
               padding: '0.75rem 1rem',
@@ -191,15 +203,17 @@ What does it look like?`,
               padding: '0.75rem 1.5rem',
               borderRadius: '8px',
               border: 'none',
-              backgroundColor: loading || !input.trim() ? 'rgba(124,58,237,0.4)' : 'var(--accent)',
+              backgroundColor: !input.trim() ? 'rgba(124,58,237,0.3)' : 'var(--accent)',
               color: 'white',
               fontFamily: "'Inter', sans-serif",
               fontSize: '0.95rem',
               fontWeight: 500,
               cursor: loading || !input.trim() ? 'not-allowed' : 'pointer',
+              opacity: loading ? 0.7 : 1,
+              transition: 'opacity 0.2s',
             }}
           >
-            {loading ? 'Sending...' : 'Send'}
+            Send
           </button>
         </form>
       </div>
