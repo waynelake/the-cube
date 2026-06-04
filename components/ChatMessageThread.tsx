@@ -13,44 +13,56 @@ export default function MessageThread({ messages }: { messages: Message[] }) {
 
   useEffect(() => {
     // Auto-scroll to bottom
-    endRef.current?.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      endRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, 0);
   }, [messages]);
+
+  if (!messages || messages.length === 0) {
+    return (
+      <div style={{ color: 'var(--text-secondary)', textAlign: 'center', paddingTop: '2rem' }}>
+        Loading conversation...
+      </div>
+    );
+  }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-      {messages.map((message) => (
-        <div
-          key={message.id}
-          style={{
-            display: 'flex',
-            justifyContent: message.role === 'user' ? 'flex-end' : 'flex-start',
-          }}
-        >
+      {messages.map((message) => {
+        const isUser = message.role === 'user';
+        return (
           <div
+            key={message.id}
             style={{
-              maxWidth: '70%',
-              padding: '1rem 1.25rem',
-              borderRadius: '12px',
-              backgroundColor:
-                message.role === 'user'
-                  ? 'rgba(124, 58, 237, 0.15)'
-                  : 'var(--surface)',
-              border:
-                message.role === 'user'
-                  ? '1px solid rgba(124, 58, 237, 0.3)'
-                  : '1px solid var(--border)',
-              color: 'var(--text-primary)',
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '0.95rem',
-              lineHeight: '1.6',
-              whiteSpace: 'pre-wrap',
-              wordWrap: 'break-word',
+              display: 'flex',
+              justifyContent: isUser ? 'flex-end' : 'flex-start',
+              width: '100%',
             }}
           >
-            {message.content}
+            <div
+              style={{
+                maxWidth: '70%',
+                padding: '1rem 1.25rem',
+                borderRadius: '12px',
+                backgroundColor: isUser
+                  ? 'rgba(124, 58, 237, 0.2)'
+                  : '#f5f3f0',
+                border: isUser
+                  ? '1px solid rgba(124, 58, 237, 0.4)'
+                  : '1px solid #e8e4e0',
+                color: '#1a1a1a',
+                fontFamily: "'Inter', sans-serif",
+                fontSize: '0.95rem',
+                lineHeight: '1.6',
+                whiteSpace: 'pre-wrap',
+                wordWrap: 'break-word',
+              }}
+            >
+              {message.content}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
       <div ref={endRef} />
     </div>
   );
