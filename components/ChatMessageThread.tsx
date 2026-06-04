@@ -45,12 +45,12 @@ export default function MessageThread({ messages }: { messages: Message[] }) {
                 padding: '1rem 1.25rem',
                 borderRadius: '12px',
                 backgroundColor: isUser
-                  ? 'rgba(124, 58, 237, 0.2)'
+                  ? 'rgba(124, 58, 237, 0.25)'
                   : '#f5f3f0',
                 border: isUser
                   ? '1px solid rgba(124, 58, 237, 0.4)'
                   : '1px solid #e8e4e0',
-                color: '#1a1a1a',
+                color: isUser ? '#ffffff' : '#1a1a1a',
                 fontFamily: "'Inter', sans-serif",
                 fontSize: '0.95rem',
                 lineHeight: '1.6',

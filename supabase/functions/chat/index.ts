@@ -186,51 +186,86 @@ function analyzeDimensionCoverage(messages: Array<{ role: string; content: strin
 }
 
 function buildAuraSystemPrompt(language: string, coverage: CoverageState): string {
-  const elementInstructions = `
+  const getFollowUpPrompts = (element: string): string[] => {
+    const prompts: Record<string, string[]> = {
+      cube: [
+        "If you were to approach the cube, how would you describe its texture?",
+        "What is the cube made of - is it smooth, rough, or something else entirely?",
+        "How far away from you does the cube sit in this space?",
+        "What color or colors does the cube have?",
+        "When you look at the cube, how does it make you feel?",
+      ],
+      ladder: [
+        "Where does this ladder lead in your space?",
+        "How tall would you say the ladder is?",
+        "What is it made from - wood, metal, something else?",
+        "If you were to climb it, how difficult would it be?",
+        "What is the ladder's relationship to the cube?",
+      ],
+      flowers: [
+        "Where in your space do these flowers appear?",
+        "What kind of flowers are they - what colors and varieties?",
+        "Are they in the ground, in a vase, or somewhere else?",
+        "Do they appear well-tended or neglected?",
+        "How do the flowers relate to the other elements in your space?",
+      ],
+      storm: [
+        "Where is this storm in relation to your space - near or far?",
+        "What kind of storm is it - rain, thunder, wind, snow?",
+        "How does the storm make you feel in this moment?",
+        "Is the storm moving toward your space or away from it?",
+        "How does the storm affect the other elements you have described?",
+      ],
+      animal: [
+        "What kind of animal is present in your space?",
+        "Where is the animal positioned relative to the other elements?",
+        "What is the animal doing - is it moving, resting, watching?",
+        "How do you feel about the presence of this animal?",
+        "What is the animal's relationship to you in this space?",
+      ],
+    };
+    return prompts[element] || [];
+  };
 
-CURRENT ELEMENT: ${coverage.currentElement.toUpperCase()}
-
-Element order (in sequence):
-1. The Space (${coverage.space ? "✓ covered" : "current"})
-2. The Cube (${coverage.cube ? "✓ covered" : "pending"})
-3. The Ladder (${coverage.ladder ? "✓ covered" : "pending"})
-4. The Flowers (${coverage.flowers ? "✓ covered" : "pending"})
-5. The Storm (${coverage.storm ? "✓ covered" : "pending"})
-6. The Animal (${coverage.animal ? "✓ covered" : "pending"})
-
-${coverage.currentElement !== "complete" ? `
-NEXT STEPS FOR ${coverage.currentElement.toUpperCase()}:
-- Ask ONE probing question that explores an uncovered dimension
-- Do NOT repeat back what the user said
-- Do NOT echo their words
-- Do NOT move to the next element until you sense you have good depth
-- Ask follow-ups like: "What about...?", "How does it feel...?", "If you were to...?"
-- Keep questions open-ended and exploratory
-` : `
-All elements have been covered. Prepare to transition to reading synthesis.
-`}`;
+  const currentPrompts = getFollowUpPrompts(coverage.currentElement);
 
   const basePrompt = `You are Aura, a warm, deeply intuitive facilitator. You guide the user through a rich visualization experience, gathering information for their personal reading.
 
 VOICE & BEHAVIOR
 - Warm, curious, quiet depth
-- Ask ONE question at a time
+- Ask ONE question at a time - never multiple questions
 - Never repeat or echo what the user said
-- No "great answer" filler — only when genuinely moved
+- No "great answer" filler - only when genuinely moved
 - Never list, number, or bullet point
 - Never break character
 - Never explain symbolism during intake
+- Do not use em dashes (–) or long dashes, use regular hyphens
 
 CRITICAL: DO NOT REPEAT BACK WHAT THE USER SAID
 
-When a user shares something, engage with it directly. Ask the next probing question without echoing or summarizing their input. For example:
+When a user shares something, engage with it directly. Ask the next probing question without echoing or summarizing their input.
 
-❌ Wrong: "A transparent cube that rotates... How captivating. What about its..."
-✅ Right: "If you tried to touch it, what would you feel?"
+CURRENT FOCUS: ${coverage.currentElement.toUpperCase()}
 
-${elementInstructions}
+${coverage.currentElement === "space" ? `
+The user has just started describing their space. Ask the next detail-oriented follow-up question about what they've shared.
+` : `
+Available follow-up prompts for ${coverage.currentElement}:
+${currentPrompts.map((p, i) => `${i + 1}. ${p}`).join("\n")}
+
+Choose a follow-up that explores a dimension they haven't mentioned yet. Do NOT move to the next element (${getNextElement(coverage)}) until you have rich, detailed coverage.
+`}
 
 Respond in the user's language throughout.`;
 
   return basePrompt;
+}
+
+function getNextElement(coverage: CoverageState): string {
+  if (!coverage.cube) return "cube";
+  if (!coverage.ladder) return "ladder";
+  if (!coverage.flowers) return "flowers";
+  if (!coverage.storm) return "storm";
+  if (!coverage.animal) return "animal";
+  return "complete";
 }
