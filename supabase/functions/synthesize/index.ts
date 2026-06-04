@@ -655,7 +655,12 @@ arrived before the mind tried to correct it. The correction itself is data.
 - Do not treat unexpected or broken imagery as errors — they are the
   most important data in the entire reading`;
 
+    const languagePrefix = language === 'DE'
+      ? `🔴 RESPOND ONLY IN GERMAN (DEUTSCH) 🔴\nDu MUSST die gesamte Antwort auf Deutsch schreiben. JEDES WORT auf Deutsch. Keine Englisch, keine Mischung.\n\n`
+      : `🔴 RESPOND ONLY IN ENGLISH 🔴\nYou MUST generate the entire response in English. EVERY WORD in English. No German, no mixing.\n\n`;
+
     const userMessage =
+      languagePrefix +
       `Here are the five elements described by the user:\n\n` +
       `CUBE: ${answerMap["cube"] || "(not described)"}\n` +
       `LADDER: ${answerMap["ladder"] || "(not described)"}\n` +
