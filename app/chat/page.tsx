@@ -8,10 +8,12 @@ import MessageThread from '@/components/ChatMessageThread';
 function ChatContent() {
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+  const recognitionRef = useRef<any>(null);
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [messages, setMessages] = useState<Array<{ id: string; role: string; content: string }>>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const [user, setUser] = useState<any>(null);
 
   // Initialize chat
@@ -50,7 +52,7 @@ function ChatContent() {
       const openingMessage = {
         id: 'opening-' + Date.now(),
         role: 'assistant',
-        content: `I'd like you to imagine a space — entirely your own. It can be anything: indoors or outdoors, real or impossible. You're standing in it right now.
+        content: `I'd like you to imagine a space - entirely your own. It can be anything: indoors or outdoors, real or impossible. You're standing in it right now.
 
 What does it look like?`,
       };
@@ -75,6 +77,47 @@ What does it look like?`,
       inputRef.current.focus();
     }
   }, [loading]);
+
+  // Initialize speech recognition
+  useEffect(() => {
+    const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (SpeechRecognition) {
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = false;
+      recognitionRef.current.interimResults = false;
+      recognitionRef.current.lang = 'en-US';
+
+      recognitionRef.current.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+
+      recognitionRef.current.onresult = (event: any) => {
+        const transcript = Array.from(event.results)
+          .map((result: any) => result[0].transcript)
+          .join('');
+        setInput((prev) => prev + (prev ? ' ' : '') + transcript);
+      };
+
+      recognitionRef.current.onerror = (event: any) => {
+        console.error('Speech recognition error:', event.error);
+        setIsListening(false);
+      };
+    }
+  }, []);
+
+  const handleVoiceInput = () => {
+    if (recognitionRef.current) {
+      if (isListening) {
+        recognitionRef.current.stop();
+      } else {
+        recognitionRef.current.start();
+      }
+    }
+  };
 
   const handleSendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -181,7 +224,7 @@ What does it look like?`,
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your response..."
+            placeholder="Type or use voice..."
             disabled={loading}
             autoFocus
             style={{
@@ -196,6 +239,28 @@ What does it look like?`,
               outline: 'none',
             }}
           />
+          <button
+            type="button"
+            onClick={handleVoiceInput}
+            title={isListening ? 'Stop listening' : 'Start voice input'}
+            style={{
+              padding: '0.75rem 1rem',
+              borderRadius: '8px',
+              border: '1px solid var(--border)',
+              backgroundColor: isListening ? 'rgba(200, 50, 50, 0.2)' : 'transparent',
+              color: isListening ? '#c83232' : 'var(--text-secondary)',
+              fontFamily: "'Inter', sans-serif",
+              fontSize: '1.2rem',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minWidth: '44px',
+            }}
+          >
+            🎙️
+          </button>
           <button
             type="submit"
             disabled={loading || !input.trim()}
