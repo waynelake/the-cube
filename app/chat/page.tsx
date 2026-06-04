@@ -14,6 +14,7 @@ function ChatContent() {
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
   const [isListening, setIsListening] = useState(false);
+  const [error, setError] = useState('');
   const [user, setUser] = useState<any>(null);
 
   // Initialize chat
@@ -96,10 +97,17 @@ What does it look like?`,
       };
 
       recognitionRef.current.onresult = (event: any) => {
-        const transcript = Array.from(event.results)
-          .map((result: any) => result[0].transcript)
-          .join('');
-        setInput((prev) => prev + (prev ? ' ' : '') + transcript);
+        // Only capture final results, not interim ones
+        let finalTranscript = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const transcript = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalTranscript += transcript + ' ';
+          }
+        }
+        if (finalTranscript.trim()) {
+          setInput((prev) => prev + (prev ? ' ' : '') + finalTranscript.trim());
+        }
       };
 
       recognitionRef.current.onerror = (event: any) => {
@@ -154,12 +162,14 @@ What does it look like?`,
 
       if (!res.ok) {
         const error = await res.json();
-        console.error('Chat error:', error);
+        console.error('Chat API error:', error);
+        setError(`Error: ${error.error || 'Unknown error'}`);
         setLoading(false);
         return;
       }
 
       const data = await res.json();
+      console.log('Chat response received:', data);
 
       // Add Aura response to UI
       const assistantMessage = {
@@ -175,7 +185,9 @@ What does it look like?`,
         console.log('Ready for synthesis - trigger reading generation');
       }
     } catch (error) {
+      const errorMsg = error instanceof Error ? error.message : 'Failed to send message';
       console.error('Error sending message:', error);
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -206,6 +218,18 @@ What does it look like?`,
             paddingBottom: '1rem',
           }}
         >
+          {error && (
+            <div style={{
+              padding: '1rem',
+              background: '#ffebee',
+              color: '#c62828',
+              borderRadius: '8px',
+              marginBottom: '1rem',
+              fontSize: '0.9rem',
+            }}>
+              {error}
+            </div>
+          )}
           <MessageThread messages={messages} />
         </div>
 
@@ -249,17 +273,21 @@ What does it look like?`,
               border: '1px solid var(--border)',
               backgroundColor: isListening ? 'rgba(200, 50, 50, 0.2)' : 'transparent',
               color: isListening ? '#c83232' : 'var(--text-secondary)',
-              fontFamily: "'Inter', sans-serif",
-              fontSize: '1.2rem',
               cursor: 'pointer',
               transition: 'all 0.2s',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
               minWidth: '44px',
+              height: '44px',
             }}
           >
-            🎙️
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 1a3 3 0 0 0-3 3v12a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
           </button>
           <button
             type="submit"
